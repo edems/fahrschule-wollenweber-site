@@ -5,6 +5,7 @@ import SmoothScroll from '@/components/SmoothScroll';
 import TopNav from '@/components/nav/TopNav';
 import ScrollProgress from '@/components/ScrollProgress';
 import ScrollColorController from '@/components/ScrollColorController';
+import PageLoader from '@/components/PageLoader';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.fahrschule-wollenweber.de'),
@@ -98,6 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <SmoothScroll />
         <MotionProvider>
+          <PageLoader />
           <TopNav />
           <ScrollProgress />
           <ScrollColorController />
