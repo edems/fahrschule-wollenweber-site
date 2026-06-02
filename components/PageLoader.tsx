@@ -42,7 +42,17 @@ export default function PageLoader() {
       if (raf) cancelAnimationFrame(raf);
       setProgress(1);
       sessionStorage.setItem(SESSION_KEY, '1');
-      setTimeout(() => setVisible(false), 280);
+      setTimeout(() => {
+        setVisible(false);
+        // PageLoader verdeckt das Hero-Video mit z-100 fixed inset-0.
+        // Mobile Browser (iOS Safari, Chrome Android) blocken Autoplay
+        // solange ein anderes Element das Video verdeckt. Wir dispatchen
+        // deshalb nach dem Hide einen Custom-Event, auf den VideoStage
+        // hört, um play() nochmal zu versuchen.
+        if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('wollenweber:loader-hidden', { detail: { reason } }));
+        }
+      }, 280);
       if (typeof console !== 'undefined' && process.env.NODE_ENV === 'development') {
         // eslint-disable-next-line no-console
         console.log(`[PageLoader] hidden via ${reason} after ${Math.round(performance.now() - start)}ms`);

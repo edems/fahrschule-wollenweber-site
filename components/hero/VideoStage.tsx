@@ -31,6 +31,7 @@ export default function VideoStage({ active }: Props) {
   }, []);
 
   useEffect(() => {
+    const cleanups: Array<() => void> = [];
     MODE_ORDER.forEach((id) => {
       const v = refs.current[id];
       if (!v) return;
@@ -39,7 +40,25 @@ export default function VideoStage({ active }: Props) {
         v.preload = 'auto';
         if (v.paused) {
           v.currentTime = 0;
-          v.play().catch(() => undefined);
+          const tryPlay = () => {
+            v.play().catch((err) => {
+              if (typeof console !== 'undefined' && process.env.NODE_ENV === 'development') {
+                // eslint-disable-next-line no-console
+                console.warn(`[VideoStage] play(${id}) failed:`, err?.message || err);
+              }
+            });
+          };
+          // Sofort versuchen — Browser puffert intern und spielt sobald
+          // genug Daten da sind, das ist der historische Pfad und deckt
+          // den Mode-Switch-Fall ab (Video ist im DOM, war nur inaktiv).
+          tryPlay();
+          // Zusätzlich retry bei loadeddata — fängt den Mobile-First-Visit-
+          // Fall ab, wo tryPlay() wegen Autoplay-Policy oder noch-nicht-
+          // gepuffertem Video beim Mount fehlschlägt.
+          if (v.readyState < 2) {
+            v.addEventListener('loadeddata', tryPlay, { once: true });
+            cleanups.push(() => v.removeEventListener('loadeddata', tryPlay));
+          }
         }
       } else if (id === active && reducedMotion) {
         v.classList.add('is-active', 'is-paused');
@@ -49,6 +68,24 @@ export default function VideoStage({ active }: Props) {
         v.preload = 'none';
       }
     });
+    return () => cleanups.forEach((fn) => fn());
+  }, [active, reducedMotion]);
+
+  // PageLoader ist z-100 fixed inset-0 und verdeckt das Hero-Video beim
+  // Mount. Mobile Browser (iOS Safari, Chrome Android) blocken Autoplay
+  // solange ein anderes Element das Video verdeckt. Nach dem Loader-Hide
+  // dispatcht PageLoader einen Custom-Event, auf dem wir play() retryen.
+  useEffect(() => {
+    if (reducedMotion) return;
+    const onLoaderHidden = () => {
+      const v = refs.current[active];
+      if (v && v.paused) {
+        v.currentTime = 0;
+        v.play().catch(() => undefined);
+      }
+    };
+    window.addEventListener('wollenweber:loader-hidden', onLoaderHidden);
+    return () => window.removeEventListener('wollenweber:loader-hidden', onLoaderHidden);
   }, [active, reducedMotion]);
 
   useEffect(() => {
