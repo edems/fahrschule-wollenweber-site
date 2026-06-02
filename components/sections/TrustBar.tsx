@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 type Signal = {
   icon: 'stars' | 'reviews' | 'lehrer' | 'standorte' | 'erfahrung';
@@ -61,7 +61,7 @@ export default function TrustBar() {
       aria-label="Vertrauenssignale"
     >
       <div className="container-page">
-        <motion.ul
+        <m.ul
           className="trustbar-grid"
           initial="hidden"
           whileInView="visible"
@@ -72,7 +72,7 @@ export default function TrustBar() {
           }}
         >
           {TRUST_SIGNALS.map((s, i) => (
-            <motion.li
+            <m.li
               key={i}
               className="trustbar-card"
               variants={{
@@ -87,9 +87,9 @@ export default function TrustBar() {
                 <div className="trustbar-value">{s.value}</div>
                 <div className="trustbar-label">{s.label}</div>
               </div>
-            </motion.li>
+            </m.li>
           ))}
-        </motion.ul>
+        </m.ul>
       </div>
 
       <style jsx>{`

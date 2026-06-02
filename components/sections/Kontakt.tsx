@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { KATEGORIEN } from '@/lib/klassen';
 import { STANDORTE, HAUPTNUMMER } from '@/lib/standorte';
 import MonatsKalender from '@/components/kalender/MonatsKalender';
@@ -108,7 +108,7 @@ export default function Kontakt() {
         />
 
         {/* 5-Kanal Quick-Contact */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
@@ -159,9 +159,9 @@ export default function Kontakt() {
               <div className="kontakt-channel-sub">Selbst den Tag wählen</div>
             </div>
           </a>
-        </motion.div>
+        </m.div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
@@ -272,7 +272,7 @@ export default function Kontakt() {
               Beim Klick öffnet sich dein Mail-Programm mit allen Daten. Oder kontaktiere uns direkt über die 5 Kanäle oben.
             </p>
           </form>
-        </motion.div>
+        </m.div>
       </div>
 
       <style jsx>{`

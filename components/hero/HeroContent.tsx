@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import type { ModeId } from '@/lib/modes';
 import { MODES } from '@/lib/modes';
 import { HAUPTNUMMER } from '@/lib/standorte';
@@ -15,41 +15,41 @@ const fadeUp = {
 };
 
 export default function HeroContent({ active }: Props) {
-  const m = MODES[active];
+  const mode = MODES[active];
   const modeKey = active;
 
   return (
     <div className="container-page relative z-10 grid h-full grid-cols-1 items-end gap-6 pb-8 pt-6 sm:gap-8 sm:pb-12 sm:pt-12 lg:grid-cols-[1.4fr_1fr] lg:gap-16 lg:pt-0">
       <div className="w-full">
         <AnimatePresence mode="wait">
-          <motion.div
+          <m.div
             key={modeKey + '-badge'}
             {...fadeUp}
             className="mb-5 inline-flex items-center gap-2 sm:mb-7 sm:gap-3"
           >
             <span className="accent-line" />
-            <span className="eyebrow">{m.badge}</span>
+            <span className="eyebrow">{mode.badge}</span>
             <span className="ml-0.5 h-1 w-1 rounded-full bg-violet sm:ml-1" />
             <span className="hidden text-[10.5px] font-semibold uppercase tracking-eyebrow text-mute sm:inline">
               Fahrschule Wollenweber
             </span>
-          </motion.div>
+          </m.div>
         </AnimatePresence>
 
         <h1 className="display-1 mb-6 w-full text-offwhite sm:mb-7">
           <AnimatePresence mode="wait">
-            <motion.span key={modeKey + '-headline'} {...fadeUp} className="block">
-              <span className="block">{m.headline[0]}</span>
-              <span className="block gradient-text gradient-text-italic">{m.headline[1]}</span>
-              <span className="block">{m.headline[2]}</span>
-            </motion.span>
+            <m.span key={modeKey + '-headline'} {...fadeUp} className="block">
+              <span className="block">{mode.headline[0]}</span>
+              <span className="block gradient-text gradient-text-italic">{mode.headline[1]}</span>
+              <span className="block">{mode.headline[2]}</span>
+            </m.span>
           </AnimatePresence>
         </h1>
 
         {/* Mobile-only compact stats bar */}
         <div className="mb-6 grid grid-cols-3 gap-2 sm:hidden">
-          {m.stats.map((s, i) => (
-            <motion.div
+          {mode.stats.map((s, i) => (
+            <m.div
               key={modeKey + '-mobile-stat-' + i}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -62,12 +62,12 @@ export default function HeroContent({ active }: Props) {
               <div className="mt-1 text-[9.5px] uppercase tracking-[0.14em] text-mute">
                 {s.label}
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
         <AnimatePresence mode="wait">
-          <motion.ul
+          <m.ul
             key={modeKey + '-vp'}
             initial="hidden"
             animate="visible"
@@ -78,8 +78,8 @@ export default function HeroContent({ active }: Props) {
             }}
             className="mb-7 max-w-xl space-y-2 sm:mb-8 sm:space-y-2.5"
           >
-            {m.versprechen.map((v) => (
-              <motion.li
+            {mode.versprechen.map((v) => (
+              <m.li
                 key={v}
                 variants={{
                   hidden: { opacity: 0, x: -12 },
@@ -89,15 +89,15 @@ export default function HeroContent({ active }: Props) {
               >
                 <span className="mt-[6px] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br from-brand-blue to-violet sm:mt-[7px]" />
                 <span className="text-offwhite/90">{v}</span>
-              </motion.li>
+              </m.li>
             ))}
-          </motion.ul>
+          </m.ul>
         </AnimatePresence>
 
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3 sm:gap-4">
-          <a href={m.ctaHref} className="btn-primary w-full justify-center !px-6 !py-4 sm:w-auto">
+          <a href={mode.ctaHref} className="btn-primary w-full justify-center !px-6 !py-4 sm:w-auto">
             <AnimatePresence mode="wait">
-              <motion.span
+              <m.span
                 key={modeKey + '-cta'}
                 initial={{ opacity: 0, y: 4 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -105,8 +105,8 @@ export default function HeroContent({ active }: Props) {
                 transition={{ duration: 0.25 }}
                 className="inline-flex items-center gap-2"
               >
-                {m.cta} <span className="arrow">→</span>
-              </motion.span>
+                {mode.cta} <span className="arrow">→</span>
+              </m.span>
             </AnimatePresence>
           </a>
           <a
@@ -126,7 +126,7 @@ export default function HeroContent({ active }: Props) {
         </div>
       </div>
 
-      <motion.aside
+      <m.aside
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
@@ -136,7 +136,7 @@ export default function HeroContent({ active }: Props) {
           <div className="eyebrow mb-1.5">Aktueller Modus</div>
           <div className="text-[20px] font-semibold text-offwhite">
             <AnimatePresence mode="wait">
-              <motion.span
+              <m.span
                 key={modeKey + '-label'}
                 initial={{ opacity: 0, y: 4 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -144,15 +144,15 @@ export default function HeroContent({ active }: Props) {
                 transition={{ duration: 0.25 }}
                 className="block"
               >
-                {m.label}
-              </motion.span>
+                {mode.label}
+              </m.span>
             </AnimatePresence>
           </div>
         </div>
         <div className="divider-line mb-5" />
         <div className="grid grid-cols-3 gap-x-5 gap-y-5">
-          {m.stats.map((s, i) => (
-            <motion.div
+          {mode.stats.map((s, i) => (
+            <m.div
               key={modeKey + '-stat-' + i}
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -164,7 +164,7 @@ export default function HeroContent({ active }: Props) {
               <div className="mt-1.5 text-[10px] uppercase tracking-[0.16em] text-mute">
                 {s.label}
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
         <div className="divider-line mt-5 mb-4" />
@@ -172,7 +172,7 @@ export default function HeroContent({ active }: Props) {
           Beratung anfragen
           <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
         </a>
-      </motion.aside>
+      </m.aside>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import MotionProvider from '@/components/MotionProvider';
 import SmoothScroll from '@/components/SmoothScroll';
 import TopNav from '@/components/nav/TopNav';
 import ScrollProgress from '@/components/ScrollProgress';
@@ -96,10 +97,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <SmoothScroll />
-        <TopNav />
-        <ScrollProgress />
-        <ScrollColorController />
-        {children}
+        <MotionProvider>
+          <TopNav />
+          <ScrollProgress />
+          <ScrollColorController />
+          {children}
+        </MotionProvider>
       </body>
     </html>
   );

@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { SEMINARE } from '@/lib/seminare';
 import SectionHeader from '@/components/ui/SectionHeader';
 import { Stagger } from '@/components/ui/ScrollMotion';

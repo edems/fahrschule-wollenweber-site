@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { REGIONEN, REGIONEN_COUNT } from '@/lib/regionen';
 import SectionHeader from '@/components/ui/SectionHeader';
 import { Reveal } from '@/components/ui/ScrollMotion';
@@ -35,7 +35,7 @@ export default function Regionen() {
 
           <ul className="flex flex-wrap gap-2">
             {REGIONEN.map((ort, i) => (
-              <motion.li
+              <m.li
                 key={ort}
                 initial={{ opacity: 0, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -50,7 +50,7 @@ export default function Regionen() {
                   <span className="region-pin" aria-hidden>●</span>
                   {ort}
                 </span>
-              </motion.li>
+              </m.li>
             ))}
           </ul>
 

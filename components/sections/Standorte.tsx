@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { STANDORTE, HAUPTNUMMER } from '@/lib/standorte';
 import SectionHeader from '@/components/ui/SectionHeader';
 import { Stagger, Reveal } from '@/components/ui/ScrollMotion';

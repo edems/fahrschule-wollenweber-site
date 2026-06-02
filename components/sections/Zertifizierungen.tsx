@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import SectionHeader from '@/components/ui/SectionHeader';
 import { Stagger } from '@/components/ui/ScrollMotion';
 
@@ -68,7 +68,7 @@ export default function Zertifizierungen() {
           ))}
         </Stagger>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
@@ -79,7 +79,7 @@ export default function Zertifizierungen() {
           <p>
             <strong>Familie Wollenweber</strong> — drei Fahrlehrer mit Herz, Verstand und über 20 Jahren Erfahrung in Bad Marienberg und Hachenburg. Wir bilden dich aus, als wärst du unser eigenes Kind.
           </p>
-        </motion.div>
+        </m.div>
       </div>
 
       <style jsx>{`

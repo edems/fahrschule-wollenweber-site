@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { REVIEWS, REVIEW_SUMMARY } from '@/lib/reviews';
 import SectionHeader from '@/components/ui/SectionHeader';
 import { Stagger, Reveal } from '@/components/ui/ScrollMotion';
@@ -40,7 +40,7 @@ export default function Bewertungen() {
                 </div>
                 <div className="mt-4 flex items-center gap-1.5">
                   {[1, 2, 3, 4, 5].map((n) => (
-                    <motion.span
+                    <m.span
                       key={n}
                       initial={{ scale: 0, rotate: -180 }}
                       whileInView={{ scale: 1, rotate: 0 }}
@@ -50,7 +50,7 @@ export default function Bewertungen() {
                       aria-hidden
                     >
                       ★
-                    </motion.span>
+                    </m.span>
                   ))}
                 </div>
                 <p className="mt-3 text-[14px] font-medium" style={{ color: 'rgba(26, 26, 46, 0.7)' }}>
@@ -60,7 +60,7 @@ export default function Bewertungen() {
 
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {REVIEW_SUMMARY.locations.map((loc, i) => (
-                  <motion.a
+                  <m.a
                     key={loc.name}
                     href={loc.name === 'Hachenburg' ? GOOGLE_MAPS.hachenburg : GOOGLE_MAPS.badMarienberg}
                     target="_blank"
@@ -87,7 +87,7 @@ export default function Bewertungen() {
                     <div className="mt-2 text-[11px] font-semibold uppercase tracking-[0.12em]" style={{ color: '#6D28D9' }}>
                       Auf Google lesen ↗
                     </div>
-                  </motion.a>
+                  </m.a>
                 ))}
               </div>
             </div>

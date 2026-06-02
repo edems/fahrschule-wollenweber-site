@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion';
+import { m, useMotionValue, useSpring, useReducedMotion } from 'framer-motion';
 import type { ModeId } from '@/lib/modes';
 import { MODE_ORDER, MODES } from '@/lib/modes';
 import VideoStage from './VideoStage';
@@ -94,7 +94,7 @@ export default function Hero() {
   }, [reduce, glowXRaw, glowYRaw]);
 
   return (
-    <motion.section
+    <m.section
       ref={sectionRef}
       id="top"
       className="hero-section relative h-auto min-h-[820px] w-full overflow-hidden lg:h-[100vh] lg:min-h-[860px]"
@@ -108,7 +108,7 @@ export default function Hero() {
 
       {/* Cursor-Follow Glow */}
       {!reduce && (
-        <motion.div
+        <m.div
           className="pointer-events-none absolute inset-0 z-[2]"
           style={{
             background: `radial-gradient(circle 500px at calc(50% + ${glowX.get()}px) calc(50% + ${glowY.get()}px), rgba(124,58,237,0.12) 0%, transparent 70%)`,
@@ -117,12 +117,12 @@ export default function Hero() {
       )}
 
       {!reduce && (
-        <motion.div
+        <m.div
           className="absolute left-0 right-0 top-[96px] z-40"
           style={{ y: chipYSpring, opacity: chipOpacity }}
         >
           <ModeChips active={active} onChange={setActive} />
-        </motion.div>
+        </m.div>
       )}
       {reduce && <ModeChips active={active} onChange={setActive} />}
 
@@ -132,12 +132,12 @@ export default function Hero() {
         <div className="h-[60px] w-px animate-scroll-pulse bg-gradient-to-b from-transparent to-violet" />
       </div>
 
-      <motion.div
+      <m.div
         className="relative z-10 flex h-full items-end justify-center pb-12 pt-32 sm:pb-16 sm:pt-32 lg:pb-20"
         style={reduce ? undefined : { y: textYSpring, opacity: textOpacity }}
       >
         <HeroContent active={active} />
-      </motion.div>
+      </m.div>
 
       <style jsx>{`
         .hero-section {
@@ -151,6 +151,6 @@ export default function Hero() {
           .hero-section { animation: none; }
         }
       `}</style>
-    </motion.section>
+    </m.section>
   );
 }

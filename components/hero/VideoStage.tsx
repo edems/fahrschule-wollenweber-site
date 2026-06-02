@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
-import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion';
+import { m, useMotionValue, useSpring, useReducedMotion } from 'framer-motion';
 import type { ModeId } from '@/lib/modes';
 import { MODE_ORDER, MODES } from '@/lib/modes';
 
@@ -105,7 +105,7 @@ export default function VideoStage({ active }: Props) {
 
   return (
     <div ref={stageRef} className="absolute inset-0 z-0 overflow-hidden" id="video-stage" style={{ perspective: '1200px' }}>
-      <motion.div
+      <m.div
         className="absolute inset-0"
         style={reduce ? undefined : {
           scale,
@@ -135,10 +135,10 @@ export default function VideoStage({ active }: Props) {
             />
           );
         })}
-      </motion.div>
+      </m.div>
 
       {!reduce && (
-        <motion.div
+        <m.div
           className="pointer-events-none absolute inset-0 bg-navy-deep"
           style={{ opacity: overlayOpacity }}
         />

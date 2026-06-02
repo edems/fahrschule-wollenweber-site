@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, type ReactNode, type CSSProperties } from 'react';
-import { motion, useScroll, useTransform, useSpring, useInView, useReducedMotion } from 'framer-motion';
+import { m, useScroll, useTransform, useSpring, useInView, useReducedMotion } from 'framer-motion';
 
 type RevealProps = {
   children: ReactNode;
@@ -34,7 +34,7 @@ export function Reveal({
     return <div ref={ref} className={className}>{children}</div>;
   }
 
-  const MotionTag = motion[as] as typeof motion.div;
+  const MotionTag = m[as] as typeof m.div;
 
   return (
     <MotionTag
@@ -71,9 +71,9 @@ export function Parallax({ children, speed = 0.15, className, style }: ParallaxP
   }
 
   return (
-    <motion.div ref={ref} style={{ ...style, y }} className={className}>
+    <m.div ref={ref} style={{ ...style, y }} className={className}>
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -95,7 +95,7 @@ export function Stagger({ children, delayStep = 0.08, className, y = 24, amount 
   }
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       initial="hidden"
       animate={inView ? 'visible' : 'hidden'}
@@ -107,7 +107,7 @@ export function Stagger({ children, delayStep = 0.08, className, y = 24, amount 
     >
       {Array.isArray(children)
         ? children.map((child, i) => (
-            <motion.div
+            <m.div
               key={i}
               variants={{
                 hidden: { opacity: 0, y },
@@ -115,10 +115,10 @@ export function Stagger({ children, delayStep = 0.08, className, y = 24, amount 
               }}
             >
               {child}
-            </motion.div>
+            </m.div>
           ))
         : children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -139,7 +139,7 @@ export function WordReveal({ text, className, delay = 0 }: WordRevealProps) {
   }
 
   return (
-    <motion.span
+    <m.span
       ref={ref}
       initial="hidden"
       animate={inView ? 'visible' : 'hidden'}
@@ -150,7 +150,7 @@ export function WordReveal({ text, className, delay = 0 }: WordRevealProps) {
       className={className}
     >
       {words.map((word, i) => (
-        <motion.span
+        <m.span
           key={i}
           variants={{
             hidden: { opacity: 0, y: 16, filter: 'blur(8px)' },
@@ -160,9 +160,9 @@ export function WordReveal({ text, className, delay = 0 }: WordRevealProps) {
           style={{ marginRight: '0.25em' }}
         >
           {word}
-        </motion.span>
+        </m.span>
       ))}
-    </motion.span>
+    </m.span>
   );
 }
 

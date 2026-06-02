@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
+import { m, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 
 const LINKS = [
   { href: '#klassen', label: 'Klassen' },
@@ -28,7 +28,7 @@ export default function TopNav() {
   const navProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 20 });
 
   return (
-    <motion.nav
+    <m.nav
       initial={{ y: -32, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
@@ -38,19 +38,19 @@ export default function TopNav() {
           : 'border-b border-transparent bg-gradient-to-b from-navy-deep/60 to-transparent backdrop-blur-md'
       }`}
     >
-      <motion.div
+      <m.div
         className="absolute inset-x-0 bottom-0 h-[1px] origin-left bg-gradient-to-r from-brand-blue via-violet to-brand-blue"
         style={{ scaleX: navProgress, opacity: scrolled ? 0.6 : 0 }}
       />
 
       <div className="container-page flex h-[76px] items-center justify-between">
         <a href="#top" className="group flex items-center gap-3">
-          <motion.div
+          <m.div
             whileHover={{ rotate: [0, -5, 5, 0], transition: { duration: 0.6 } }}
             className="grid h-9 w-9 place-items-center rounded-[10px] bg-gradient-to-br from-brand-blue to-violet text-sm font-extrabold text-offwhite shadow-[0_6px_24px_-8px_rgba(124,58,237,0.6)]"
           >
             W
-          </motion.div>
+          </m.div>
           <div className="leading-tight">
             <div className="text-[15px] font-semibold tracking-wide transition-colors group-hover:text-violet-light">
               Fahrschule Wollenweber
@@ -91,7 +91,7 @@ export default function TopNav() {
 
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -113,7 +113,7 @@ export default function TopNav() {
                 Anmelden →
               </a>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 
@@ -137,6 +137,6 @@ export default function TopNav() {
         }
         .nav-link:hover::after { transform: scaleX(1); }
       `}</style>
-    </motion.nav>
+    </m.nav>
   );
 }

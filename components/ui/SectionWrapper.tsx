@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform, useSpring, useInView, useReducedMotion } from 'framer-motion';
+import { m, useScroll, useTransform, useSpring, useInView, useReducedMotion } from 'framer-motion';
 import { useRef, type ReactNode } from 'react';
 
 type SectionTheme = 'dark' | 'light';
@@ -58,13 +58,13 @@ export default function SectionWrapper({ id, theme, nextTheme, children, classNa
   }
 
   return (
-    <motion.section
+    <m.section
       ref={ref}
       id={id}
       className={`section-wrapper ${theme === 'light' ? 'section-light' : 'section-dark'} ${className}`}
       style={{ background: BG[theme], opacity }}
     >
       {children}
-    </motion.section>
+    </m.section>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { m, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { KATEGORIEN } from '@/lib/klassen';
 import { asset } from '@/lib/paths';
 import SectionHeader from '@/components/ui/SectionHeader';
@@ -25,7 +25,7 @@ export default function KlassenHub() {
           description="Wähle deine Kategorie und entdecke alle Klassen, die wir im Westerwald ausbilden. Klick auf eine Klasse für die Anmeldung."
         />
 
-        <motion.div
+        <m.div
           role="tablist"
           aria-label="Klassen-Kategorien"
           className="mb-10 flex flex-wrap items-center gap-2"
@@ -58,7 +58,7 @@ export default function KlassenHub() {
               </button>
             );
           })}
-        </motion.div>
+        </m.div>
 
         <div
           id="klassen-panel"
@@ -67,7 +67,7 @@ export default function KlassenHub() {
           className="light-card relative overflow-hidden rounded-3xl p-6 md:p-10"
         >
           <AnimatePresence mode="wait">
-            <motion.div
+            <m.div
               key={active}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -75,7 +75,7 @@ export default function KlassenHub() {
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             >
               <div className="mb-8 flex items-center gap-4">
-                <motion.div
+                <m.div
                   initial={{ scale: 0.8, rotate: -10 }}
                   animate={{ scale: 1, rotate: 0 }}
                   transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -89,7 +89,7 @@ export default function KlassenHub() {
                     width={48}
                     height={48}
                   />
-                </motion.div>
+                </m.div>
                 <div>
                   <div className="eyebrow mb-1">Kategorie</div>
                   <h3 className="text-2xl font-semibold md:text-3xl" style={{ color: 'var(--c-navy)' }}>
@@ -100,17 +100,17 @@ export default function KlassenHub() {
 
               <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {aktiveKat.klassen.map((k, idx) => (
-                  <motion.li
+                  <m.li
                     key={k.code}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.45, delay: idx * 0.04, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <KlasseCard k={k} />
-                  </motion.li>
+                  </m.li>
                 ))}
               </ul>
-            </motion.div>
+            </m.div>
           </AnimatePresence>
         </div>
       </div>
@@ -214,7 +214,7 @@ function KlasseCard({ k }: { k: { code: string; name: string; beschreibung: stri
   };
 
   return (
-    <motion.a
+    <m.a
       ref={ref}
       href={`#kontakt?klasse=${k.code}`}
       onMouseMove={handleMove}
@@ -267,6 +267,6 @@ function KlasseCard({ k }: { k: { code: string; name: string; beschreibung: stri
           color: #6D28D9;
         }
       `}</style>
-    </motion.a>
+    </m.a>
   );
 }

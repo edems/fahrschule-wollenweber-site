@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { MODES } from '@/lib/modes';
 import { asset } from '@/lib/paths';
 import SectionHeader from '@/components/ui/SectionHeader';
@@ -61,7 +61,7 @@ export default function Fuhrpark() {
           })}
         </Stagger>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
@@ -89,7 +89,7 @@ export default function Fuhrpark() {
               <div className="fuhrpark-trustline-desc">Mofa bis Bus, alle Führerscheinklassen</div>
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
 
       <style jsx>{`

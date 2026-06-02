@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { KATEGORIEN } from '@/lib/klassen';
 import SectionHeader from '@/components/ui/SectionHeader';
 
@@ -18,7 +18,7 @@ export default function Preise() {
           description="Die Kosten für den Führerschein hängen von deiner Klasse, deinem Lerntempo und der Anzahl der Fahrstunden ab. Wir beraten dich persönlich und transparent."
         />
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -53,7 +53,7 @@ export default function Preise() {
                   'Anmeldung & Behördenwege',
                   'Lehrmaterial digital',
                 ].map((item, i) => (
-                  <motion.li
+                  <m.li
                     key={item}
                     initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -63,7 +63,7 @@ export default function Preise() {
                   >
                     <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br from-brand-blue to-violet" />
                     <span style={{ color: 'var(--c-navy)' }}>{item}</span>
-                  </motion.li>
+                  </m.li>
                 ))}
               </ul>
             </div>
@@ -84,7 +84,7 @@ export default function Preise() {
               Beratungstermin anfragen <span aria-hidden>→</span>
             </a>
           </div>
-        </motion.div>
+        </m.div>
       </div>
 
       <style jsx>{`
