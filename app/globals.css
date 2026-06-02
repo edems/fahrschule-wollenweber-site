@@ -14,13 +14,7 @@
     --c-navy-deep: #0a0a14;
     --c-violet: #7C3AED;
     --c-blue: #5B4FE9;
-    --c-pink: #EC4899;
-    --c-brand-black: #050510;
-    --brand-gradient: linear-gradient(135deg, #0B1026 0%, #1D4ED8 28%, #7C3AED 58%, #EC4899 82%, #050510 100%);
-    --brand-gradient-soft: linear-gradient(135deg, rgba(29, 78, 216, 0.18) 0%, rgba(124, 58, 237, 0.14) 48%, rgba(236, 72, 153, 0.12) 78%, rgba(5, 5, 16, 0.16) 100%);
     --c-offwhite: #F8F8FB;
-    --c-mute: rgba(248, 248, 251, 0.65);
-    --c-line: rgba(248, 248, 251, 0.12);
 
     /* Dark theme tokens — wärmeres Brand-Navy, nicht fast-schwarz */
     --theme-bg: #1A1A2E;
@@ -52,22 +46,11 @@
     /* WhatsApp brand color */
     --c-whatsapp: #25D366;
     --c-whatsapp-dark: #128C7E;
-
-    --premium-glass: rgba(10, 10, 20, 0.46);
-    --premium-glass-strong: rgba(10, 10, 20, 0.68);
-    --premium-line: rgba(248, 248, 251, 0.14);
-    --premium-line-bright: rgba(248, 248, 251, 0.28);
-    --premium-light-edge: rgba(255, 255, 255, 0.42);
   }
 
   /* Body is transparent — section backgrounds are rendered ON the body,
      and the body color animates based on scroll position via useScrollColor. */
-  html, body {
-    position: relative;
-    background: var(--theme-bg);
-    color: var(--theme-text);
-    overflow-x: clip;
-  }
+  html, body { background: var(--theme-bg); color: var(--theme-text); }
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -96,10 +79,7 @@
     color: var(--theme-text-mute);
   }
   .gradient-text {
-    background: var(--brand-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+    @apply bg-gradient-to-br from-[#9d7eff] via-violet to-brand-blue bg-clip-text text-transparent;
   }
   .gradient-text-italic {
     @apply font-serif italic font-normal;
@@ -108,9 +88,7 @@
   /* ===== BUTTONS ===== */
   .btn-primary {
     @apply inline-flex items-center gap-2 rounded-full px-7 py-4 text-sm font-semibold text-offwhite shadow-[0_12px_32px_-10px_rgba(124,58,237,0.6)] transition-all duration-300;
-    background: var(--brand-gradient);
-    position: relative;
-    overflow: hidden;
+    background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 100%);
   }
   .btn-primary:hover {
     transform: translateY(-2px);
@@ -120,8 +98,6 @@
     @apply inline-flex items-center gap-2 rounded-full border px-6 py-4 text-sm font-medium text-offwhite backdrop-blur-md transition-all duration-300;
     border-color: var(--theme-line);
     background: rgba(255, 255, 255, 0.03);
-    position: relative;
-    overflow: hidden;
   }
   .btn-ghost-dark:hover {
     border-color: rgba(255, 255, 255, 0.3);
@@ -142,8 +118,6 @@
     @apply inline-flex items-center gap-2 rounded-full px-6 py-4 text-sm font-semibold text-white transition-all duration-300;
     background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
     box-shadow: 0 8px 24px -8px rgba(37, 211, 102, 0.5);
-    position: relative;
-    overflow: hidden;
   }
   .btn-whatsapp:hover {
     transform: translateY(-2px);
@@ -151,11 +125,9 @@
   }
   .btn-call {
     @apply inline-flex items-center gap-2 rounded-full px-6 py-4 text-sm font-semibold transition-all duration-300;
-    background: var(--brand-gradient);
+    background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 100%);
     box-shadow: 0 8px 24px -8px rgba(124, 58, 237, 0.5);
     color: #F8F8FB;
-    position: relative;
-    overflow: hidden;
   }
   .btn-call:hover {
     transform: translateY(-2px);
@@ -166,26 +138,8 @@
      so light→light and dark→dark have no hard transition. ===== */
   .section {
     @apply relative;
-    overflow: hidden;
     padding-top: clamp(72px, 11vw, 120px);
     padding-bottom: clamp(72px, 11vw, 120px);
-  }
-  .section > .container-page {
-    position: relative;
-    z-index: 1;
-  }
-  .section::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.38), rgba(37, 211, 102, 0.22), transparent);
-    transform-origin: left;
-    animation: section-flow-line 6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-    pointer-events: none;
-    opacity: 0.75;
   }
   .section-dark {
     background: var(--theme-bg);
@@ -217,44 +171,16 @@
   }
 
   .glass-panel {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), var(--premium-glass));
-    backdrop-filter: blur(24px) saturate(170%);
-    -webkit-backdrop-filter: blur(24px) saturate(170%);
-    border: 1px solid var(--premium-line);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.12),
-      0 24px 70px -42px rgba(0, 0, 0, 0.75);
+    background: var(--theme-panel);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid var(--theme-line);
   }
   .glass-pill {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), var(--premium-glass));
-    backdrop-filter: blur(24px) saturate(170%);
-    -webkit-backdrop-filter: blur(24px) saturate(170%);
-    border: 1px solid var(--premium-line);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.12),
-      0 24px 70px -42px rgba(0, 0, 0, 0.75);
-  }
-  .premium-edge {
-    position: relative;
-    overflow: hidden;
-  }
-  .premium-edge::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    border-radius: inherit;
-    background: linear-gradient(135deg, rgba(255,255,255,0.28), transparent 32%, transparent 68%, rgba(255,255,255,0.08));
-    opacity: 0.55;
-  }
-  .premium-press {
-    transform: translateY(0) scale(1);
-  }
-  .premium-press:hover {
-    transform: translateY(-2px) scale(1.01);
-  }
-  .premium-press:active {
-    transform: translateY(0) scale(0.985);
+    background: var(--theme-panel);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border: 1px solid var(--theme-line);
   }
   .divider-line {
     @apply h-px w-full;
@@ -276,18 +202,8 @@
   }
 }
 
-@keyframes section-flow-line {
-  0% { transform: scaleX(0.08) translateX(-18%); opacity: 0; }
-  28% { opacity: 0.85; }
-  58% { transform: scaleX(1) translateX(0); opacity: 0.75; }
-  100% { transform: scaleX(0.08) translateX(118%); opacity: 0; }
-}
-
 /* Native browser scroll */
 html { scroll-behavior: auto; }
-
-[id] { scroll-margin-top: 88px; }
-#top { scroll-margin-top: 0; }
 
 body::-webkit-scrollbar { width: 8px; }
 body::-webkit-scrollbar-track { background: var(--theme-bg); }

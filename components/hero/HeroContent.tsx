@@ -21,8 +21,8 @@ export default function HeroContent({ active }: Props) {
   const modeKey = active;
 
   return (
-    <div className="container-page relative z-10 grid h-full grid-cols-1 items-center gap-6 pb-20 pt-32 sm:gap-8 md:pb-24 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
-      <div className="hero-copy w-full">
+    <div className="container-page relative z-10 grid h-full grid-cols-1 items-end gap-6 pb-28 pt-32 sm:gap-8 sm:pb-20 md:pb-24 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
+      <div className="w-full">
         <AnimatePresence mode="wait">
           <motion.div
             key={modeKey + '-badge'}
@@ -97,7 +97,7 @@ export default function HeroContent({ active }: Props) {
         </AnimatePresence>
 
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3 sm:gap-4">
-          <a href={m.ctaHref} className="premium-press premium-edge btn-primary w-full justify-center !px-6 !py-4 sm:w-auto">
+          <a href={m.ctaHref} className="btn-primary w-full justify-center !px-6 !py-4 sm:w-auto">
             <AnimatePresence mode="wait">
               <motion.span
                 key={modeKey + '-cta'}
@@ -113,7 +113,7 @@ export default function HeroContent({ active }: Props) {
           </a>
           <a
             href={`tel:${HAUPTNUMMER.festnetzTel}`}
-            className="premium-press premium-edge btn-call w-full justify-center !px-6 !py-4 sm:w-auto"
+            className="btn-call w-full justify-center !px-6 !py-4 sm:w-auto"
           >
             <span aria-hidden>📞</span>
             Anrufen: {HAUPTNUMMER.festnetz}
@@ -125,7 +125,7 @@ export default function HeroContent({ active }: Props) {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="hero-contact-wrap mt-6 sm:mt-7"
+          className="mt-8 sm:mt-10"
         >
           <div className="hero-contact-bar">
             <div className="hero-contact-eyebrow">
@@ -236,11 +236,9 @@ export default function HeroContent({ active }: Props) {
         </a>
       </motion.aside>
 
-      <style jsx global>{`
+      <style jsx>{`
         .hero-contact-bar {
-          width: 100%;
-          min-height: 124px;
-          padding: 16px 20px;
+          padding: 18px 22px;
           background: rgba(10, 10, 20, 0.55);
           backdrop-filter: blur(20px) saturate(160%);
           -webkit-backdrop-filter: blur(20px) saturate(160%);
@@ -284,12 +282,11 @@ export default function HeroContent({ active }: Props) {
           display: flex;
           align-items: center;
           gap: 10px;
-          min-height: 54px;
-          padding: 10px 12px;
+          padding: 12px 14px;
           border-radius: 14px;
           background: rgba(255, 255, 255, 0.05);
           border: 1px solid rgba(255, 255, 255, 0.1);
-          transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), border-color 260ms, background 260ms, box-shadow 260ms;
+          transition: all 250ms cubic-bezier(0.22, 1, 0.36, 1);
           text-decoration: none;
           color: #F8F8FB;
         }
@@ -297,9 +294,6 @@ export default function HeroContent({ active }: Props) {
           background: rgba(255, 255, 255, 0.1);
           border-color: rgba(124, 58, 237, 0.4);
           transform: translateY(-2px);
-        }
-        .hero-contact-action:active {
-          transform: translateY(0) scale(0.985);
         }
         .hero-contact-action-call {
           background: linear-gradient(135deg, rgba(91, 79, 233, 0.18) 0%, rgba(124, 58, 237, 0.12) 100%);
@@ -349,12 +343,8 @@ export default function HeroContent({ active }: Props) {
           font-weight: 600;
           color: #F8F8FB;
           margin-top: 1px;
-          min-height: 16px;
         }
         @media (max-width: 480px) {
-          .hero-contact-wrap {
-            display: none;
-          }
           .hero-contact-actions {
             grid-template-columns: 1fr 1fr;
           }
@@ -364,55 +354,6 @@ export default function HeroContent({ active }: Props) {
           }
           .hero-contact-value {
             font-size: 10.5px;
-          }
-        }
-        @media (max-width: 640px) {
-          .hero-copy {
-            transform: translateY(-18px);
-          }
-          .hero-copy :global(.display-1) {
-            font-size: clamp(48px, 13vw, 58px);
-            line-height: 1.02;
-          }
-          .hero-copy :global(.glass-pill) {
-            padding: 10px 8px;
-          }
-          .hero-copy :global(.glass-pill) div:first-child {
-            font-size: 24px;
-          }
-          .hero-copy :global(.glass-pill) div:last-child {
-            font-size: 8.5px;
-            letter-spacing: 0.12em;
-          }
-          .hero-copy :global(.btn-primary),
-          .hero-copy :global(.btn-call),
-          .hero-copy :global(.btn-ghost-dark) {
-            min-height: 58px;
-            padding-top: 14px !important;
-            padding-bottom: 14px !important;
-          }
-        }
-        @media (min-width: 1024px) and (max-height: 1080px) {
-          .hero-copy {
-            transform: translateY(-64px);
-          }
-          .hero-contact-wrap {
-            margin-top: 18px;
-          }
-          .hero-contact-bar {
-            min-height: 112px;
-            padding: 14px 18px;
-          }
-          .hero-contact-eyebrow {
-            margin-bottom: 10px;
-          }
-          .hero-contact-action {
-            min-height: 50px;
-            padding: 9px 11px;
-          }
-          .hero-contact-icon {
-            width: 28px;
-            height: 28px;
           }
         }
       `}</style>

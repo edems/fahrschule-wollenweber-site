@@ -18,7 +18,6 @@ export default function VideoStage({ active }: Props) {
     bus: null,
   });
   const [reducedMotion, setReducedMotion] = useState(false);
-  const [allowAdjacentPreload, setAllowAdjacentPreload] = useState(false);
   const stageRef = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
 
@@ -29,16 +28,6 @@ export default function VideoStage({ active }: Props) {
     const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
     mq.addEventListener('change', handler);
     return () => mq.removeEventListener('change', handler);
-  }, []);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const mq = window.matchMedia('(min-width: 768px)');
-    const connection = navigator as Navigator & { connection?: { saveData?: boolean } };
-    const update = () => setAllowAdjacentPreload(mq.matches && !connection.connection?.saveData);
-    update();
-    mq.addEventListener('change', update);
-    return () => mq.removeEventListener('change', update);
   }, []);
 
   useEffect(() => {
@@ -60,7 +49,6 @@ export default function VideoStage({ active }: Props) {
   }, [active, reducedMotion]);
 
   useEffect(() => {
-    if (!allowAdjacentPreload) return;
     const currentIdx = MODE_ORDER.indexOf(active);
     const next = MODE_ORDER[(currentIdx + 1) % MODE_ORDER.length];
     const prev = MODE_ORDER[(currentIdx - 1 + MODE_ORDER.length) % MODE_ORDER.length];
@@ -68,7 +56,7 @@ export default function VideoStage({ active }: Props) {
       const v = refs.current[id];
       if (v && v.preload !== 'auto') v.preload = 'auto';
     });
-  }, [active, allowAdjacentPreload]);
+  }, [active]);
 
   // Scroll-Tracking – Video skaliert raus beim Raus-Scrollen, 3D-Tilt mit Maus
   const { scrollYProgress } = useScroll({
@@ -105,17 +93,14 @@ export default function VideoStage({ active }: Props) {
                 refs.current[id] = el;
               }}
               data-mode={id}
+              src={m.video}
               muted
               loop
               playsInline
-              preload={isActive ? 'auto' : allowAdjacentPreload ? 'metadata' : 'none'}
-              poster={m.poster}
+              preload={isActive ? 'auto' : 'metadata'}
               aria-hidden={!isActive}
               className={`hero-video ${isActive ? 'is-active' : ''} ${reducedMotion && isActive ? 'is-paused' : ''}`}
-            >
-              <source src={m.videoMobile} type="video/mp4" media="(max-width: 640px)" />
-              <source src={m.video} type="video/mp4" />
-            </video>
+            />
           );
         })}
       </motion.div>

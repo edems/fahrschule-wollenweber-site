@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { SEMINARE } from '@/lib/seminare';
 import SectionHeader from '@/components/ui/SectionHeader';
-import { PremiumReveal, Stagger } from '@/components/ui/ScrollMotion';
+import { Stagger } from '@/components/ui/ScrollMotion';
 import {
   LifebuoyIcon,
   TruckIcon,
@@ -26,17 +26,15 @@ export default function Spezialleistungen() {
   return (
     <section id="spezialleistungen" className="section section-light relative">
       <div className="container-page relative">
-        <PremiumReveal>
-          <SectionHeader
-            eyebrow="Spezialleistungen"
-            title={
-              <>
-                Mehr als <span className="gradient-text gradient-text-italic">nur Führerschein.</span>
-              </>
-            }
-            description="Berufskraftfahrer-Weiterbildung, Staplerschein, Baumaschinenführer, Aufbauseminare, Fahreignungsseminar – bei uns bist du fachlich richtig."
-          />
-        </PremiumReveal>
+        <SectionHeader
+          eyebrow="Spezialleistungen"
+          title={
+            <>
+              Mehr als <span className="gradient-text gradient-text-italic">nur Führerschein.</span>
+            </>
+          }
+          description="Berufskraftfahrer-Weiterbildung, Staplerschein, Baumaschinenführer, Aufbauseminare, Fahreignungsseminar – bei uns bist du fachlich richtig."
+        />
 
         <Stagger delayStep={0.08} className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {SEMINARE.map((s) => {

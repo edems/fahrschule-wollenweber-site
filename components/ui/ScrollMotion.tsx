@@ -3,14 +3,6 @@
 import { useEffect, useRef, type ReactNode, type CSSProperties } from 'react';
 import { motion, useScroll, useTransform, useSpring, useInView, useReducedMotion } from 'framer-motion';
 
-const premiumEase = [0.22, 1, 0.36, 1] as [number, number, number, number];
-
-const premiumSpring = {
-  stiffness: 80,
-  damping: 22,
-  mass: 0.4,
-};
-
 type RevealProps = {
   children: ReactNode;
   delay?: number;
@@ -49,50 +41,7 @@ export function Reveal({
       ref={ref}
       initial={{ opacity: 0, y, x }}
       animate={inView ? { opacity: 1, y: 0, x: 0 } : { opacity: 0, y, x }}
-      transition={{ duration, delay, ease: premiumEase }}
-      className={className}
-    >
-      {children}
-    </MotionTag>
-  );
-}
-
-type PremiumRevealProps = RevealProps & {
-  blur?: number;
-};
-
-export function PremiumReveal({
-  children,
-  delay = 0,
-  y = 34,
-  x = 0,
-  className,
-  as = 'div',
-  amount = 0.22,
-  once = true,
-  duration = 0.82,
-  blur = 10,
-}: PremiumRevealProps) {
-  const reduce = useReducedMotion();
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once, amount });
-
-  if (reduce) {
-    return <div ref={ref} className={className}>{children}</div>;
-  }
-
-  const MotionTag = motion[as] as typeof motion.div;
-
-  return (
-    <MotionTag
-      ref={ref}
-      initial={{ opacity: 0, y, x, filter: `blur(${blur}px)` }}
-      animate={
-        inView
-          ? { opacity: 1, y: 0, x: 0, filter: 'blur(0px)' }
-          : { opacity: 0, y, x, filter: `blur(${blur}px)` }
-      }
-      transition={{ duration, delay, ease: premiumEase }}
+      transition={{ duration, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
       {children}
@@ -115,7 +64,7 @@ export function Parallax({ children, speed = 0.15, className, style }: ParallaxP
     offset: ['start end', 'end start'],
   });
   const yRaw = useTransform(scrollYProgress, [0, 1], [speed * -80, speed * 80]);
-  const y = useSpring(yRaw, premiumSpring);
+  const y = useSpring(yRaw, { stiffness: 80, damping: 20, mass: 0.4 });
 
   if (reduce) {
     return <div ref={ref} className={className} style={style}>{children}</div>;
@@ -162,7 +111,7 @@ export function Stagger({ children, delayStep = 0.08, className, y = 24, amount 
               key={i}
               variants={{
                 hidden: { opacity: 0, y },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: premiumEase } },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
               }}
             >
               {child}
@@ -205,7 +154,7 @@ export function WordReveal({ text, className, delay = 0 }: WordRevealProps) {
           key={i}
           variants={{
             hidden: { opacity: 0, y: 16, filter: 'blur(8px)' },
-            visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.6, ease: premiumEase } },
+            visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
           }}
           className="inline-block"
           style={{ marginRight: '0.25em' }}

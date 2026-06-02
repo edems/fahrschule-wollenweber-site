@@ -2,23 +2,21 @@
 
 import { LERNPFADE } from '@/lib/lernpfade';
 import SectionHeader from '@/components/ui/SectionHeader';
-import { PremiumReveal, Stagger } from '@/components/ui/ScrollMotion';
+import { Stagger, Reveal } from '@/components/ui/ScrollMotion';
 
 export default function Lernpfade() {
   return (
     <section id="lernpfade" className="section section-dark transition-to-light relative">
       <div className="container-page">
-        <PremiumReveal>
-          <SectionHeader
-            eyebrow="Lernpfade"
-            title={
-              <>
-                Dein Weg, <span className="gradient-text gradient-text-italic">dein Tempo.</span>
-              </>
-            }
-            description="Vom Begleiteten Fahren ab 17 bis zur Berufskraftfahrer-Weiterbildung – wir haben den passenden Pfad für dein Ziel."
-          />
-        </PremiumReveal>
+        <SectionHeader
+          eyebrow="Lernpfade"
+          title={
+            <>
+              Dein Weg, <span className="gradient-text gradient-text-italic">dein Tempo.</span>
+            </>
+          }
+          description="Vom Begleiteten Fahren ab 17 bis zur Berufskraftfahrer-Weiterbildung – wir haben den passenden Pfad für dein Ziel."
+        />
 
         <Stagger delayStep={0.08} className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {LERNPFADE.map((lp) => (

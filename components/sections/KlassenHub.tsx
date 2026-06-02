@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { KATEGORIEN } from '@/lib/klassen';
 import { KLASSEN_ICON_MAP } from '@/components/icons/KlassenIcons';
 import SectionHeader from '@/components/ui/SectionHeader';
-import { PremiumReveal } from '@/components/ui/ScrollMotion';
 
 type KatId = (typeof KATEGORIEN)[number]['id'];
 
@@ -18,17 +17,15 @@ export default function KlassenHub() {
   return (
     <section id="klassen" className="section section-light relative">
       <div className="container-page relative">
-        <PremiumReveal>
-          <SectionHeader
-            eyebrow="Führerscheinklassen"
-            title={
-              <>
-                Von Mofa bis <span className="gradient-text gradient-text-italic">Bus.</span>
-              </>
-            }
-            description="Wähle deine Kategorie und entdecke alle Klassen, die wir im Westerwald ausbilden. Klick auf eine Klasse für die Anmeldung."
-          />
-        </PremiumReveal>
+        <SectionHeader
+          eyebrow="Führerscheinklassen"
+          title={
+            <>
+              Von Mofa bis <span className="gradient-text gradient-text-italic">Bus.</span>
+            </>
+          }
+          description="Wähle deine Kategorie und entdecke alle Klassen, die wir im Westerwald ausbilden. Klick auf eine Klasse für die Anmeldung."
+        />
 
         <motion.div
           role="tablist"
@@ -208,7 +205,7 @@ function KlasseCard({ k }: { k: { code: string; name: string; beschreibung: stri
   return (
     <motion.a
       ref={ref}
-      href="#kontakt"
+      href={`#kontakt?klasse=${k.code}`}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       style={{ rotateX, rotateY, transformPerspective: 1000, transformStyle: 'preserve-3d' }}
@@ -262,3 +259,4 @@ function KlasseCard({ k }: { k: { code: string; name: string; beschreibung: stri
     </motion.a>
   );
 }
+

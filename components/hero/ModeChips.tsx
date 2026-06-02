@@ -51,7 +51,7 @@ export default function ModeChips({ active, onChange }: Props) {
   const activeIndex = MODE_ORDER.indexOf(active);
 
   return (
-    <div className="container-page flex flex-col items-center">
+    <div className="container-page fixed left-0 right-0 top-[96px] z-40 flex flex-col items-center">
       <div
         ref={pillRef}
         role="tablist"
@@ -61,7 +61,6 @@ export default function ModeChips({ active, onChange }: Props) {
         {MODE_ORDER.map((id) => {
           const m = MODES[id];
           const isActive = id === active;
-          const shortLabel = id === 'landwirtschaft' ? 'Traktor' : m.label;
           return (
             <button
               key={id}
@@ -76,8 +75,7 @@ export default function ModeChips({ active, onChange }: Props) {
               className={`mode-chip ${isActive ? 'is-active' : ''}`}
             >
               <span className="dot" />
-              <span className="label-full">{m.label}</span>
-              <span className="label-compact">{shortLabel}</span>
+              <span>{m.label}</span>
               {isActive && <span className="mode-chip-shine" aria-hidden />}
             </button>
           );
@@ -102,15 +100,12 @@ export default function ModeChips({ active, onChange }: Props) {
           max-width: 100%;
           gap: 4px;
           padding: 6px;
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(10, 10, 20, 0.52));
-          backdrop-filter: blur(26px) saturate(180%);
-          -webkit-backdrop-filter: blur(26px) saturate(180%);
-          border: 1px solid rgba(248, 248, 251, 0.16);
+          background: rgba(26, 26, 46, 0.55);
+          backdrop-filter: blur(18px) saturate(160%);
+          -webkit-backdrop-filter: blur(18px) saturate(160%);
+          border: 1px solid var(--c-line);
           border-radius: 999px;
           position: relative;
-          box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.12),
-            0 18px 54px -34px rgba(0, 0, 0, 0.85);
         }
         .mode-chip {
           display: inline-flex;
@@ -122,7 +117,7 @@ export default function ModeChips({ active, onChange }: Props) {
           font-weight: 500;
           color: var(--c-mute);
           border-radius: 999px;
-          transition: color 250ms, background 250ms, transform 250ms, box-shadow 250ms;
+          transition: color 250ms, background 250ms, transform 250ms;
           position: relative;
           overflow: hidden;
           white-space: nowrap;
@@ -130,18 +125,10 @@ export default function ModeChips({ active, onChange }: Props) {
         }
         .mode-chip:hover { color: #F8F8FB; }
         .mode-chip:hover:not(.is-active) { transform: translateY(-1px); }
-        .label-compact {
-          display: none;
-        }
-        .mode-chip:active {
-          transform: scale(0.985);
-        }
         .mode-chip.is-active {
           color: #F8F8FB;
-          background: linear-gradient(135deg, rgba(91, 79, 233, 0.92) 0%, rgba(124, 58, 237, 0.88) 100%);
-          box-shadow:
-            inset 0 1px 0 rgba(255, 255, 255, 0.22),
-            0 10px 28px -12px rgba(124, 58, 237, 0.85);
+          background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 100%);
+          box-shadow: 0 6px 20px -6px rgba(124, 58, 237, 0.7);
         }
         .mode-chip-shine {
           position: absolute;
@@ -200,25 +187,14 @@ export default function ModeChips({ active, onChange }: Props) {
             scroll-snap-align: center;
             scroll-snap-stop: always;
             flex: 0 0 auto;
-            padding: 10px 14px;
+            padding: 10px 20px;
             min-height: 40px;
-          }
-          .label-full {
-            display: none;
-          }
-          .label-compact {
-            display: inline;
           }
         }
         @media (max-width: 480px) {
-          .mode-pill {
-            max-width: calc(100vw - 40px);
-            gap: 2px;
-            padding: 5px 4px;
-          }
           .mode-chip {
-            padding: 9px 12px;
-            font-size: 12.5px;
+            padding: 10px 16px;
+            font-size: 12px;
           }
         }
       `}</style>

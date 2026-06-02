@@ -1,320 +1,257 @@
 'use client';
 
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion } from 'framer-motion';
 
 const TRUST_SIGNALS = [
   {
+    icon: 'star',
     value: '5,0',
     label: 'Google-Sterne',
     sub: 'Echte Bewertungen',
-    tone: 'gold',
   },
   {
+    icon: 'review',
     value: '322',
     label: 'Bewertungen',
     sub: 'Hachenburg + Bad Marienberg',
-    tone: 'violet',
   },
   {
+    icon: 'teacher',
     value: '3',
     label: 'Fahrlehrer',
     sub: 'Familie Wollenweber',
-    tone: 'green',
   },
   {
+    icon: 'pin',
     value: '2',
     label: 'Standorte',
     sub: 'Im Westerwald',
-    tone: 'blue',
   },
   {
+    icon: 'time',
     value: '20+',
     label: 'Jahre',
     sub: 'Erfahrung',
-    tone: 'silver',
   },
 ] as const;
 
-export default function TrustBar() {
-  const ref = useRef<HTMLElement>(null);
-  const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
-  const bridgeYRaw = useTransform(scrollYProgress, [0, 1], [42, -42]);
-  const bridgeY = useSpring(bridgeYRaw, { stiffness: 70, damping: 22, mass: 0.4 });
-  const lineScale = useTransform(scrollYProgress, [0.1, 0.55, 0.9], [0.1, 1, 0.35]);
-
+function TrustIcon({ icon }: { icon: typeof TRUST_SIGNALS[number]['icon'] }) {
+  if (icon === 'star') {
+    return (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="#FBBC05" aria-hidden>
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+      </svg>
+    );
+  }
+  if (icon === 'review') {
+    return (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        <line x1="8" y1="10" x2="16" y2="10"/>
+        <line x1="8" y1="14" x2="13" y2="14"/>
+      </svg>
+    );
+  }
+  if (icon === 'teacher') {
+    return (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <circle cx="12" cy="7" r="4"/>
+        <path d="M5 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/>
+      </svg>
+    );
+  }
+  if (icon === 'pin') {
+    return (
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+        <circle cx="12" cy="10" r="3"/>
+      </svg>
+    );
+  }
   return (
-    <section ref={ref} className="trust-bridge" aria-label="Vertrauenssignale">
-      <div className="trust-bridge-top" aria-hidden />
-      <motion.div
-        className="trust-bridge-lines"
-        aria-hidden
-        style={reduce ? undefined : { y: bridgeY }}
-      >
-        <motion.span style={reduce ? undefined : { scaleX: lineScale }} />
-        <motion.span style={reduce ? undefined : { scaleX: lineScale }} />
-        <motion.span style={reduce ? undefined : { scaleX: lineScale }} />
-      </motion.div>
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <circle cx="12" cy="12" r="10"/>
+        <polyline points="12 6 12 12 16 14"/>
+      </svg>
+  );
+}
 
-      <div className="container-page relative">
-        <div className="trust-copy">
-          <motion.div
-            className="trust-kicker"
-            initial={reduce ? false : { opacity: 0, y: 12 }}
-            whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          >
-            Westerwald · Persönlich · Geprüft
-          </motion.div>
-          <motion.p
-            initial={reduce ? false : { opacity: 0, y: 18 }}
-            whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-          >
-            Direkt nach dem ersten Eindruck zählt Vertrauen: echte Bewertungen, kurze Wege,
-            feste Ansprechpartner und Erfahrung auf den Straßen der Region.
-          </motion.p>
-        </div>
-
+export default function TrustBar() {
+  return (
+    <section className="trustbar" aria-label="Vertrauenssignale">
+      <div className="container-page">
         <motion.div
-          className="trust-grid"
-          initial={reduce ? false : 'hidden'}
-          whileInView={reduce ? undefined : 'visible'}
-          viewport={{ once: true, amount: 0.35 }}
+          className="trustbar-grid"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
           variants={{
             hidden: {},
-            visible: { transition: { staggerChildren: 0.08, delayChildren: 0.12 } },
+            visible: { transition: { staggerChildren: 0.1 } },
           }}
         >
-          {TRUST_SIGNALS.map((signal, index) => (
-            <motion.article
-              key={signal.label}
-              className={`trust-card trust-card-${signal.tone}`}
+          {TRUST_SIGNALS.map((s) => (
+            <motion.div
+              key={s.label}
+              className="trustbar-item"
               variants={{
-                hidden: { opacity: 0, y: 26, rotateX: -7 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  rotateX: 0,
-                  transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
-                },
+                hidden: { opacity: 0, y: 16 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
               }}
             >
-              <div className="trust-index" aria-hidden>
-                {String(index + 1).padStart(2, '0')}
+              <div className="trustbar-icon" aria-hidden>
+                <TrustIcon icon={s.icon} />
               </div>
-              <div className="trust-value">{signal.value}</div>
-              <div className="trust-label">{signal.label}</div>
-              <div className="trust-sub">{signal.sub}</div>
-              <span className="trust-card-line" aria-hidden />
-            </motion.article>
+              <div className="trustbar-content">
+                <div className="trustbar-value">{s.value}</div>
+                <div className="trustbar-label">{s.label}</div>
+                <div className="trustbar-sub">{s.sub}</div>
+              </div>
+            </motion.div>
           ))}
         </motion.div>
       </div>
 
-      <style jsx global>{`
-        .trust-bridge {
+      <style jsx>{`
+        .trustbar {
           position: relative;
-          z-index: 0;
-          isolation: isolate;
-          overflow: hidden;
-          padding: clamp(64px, 10vw, 116px) 0 clamp(70px, 11vw, 128px);
-          background:
-            radial-gradient(ellipse at 12% 8%, rgba(251, 188, 5, 0.22) 0%, transparent 38%),
-            radial-gradient(ellipse at 88% 22%, rgba(37, 211, 102, 0.14) 0%, transparent 36%),
-            radial-gradient(ellipse at 55% 100%, rgba(29, 78, 216, 0.12) 0%, transparent 42%),
-            linear-gradient(180deg, #FFFBEB 0%, #FEF3C7 46%, #F8FAFC 100%);
-          border-top: 1px solid rgba(251, 188, 5, 0.28);
-          border-bottom: 1px solid rgba(26, 26, 46, 0.08);
+          padding: 56px 0 64px 0;
+          background: linear-gradient(180deg,
+            rgba(10, 10, 20, 0.5) 0%,
+            rgba(15, 15, 30, 0.4) 50%,
+            rgba(10, 10, 20, 0.5) 100%);
+          border-top: 1px solid rgba(124, 58, 237, 0.18);
+          border-bottom: 1px solid rgba(124, 58, 237, 0.18);
+          margin-top: 0;
+          z-index: 2;
         }
-        .trust-bridge-top {
+        .trustbar::before {
+          content: '';
           position: absolute;
-          inset: 0 0 auto 0;
-          height: 120px;
-          background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), transparent);
+          top: -80px;
+          left: 0;
+          right: 0;
+          height: 80px;
+          background: linear-gradient(180deg, transparent 0%, rgba(10, 10, 20, 0.5) 100%);
           pointer-events: none;
+          z-index: -1;
         }
-        .trust-bridge::before {
+        .trustbar::after {
           content: '';
           position: absolute;
           inset: 0;
           background:
-            linear-gradient(90deg, transparent 0%, rgba(251, 188, 5, 0.16) 18%, transparent 36%),
-            linear-gradient(90deg, transparent 36%, rgba(37, 211, 102, 0.11) 62%, transparent 84%),
-            linear-gradient(135deg, transparent 20%, rgba(236, 72, 153, 0.08) 52%, transparent 78%);
-          opacity: 0.86;
+            radial-gradient(ellipse at 20% 50%, rgba(91, 79, 233, 0.08) 0%, transparent 60%),
+            radial-gradient(ellipse at 80% 50%, rgba(124, 58, 237, 0.06) 0%, transparent 60%);
           pointer-events: none;
         }
-        .trust-bridge::after {
-          content: '';
-          position: absolute;
-          inset: auto 0 0 0;
-          height: 180px;
-          background: linear-gradient(180deg, transparent, rgba(237, 233, 225, 0.92));
-          pointer-events: none;
-        }
-        .trust-bridge-lines {
-          position: absolute;
-          inset: 20% 0 auto 0;
+        .trustbar-grid {
+          position: relative;
           display: grid;
-          gap: 58px;
-          pointer-events: none;
-          opacity: 0.9;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 28px 20px;
         }
-        .trust-bridge-lines span {
-          display: block;
-          height: 1px;
-          transform-origin: left;
-          background: linear-gradient(90deg, transparent, rgba(251, 188, 5, 0.42), rgba(37, 211, 102, 0.28), transparent);
+        @media (min-width: 768px) {
+          .trustbar-grid {
+            grid-template-columns: repeat(5, 1fr);
+            gap: 24px;
+          }
         }
-        .trust-copy {
-          max-width: 760px;
-          margin-bottom: clamp(32px, 5vw, 56px);
-        }
-        .trust-kicker {
-          display: inline-flex;
+        .trustbar-item {
+          display: flex;
           align-items: center;
-          gap: 10px;
-          margin-bottom: 16px;
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.2em;
-          text-transform: uppercase;
-          color: rgba(26, 26, 46, 0.62);
+          gap: 14px;
         }
-        .trust-kicker::before {
-          content: '';
-          width: 34px;
-          height: 1px;
-          background: linear-gradient(90deg, #fbbc05, #25d366);
+        @media (min-width: 768px) {
+          .trustbar-item {
+            flex-direction: column;
+            text-align: center;
+            gap: 10px;
+          }
         }
-        .trust-copy p {
-          max-width: 680px;
-          font-size: clamp(20px, 3vw, 38px);
-          line-height: 1.12;
-          font-weight: 700;
-          letter-spacing: -0.02em;
-          color: var(--c-navy);
-        }
-        .trust-grid {
-          position: relative;
+        .trustbar-icon {
           display: grid;
-          grid-template-columns: repeat(5, minmax(0, 1fr));
-          gap: 12px;
-          perspective: 1100px;
+          place-items: center;
+          width: 52px;
+          height: 52px;
+          border-radius: 16px;
+          background: linear-gradient(135deg, rgba(91, 79, 233, 0.18) 0%, rgba(124, 58, 237, 0.12) 100%);
+          border: 1px solid rgba(124, 58, 237, 0.3);
+          color: #c4b5fd;
+          flex-shrink: 0;
         }
-        .trust-card {
-          position: relative;
-          min-height: 218px;
+        @media (min-width: 768px) {
+          .trustbar-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+          }
+        }
+        .trustbar-content {
           display: flex;
           flex-direction: column;
-          justify-content: flex-end;
-          overflow: hidden;
-          padding: 22px 20px;
-          border-radius: 18px;
-          background: rgba(255, 255, 255, 0.78);
-          border: 1px solid rgba(26, 26, 46, 0.08);
-          box-shadow: 0 18px 44px -26px rgba(251, 188, 5, 0.4);
-          backdrop-filter: blur(14px) saturate(150%);
-          -webkit-backdrop-filter: blur(14px) saturate(150%);
-          transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), border-color 320ms, background 320ms;
+          gap: 1px;
         }
-        .trust-card:hover {
-          transform: translateY(-8px);
-          background: rgba(255, 255, 255, 0.96);
-          border-color: rgba(251, 188, 5, 0.35);
-          box-shadow: 0 22px 52px -24px rgba(251, 188, 5, 0.46);
+        @media (min-width: 768px) {
+          .trustbar-content {
+            align-items: center;
+            gap: 2px;
+          }
         }
-        .trust-index {
-          position: absolute;
-          top: 18px;
-          left: 18px;
-          font-size: 10px;
-          font-weight: 700;
-          letter-spacing: 0.18em;
-          color: rgba(26, 26, 46, 0.34);
-        }
-        .trust-value {
-          font-size: clamp(42px, 5vw, 64px);
+        .trustbar-value {
+          font-size: 22px;
           font-weight: 800;
-          line-height: 0.9;
-          letter-spacing: -0.04em;
-          color: var(--c-navy);
+          letter-spacing: -0.02em;
+          color: #F8F8FB;
+          line-height: 1.1;
         }
-        .trust-label {
-          margin-top: 18px;
-          font-size: 13px;
-          font-weight: 800;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-          color: rgba(26, 26, 46, 0.78);
-        }
-        .trust-sub {
-          margin-top: 6px;
-          min-height: 34px;
-          font-size: 13px;
-          line-height: 1.32;
-          color: rgba(26, 26, 46, 0.62);
-        }
-        .trust-card-line {
-          position: absolute;
-          inset: auto 16px 16px 16px;
-          height: 2px;
-          border-radius: 999px;
-          opacity: 0.88;
-        }
-        .trust-card-gold .trust-card-line { background: linear-gradient(90deg, #fbbc05, rgba(251, 188, 5, 0)); }
-        .trust-card-violet .trust-card-line { background: linear-gradient(90deg, #7c3aed, rgba(124, 58, 237, 0)); }
-        .trust-card-green .trust-card-line { background: linear-gradient(90deg, #25d366, rgba(37, 211, 102, 0)); }
-        .trust-card-blue .trust-card-line { background: linear-gradient(90deg, #5b4fe9, rgba(91, 79, 233, 0)); }
-        .trust-card-silver .trust-card-line { background: linear-gradient(90deg, #f8f8fb, rgba(248, 248, 251, 0)); }
-
-        @media (max-width: 980px) {
-          .trust-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-          }
-          .trust-card:last-child {
-            grid-column: span 2;
-            min-height: 170px;
+        @media (min-width: 768px) {
+          .trustbar-value {
+            font-size: 32px;
           }
         }
-        @media (max-width: 760px) {
-          .trust-bridge {
-            padding: 42px 0 58px;
+        .trustbar-label {
+          font-size: 12.5px;
+          font-weight: 600;
+          color: #c4b5fd;
+          line-height: 1.2;
+        }
+        @media (min-width: 768px) {
+          .trustbar-label {
+            font-size: 14px;
           }
-          .trust-copy {
-            margin-bottom: 24px;
-          }
-          .trust-copy p {
-            font-size: clamp(22px, 7vw, 32px);
-            line-height: 1.12;
-          }
-          .trust-grid {
-            grid-template-columns: 1fr;
-          }
-          .trust-card,
-          .trust-card:last-child {
-            grid-column: auto;
-            min-height: 132px;
-            padding: 20px 18px;
-            border-radius: 16px;
-          }
-          .trust-value {
-            font-size: 42px;
-          }
-          .trust-label {
-            margin-top: 14px;
+        }
+        .trustbar-sub {
+          font-size: 11px;
+          font-weight: 500;
+          color: rgba(248, 248, 251, 0.55);
+          line-height: 1.3;
+        }
+        @media (min-width: 768px) {
+          .trustbar-sub {
             font-size: 12px;
-            letter-spacing: 0.12em;
           }
-          .trust-sub {
-            min-height: 0;
+        }
+        @media (max-width: 480px) {
+          .trustbar {
+            padding: 36px 0 40px 0;
+          }
+          .trustbar-item {
+            gap: 10px;
+          }
+          .trustbar-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+          }
+          .trustbar-value {
+            font-size: 19px;
+          }
+          .trustbar-label {
+            font-size: 11.5px;
+          }
+          .trustbar-sub {
+            font-size: 10px;
           }
         }
       `}</style>
