@@ -6,11 +6,11 @@ import SectionHeader from '@/components/ui/SectionHeader';
 import { Stagger } from '@/components/ui/ScrollMotion';
 
 const FUHRPARK = [
-  { id: 'auto', title: 'Pkw', sublabel: 'Klasse B', icon: '🚗' },
-  { id: 'motorrad', title: 'Motorrad', sublabel: 'A1 / A2 / A', icon: '🏍' },
-  { id: 'lkw', title: 'LKW', sublabel: 'C / CE', icon: '🚚' },
-  { id: 'bus', title: 'Bus', sublabel: 'D / DE', icon: '🚌' },
-  { id: 'landwirtschaft', title: 'Traktor', sublabel: 'L / T', icon: '🚜' },
+  { id: 'auto', title: 'Pkw', sublabel: 'Klasse B', icon: '/icons/klassen-auto.webp' },
+  { id: 'motorrad', title: 'Motorrad', sublabel: 'A1 / A2 / A', icon: '/icons/klassen-motorrad.webp' },
+  { id: 'lkw', title: 'LKW', sublabel: 'C / CE', icon: '/icons/klassen-lkw.webp' },
+  { id: 'bus', title: 'Bus', sublabel: 'D / DE', icon: '/icons/klassen-bus.webp' },
+  { id: 'landwirtschaft', title: 'Traktor', sublabel: 'L / T', icon: '/icons/klassen-landwirtschaft.webp' },
 ] as const;
 
 export default function Fuhrpark() {
@@ -43,7 +43,9 @@ export default function Fuhrpark() {
                     className="fuhrpark-video-el"
                   />
                   <div className="fuhrpark-video-overlay" />
-                  <div className="fuhrpark-icon" aria-hidden>{f.icon}</div>
+                  <div className="fuhrpark-icon" aria-hidden>
+                    <img src={f.icon} alt="" loading="lazy" width={32} height={32} className="fuhrpark-icon-img" />
+                  </div>
                   <div className="fuhrpark-live-badge">
                     <span className="dot" aria-hidden />
                     Loop
@@ -127,15 +129,21 @@ export default function Fuhrpark() {
           position: absolute;
           top: 14px;
           left: 14px;
-          width: 44px;
-          height: 44px;
+          width: 56px;
+          height: 56px;
           display: grid;
           place-items: center;
-          font-size: 22px;
           background: rgba(10, 10, 20, 0.7);
           backdrop-filter: blur(8px);
           border: 1px solid rgba(124, 58, 237, 0.3);
-          border-radius: 12px;
+          border-radius: 14px;
+          overflow: hidden;
+        }
+        .fuhrpark-icon-img {
+          width: 40px;
+          height: 40px;
+          object-fit: contain;
+          filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
         }
         .fuhrpark-live-badge {
           position: absolute;
