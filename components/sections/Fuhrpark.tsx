@@ -2,15 +2,16 @@
 
 import { motion } from 'framer-motion';
 import { MODES } from '@/lib/modes';
+import { asset } from '@/lib/paths';
 import SectionHeader from '@/components/ui/SectionHeader';
 import { Stagger } from '@/components/ui/ScrollMotion';
 
 const FUHRPARK = [
-  { id: 'auto', title: 'Pkw', sublabel: 'Klasse B', icon: '/icons/klassen-auto.webp' },
-  { id: 'motorrad', title: 'Motorrad', sublabel: 'A1 / A2 / A', icon: '/icons/klassen-motorrad.webp' },
-  { id: 'lkw', title: 'LKW', sublabel: 'C / CE', icon: '/icons/klassen-lkw.webp' },
-  { id: 'bus', title: 'Bus', sublabel: 'D / DE', icon: '/icons/klassen-bus.webp' },
-  { id: 'landwirtschaft', title: 'Traktor', sublabel: 'L / T', icon: '/icons/klassen-landwirtschaft.webp' },
+  { id: 'auto', title: 'Pkw', sublabel: 'Klasse B', icon: asset('/icons/klassen-auto.webp') },
+  { id: 'motorrad', title: 'Motorrad', sublabel: 'A1 / A2 / A', icon: asset('/icons/klassen-motorrad.webp') },
+  { id: 'lkw', title: 'LKW', sublabel: 'C / CE', icon: asset('/icons/klassen-lkw.webp') },
+  { id: 'bus', title: 'Bus', sublabel: 'D / DE', icon: asset('/icons/klassen-bus.webp') },
+  { id: 'landwirtschaft', title: 'Traktor', sublabel: 'L / T', icon: asset('/icons/klassen-landwirtschaft.webp') },
 ] as const;
 
 export default function Fuhrpark() {

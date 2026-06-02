@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { KATEGORIEN } from '@/lib/klassen';
+import { asset } from '@/lib/paths';
 import SectionHeader from '@/components/ui/SectionHeader';
 
 type KatId = (typeof KATEGORIEN)[number]['id'];
@@ -46,7 +47,7 @@ export default function KlassenHub() {
                 className={`klasse-tab ${isActive ? 'is-active' : ''}`}
               >
                 <img
-                  src={`/icons/klassen-${k.iconKey}.webp`}
+                  src={asset(`/icons/klassen-${k.iconKey}.webp`)}
                   alt=""
                   aria-hidden="true"
                   className="klasse-tab-icon"
@@ -81,7 +82,7 @@ export default function KlassenHub() {
                   className="klasse-icon-wrap"
                 >
                   <img
-                    src={`/icons/klassen-${aktiveKat.iconKey}.webp`}
+                    src={asset(`/icons/klassen-${aktiveKat.iconKey}.webp`)}
                     alt=""
                     aria-hidden="true"
                     className="klasse-icon-img"
