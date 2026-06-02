@@ -81,7 +81,7 @@ export default function Regionen() {
           cursor: default;
         }
         .region-pill:hover {
-          background: linear-gradient(135deg, rgba(91, 79, 233, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+          background: linear-gradient(135deg, rgba(91, 79, 233, 0.1) 0%, rgba(124, 58, 237, 0.08) 50%, rgba(236, 72, 153, 0.08) 100%);
           border-color: rgba(124, 58, 237, 0.4);
           transform: translateY(-1px);
           color: #6D28D9;

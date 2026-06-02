@@ -79,7 +79,7 @@
     color: var(--theme-text-mute);
   }
   .gradient-text {
-    @apply bg-gradient-to-br from-[#9d7eff] via-violet to-brand-blue bg-clip-text text-transparent;
+    @apply bg-gradient-to-br from-[#9d7eff] via-violet to-brand-pink bg-clip-text text-transparent;
   }
   .gradient-text-italic {
     @apply font-serif italic font-normal;
@@ -88,7 +88,7 @@
   /* ===== BUTTONS ===== */
   .btn-primary {
     @apply inline-flex items-center gap-2 rounded-full px-7 py-4 text-sm font-semibold text-offwhite shadow-[0_12px_32px_-10px_rgba(124,58,237,0.6)] transition-all duration-300;
-    background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 100%);
+    background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 50%, #EC4899 100%);
   }
   .btn-primary:hover {
     transform: translateY(-2px);
@@ -125,7 +125,7 @@
   }
   .btn-call {
     @apply inline-flex items-center gap-2 rounded-full px-6 py-4 text-sm font-semibold transition-all duration-300;
-    background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 100%);
+    background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 50%, #EC4899 100%);
     box-shadow: 0 8px 24px -8px rgba(124, 58, 237, 0.5);
     color: #F8F8FB;
   }
@@ -200,6 +200,37 @@
   .light-divider {
     background: var(--light-line);
   }
+
+  /* ===== BRAND GRADIENT — blau → violett → rosa → schwarz.
+     Single source of truth für alle Brand-Gradient-Stellen. ===== */
+  .gradient-brand {
+    background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 50%, #EC4899 100%);
+  }
+  .gradient-brand-h {
+    background: linear-gradient(90deg, #5B4FE9 0%, #7C3AED 50%, #EC4899 100%);
+  }
+  .gradient-brand-v {
+    background: linear-gradient(180deg, #5B4FE9 0%, #7C3AED 50%, #EC4899 100%);
+  }
+  /* Subtile Tints für Card-Backgrounds — gleiche Farbpalette,
+     8-18% opacity damit der Untergrund durchschimmert. */
+  .gradient-brand-soft {
+    background: linear-gradient(135deg, rgba(91, 79, 233, 0.12) 0%, rgba(124, 58, 237, 0.10) 50%, rgba(236, 72, 153, 0.10) 100%);
+  }
+  .gradient-brand-soft-strong {
+    background: linear-gradient(135deg, rgba(91, 79, 233, 0.20) 0%, rgba(124, 58, 237, 0.18) 50%, rgba(236, 72, 153, 0.18) 100%);
+  }
+  .gradient-brand-underline {
+    background: linear-gradient(90deg, #5B4FE9 0%, #7C3AED 50%, #EC4899 100%);
+  }
+  /* Text-Gradient für Hero-Headlines */
+  .text-gradient-brand {
+    background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 50%, #EC4899 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
 /* Native browser scroll */
@@ -207,8 +238,8 @@ html { scroll-behavior: auto; }
 
 body::-webkit-scrollbar { width: 8px; }
 body::-webkit-scrollbar-track { background: var(--theme-bg); }
-body::-webkit-scrollbar-thumb { background: rgba(124, 58, 237, 0.4); border-radius: 4px; }
-body::-webkit-scrollbar-thumb:hover { background: rgba(124, 58, 237, 0.7); }
+body::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #5B4FE9 0%, #7C3AED 50%, #EC4899 100%); border-radius: 4px; }
+body::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #5B4FE9 0%, #EC4899 100%); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

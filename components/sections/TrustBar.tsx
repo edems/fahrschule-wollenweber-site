@@ -158,7 +158,7 @@ export default function TrustBar() {
           display: grid;
           place-items: center;
           border-radius: 10px;
-          background: linear-gradient(135deg, rgba(91, 79, 233, 0.18) 0%, rgba(124, 58, 237, 0.12) 100%);
+          background: linear-gradient(135deg, rgba(91, 79, 233, 0.18) 0%, rgba(124, 58, 237, 0.14) 50%, rgba(236, 72, 153, 0.12) 100%);
           color: #6D28D9;
           flex-shrink: 0;
         }

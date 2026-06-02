@@ -144,7 +144,7 @@ export default function KlassenHub() {
         }
         :global(.klasse-tab.is-active) {
           color: #F8F8FB;
-          background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 100%);
+          background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 50%, #EC4899 100%);
           border-color: transparent;
           box-shadow: 0 6px 20px -6px rgba(124, 58, 237, 0.7);
         }
@@ -169,7 +169,7 @@ export default function KlassenHub() {
           width: 64px;
           height: 64px;
           border-radius: 18px;
-          background: linear-gradient(135deg, rgba(91, 79, 233, 0.12) 0%, rgba(124, 58, 237, 0.12) 100%);
+          background: linear-gradient(135deg, rgba(91, 79, 233, 0.12) 0%, rgba(124, 58, 237, 0.10) 50%, rgba(236, 72, 153, 0.10) 100%);
           border: 1px solid rgba(124, 58, 237, 0.25);
           flex-shrink: 0;
           overflow: hidden;

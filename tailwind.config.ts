@@ -19,6 +19,7 @@ const config: Config = {
         },
         brand: {
           blue: '#5B4FE9',
+          pink: '#EC4899',
         },
         offwhite: '#F8F8FB',
         mute: 'rgba(248, 248, 251, 0.65)',

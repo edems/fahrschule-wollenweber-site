@@ -104,14 +104,14 @@ export default function Hero() {
 
       {/* Cinematic overlays */}
       <div className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(180deg,rgba(10,10,20,0.55)_0%,rgba(10,10,20,0.25)_30%,rgba(10,10,20,0.15)_55%,rgba(10,10,20,0.85)_100%)]" />
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_20%_50%,rgba(91,79,233,0.18)_0%,transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_20%_50%,rgba(91,79,233,0.16)_0%,rgba(124,58,237,0.10)_40%,rgba(236,72,153,0.06)_70%,transparent_100%)]" />
 
       {/* Cursor-Follow Glow */}
       {!reduce && (
         <m.div
           className="pointer-events-none absolute inset-0 z-[2]"
           style={{
-            background: `radial-gradient(circle 500px at calc(50% + ${glowX.get()}px) calc(50% + ${glowY.get()}px), rgba(124,58,237,0.12) 0%, transparent 70%)`,
+            background: `radial-gradient(circle 500px at calc(50% + ${glowX.get()}px) calc(50% + ${glowY.get()}px), rgba(124,58,237,0.14) 0%, rgba(236,72,153,0.06) 50%, transparent 80%)`,
           }}
         />
       )}
@@ -129,7 +129,7 @@ export default function Hero() {
       {/* Scroll indicator (centered-right) */}
       <div className="pointer-events-none absolute right-12 top-1/2 z-10 hidden -translate-y-1/2 flex-col items-center gap-3 lg:flex">
         <span className="rotate-90 text-[10.5px] uppercase tracking-eyebrow text-mute">Scroll</span>
-        <div className="h-[60px] w-px animate-scroll-pulse bg-gradient-to-b from-transparent to-violet" />
+        <div className="h-[60px] w-px animate-scroll-pulse gradient-brand-v" />
       </div>
 
       <m.div

@@ -179,7 +179,7 @@ function ReviewCard({ review }: { review: typeof REVIEWS[number] }) {
       <div
         className="mb-4 inline-flex items-center gap-1.5 self-start rounded-full px-3 py-1.5"
         style={{
-          background: 'linear-gradient(135deg, rgba(91, 79, 233, 0.1) 0%, rgba(124, 58, 237, 0.08) 100%)',
+            background: 'linear-gradient(135deg, rgba(91, 79, 233, 0.1) 0%, rgba(124, 58, 237, 0.08) 50%, rgba(236, 72, 153, 0.07) 100%)',
           border: '1px solid rgba(124, 58, 237, 0.2)',
         }}
       >
@@ -192,7 +192,7 @@ function ReviewCard({ review }: { review: typeof REVIEWS[number] }) {
         <div
           className="grid h-10 w-10 shrink-0 place-items-center rounded-full text-[13px] font-bold text-offwhite"
           style={{
-            background: 'linear-gradient(135deg, #5B4FE9 0%, #7C3AED 100%)',
+            background: 'linear-gradient(135deg, #5B4FE9 0%, #7C3AED 50%, #EC4899 100%)',
           }}
           aria-hidden
         >

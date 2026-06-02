@@ -106,7 +106,7 @@ export default function PageLoader() {
             className="absolute inset-0"
             style={{
               background:
-                'radial-gradient(ellipse at 50% 40%, rgba(91,79,233,0.18) 0%, transparent 60%)',
+                'radial-gradient(ellipse at 50% 40%, rgba(91,79,233,0.18) 0%, rgba(124,58,237,0.10) 40%, rgba(236,72,153,0.06) 70%, transparent 100%)',
             }}
           />
 
@@ -117,9 +117,8 @@ export default function PageLoader() {
             className="relative z-[1] flex flex-col items-center px-6 text-center"
           >
             <div
-              className="relative grid h-20 w-20 place-items-center rounded-[22px] sm:h-24 sm:w-24"
+              className="relative grid h-20 w-20 place-items-center rounded-[22px] sm:h-24 sm:w-24 gradient-brand"
               style={{
-                background: 'linear-gradient(135deg, #5B4FE9 0%, #7C3AED 100%)',
                 boxShadow: '0 16px 48px -12px rgba(124,58,237,0.6), inset 0 1px 0 rgba(255,255,255,0.18)',
               }}
             >
@@ -146,10 +145,9 @@ export default function PageLoader() {
               aria-hidden="true"
             >
               <div
-                className="absolute inset-y-0 left-0 rounded-full"
+                className="absolute inset-y-0 left-0 rounded-full gradient-brand-h"
                 style={{
                   width: `${Math.round(progress * 100)}%`,
-                  background: 'linear-gradient(90deg, #5B4FE9 0%, #7C3AED 100%)',
                   boxShadow: '0 0 12px rgba(124,58,237,0.6)',
                   transition: reduce ? 'none' : 'width 200ms linear',
                 }}

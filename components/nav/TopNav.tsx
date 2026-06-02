@@ -39,7 +39,7 @@ export default function TopNav() {
       }`}
     >
       <m.div
-        className="absolute inset-x-0 bottom-0 h-[1px] origin-left bg-gradient-to-r from-brand-blue via-violet to-brand-blue"
+        className="absolute inset-x-0 bottom-0 h-[1px] origin-left gradient-brand-h"
         style={{ scaleX: navProgress, opacity: scrolled ? 0.6 : 0 }}
       />
 
@@ -47,7 +47,7 @@ export default function TopNav() {
         <a href="#top" className="group flex items-center gap-3">
           <m.div
             whileHover={{ rotate: [0, -5, 5, 0], transition: { duration: 0.6 } }}
-            className="grid h-9 w-9 place-items-center rounded-[10px] bg-gradient-to-br from-brand-blue to-violet text-sm font-extrabold text-offwhite shadow-[0_6px_24px_-8px_rgba(124,58,237,0.6)]"
+            className="grid h-9 w-9 place-items-center rounded-[10px] gradient-brand text-sm font-extrabold text-offwhite shadow-[0_6px_24px_-8px_rgba(124,58,237,0.6)]"
           >
             W
           </m.div>
@@ -130,7 +130,7 @@ export default function TopNav() {
           right: 0;
           bottom: -6px;
           height: 1px;
-          background: linear-gradient(90deg, #5B4FE9 0%, #7C3AED 100%);
+          background: linear-gradient(90deg, #5B4FE9 0%, #7C3AED 50%, #EC4899 100%);
           transform: scaleX(0);
           transform-origin: left;
           transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);

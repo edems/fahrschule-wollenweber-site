@@ -87,7 +87,7 @@ export default function HeroContent({ active }: Props) {
                 }}
                 className="flex items-start gap-2.5 text-[13.5px] leading-relaxed text-mute sm:gap-3 sm:text-[14.5px]"
               >
-                <span className="mt-[6px] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br from-brand-blue to-violet sm:mt-[7px]" />
+                <span className="mt-[6px] inline-block h-1.5 w-1.5 shrink-0 rounded-full gradient-brand sm:mt-[7px]" />
                 <span className="text-offwhite/90">{v}</span>
               </m.li>
             ))}

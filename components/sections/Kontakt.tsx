@@ -334,7 +334,7 @@ export default function Kontakt() {
           color: var(--c-navy);
         }
         .kontakt-channel-call {
-          background: linear-gradient(135deg, rgba(91, 79, 233, 0.1) 0%, rgba(124, 58, 237, 0.06) 100%);
+          background: linear-gradient(135deg, rgba(91, 79, 233, 0.1) 0%, rgba(124, 58, 237, 0.08) 50%, rgba(236, 72, 153, 0.07) 100%);
           border-color: rgba(124, 58, 237, 0.25);
         }
         .kontakt-channel-call:hover { border-color: rgba(124, 58, 237, 0.55); }
@@ -404,7 +404,7 @@ export default function Kontakt() {
           display: grid;
           place-items: center;
           border-radius: 12px;
-          background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 100%);
+          background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 50%, #EC4899 100%);
           color: #fff;
           font-size: 16px;
           font-weight: 700;

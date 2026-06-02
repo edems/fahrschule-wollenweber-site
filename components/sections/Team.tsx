@@ -144,7 +144,7 @@ export default function Team() {
         .team-zitat {
           position: relative;
           padding: 16px 18px 16px 22px;
-          background: linear-gradient(135deg, rgba(91, 79, 233, 0.1) 0%, rgba(124, 58, 237, 0.06) 100%);
+          background: linear-gradient(135deg, rgba(91, 79, 233, 0.1) 0%, rgba(124, 58, 237, 0.08) 50%, rgba(236, 72, 153, 0.07) 100%);
           border-left: 3px solid #7C3AED;
           border-radius: 0 12px 12px 0;
           font-style: italic;

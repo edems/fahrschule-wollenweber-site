@@ -157,7 +157,7 @@ export default function Standorte() {
           font-size: 13px;
           font-weight: 600;
           color: #F8F8FB;
-          background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 100%);
+          background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 50%, #EC4899 100%);
           border-radius: 999px;
           white-space: nowrap;
           box-shadow: 0 6px 20px -6px rgba(124, 58, 237, 0.6);

@@ -77,7 +77,7 @@ export default function Lernpfade() {
           font-weight: 700;
           letter-spacing: 0.16em;
           padding: 5px 11px;
-          background: linear-gradient(135deg, rgba(91, 79, 233, 0.2) 0%, rgba(124, 58, 237, 0.2) 100%);
+          background: linear-gradient(135deg, rgba(91, 79, 233, 0.18) 0%, rgba(124, 58, 237, 0.16) 50%, rgba(236, 72, 153, 0.16) 100%);
           border: 1px solid rgba(124, 58, 237, 0.3);
           border-radius: 999px;
           color: #c4b5fd;

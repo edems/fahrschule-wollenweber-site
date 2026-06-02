@@ -99,7 +99,7 @@ export default function Spezialleistungen() {
           width: 56px;
           height: 56px;
           border-radius: 16px;
-          background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 100%);
+          background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 50%, #EC4899 100%);
           color: #F8F8FB;
           box-shadow: 0 8px 24px -8px rgba(124, 58, 237, 0.6);
         }
@@ -151,7 +151,7 @@ export default function Spezialleistungen() {
         }
         .seminare-abschluss {
           padding: 12px 14px;
-          background: linear-gradient(135deg, rgba(91, 79, 233, 0.06) 0%, rgba(124, 58, 237, 0.04) 100%);
+          background: linear-gradient(135deg, rgba(91, 79, 233, 0.08) 0%, rgba(124, 58, 237, 0.06) 50%, rgba(236, 72, 153, 0.05) 100%);
           border: 1px solid rgba(124, 58, 237, 0.2);
           border-radius: 12px;
         }
@@ -171,7 +171,7 @@ export default function Spezialleistungen() {
           font-size: 13.5px;
           font-weight: 600;
           color: #F8F8FB;
-          background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 100%);
+          background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 50%, #EC4899 100%);
           border-radius: 12px;
           margin-top: 4px;
           transition: transform 250ms, box-shadow 250ms;

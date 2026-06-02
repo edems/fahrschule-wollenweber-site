@@ -61,7 +61,7 @@ export default function Preise() {
                     transition={{ duration: 0.4, delay: i * 0.06 }}
                     className="flex items-start gap-3"
                   >
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br from-brand-blue to-violet" />
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full gradient-brand" />
                     <span style={{ color: 'var(--c-navy)' }}>{item}</span>
                   </m.li>
                 ))}

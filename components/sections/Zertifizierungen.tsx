@@ -124,7 +124,7 @@ export default function Zertifizierungen() {
         .zert-callout {
           margin-top: 32px;
           padding: 24px 32px;
-          background: linear-gradient(135deg, rgba(91, 79, 233, 0.08) 0%, rgba(124, 58, 237, 0.04) 100%);
+          background: linear-gradient(135deg, rgba(91, 79, 233, 0.08) 0%, rgba(124, 58, 237, 0.06) 50%, rgba(236, 72, 153, 0.05) 100%);
           border: 1px solid rgba(124, 58, 237, 0.2);
           border-radius: 20px;
           display: flex;

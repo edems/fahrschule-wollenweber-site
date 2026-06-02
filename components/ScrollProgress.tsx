@@ -41,7 +41,7 @@ export default function ScrollProgress() {
       aria-hidden="true"
     >
       <div
-        className="w-full origin-top rounded-full bg-gradient-to-b from-brand-blue to-violet transition-transform duration-150 ease-out"
+        className="w-full origin-top rounded-full gradient-brand-v transition-transform duration-150 ease-out"
         style={{ height: '100%', transform: `scaleY(${progress})` }}
       />
     </div>
