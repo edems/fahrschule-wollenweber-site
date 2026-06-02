@@ -134,17 +134,19 @@ export default function Fuhrpark() {
           height: 56px;
           display: grid;
           place-items: center;
-          background: rgba(10, 10, 20, 0.7);
-          backdrop-filter: blur(8px);
-          border: 1px solid rgba(124, 58, 237, 0.3);
+          background: rgba(255, 255, 255, 0.85);
+          backdrop-filter: blur(10px) saturate(180%);
+          -webkit-backdrop-filter: blur(10px) saturate(180%);
+          border: 1px solid rgba(255, 255, 255, 0.6);
           border-radius: 14px;
           overflow: hidden;
+          box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.25);
         }
         .fuhrpark-icon-img {
           width: 40px;
           height: 40px;
           object-fit: contain;
-          filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+          filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
         }
         .fuhrpark-live-badge {
           position: absolute;
