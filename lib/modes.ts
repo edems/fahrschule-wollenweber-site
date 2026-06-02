@@ -3,6 +3,7 @@ export type ModeId = 'auto' | 'motorrad' | 'lkw' | 'landwirtschaft' | 'bus';
 export type ModeConfig = {
   id: ModeId;
   label: string;
+  shortLabel?: string;
   video: string;
   poster?: string;
   badge: string;
@@ -85,6 +86,7 @@ export const MODES: Record<ModeId, ModeConfig> = {
   landwirtschaft: {
     id: 'landwirtschaft',
     label: 'Landwirtschaft',
+    shortLabel: 'Traktor',
     video: 'videos/hero-Landwirtschaft-v1.mp4',
     poster: 'images/poster-landwirtschaft.jpg',
     badge: 'L · T',

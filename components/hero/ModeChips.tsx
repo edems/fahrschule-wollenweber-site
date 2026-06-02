@@ -62,7 +62,7 @@ export default function ModeChips({ active, onChange }: Props) {
               className={`mode-chip ${isActive ? 'is-active' : ''}`}
             >
               <span className="dot" />
-              <span className="whitespace-nowrap">{m.label}</span>
+              <span className="whitespace-nowrap">{m.shortLabel ?? m.label}</span>
               {isActive && <span className="mode-chip-shine" aria-hidden />}
             </button>
           );
