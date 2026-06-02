@@ -7,7 +7,7 @@ import { Reveal } from '@/components/ui/ScrollMotion';
 
 export default function Regionen() {
   return (
-    <section id="regionen" className="section section-light relative">
+    <section id="regionen" className="section section-light transition-to-dark relative">
       <div className="container-page relative">
         <SectionHeader
           eyebrow="Deine Region"

@@ -6,8 +6,8 @@ import { Stagger, Reveal } from '@/components/ui/ScrollMotion';
 
 export default function Team() {
   return (
-    <section id="team" className="section section-light relative">
-      <div className="container-page relative">
+    <section id="team" className="section section-dark transition-to-light relative">
+      <div className="container-page">
         <SectionHeader
           eyebrow="Unser Team"
           title={
@@ -36,12 +36,12 @@ export default function Team() {
               </div>
 
               <div className="team-body">
-                <div className="eyebrow mb-1.5" style={{ color: 'rgba(26, 26, 46, 0.6)' }}>{m.rolle}</div>
-                <h3 className="mb-3 text-xl font-semibold" style={{ color: 'var(--c-navy)' }}>{m.name}</h3>
-                <p className="mb-5 text-[14px] leading-relaxed" style={{ color: 'rgba(26, 26, 46, 0.7)' }}>{m.bio}</p>
+                <div className="eyebrow mb-1.5">{m.rolle}</div>
+                <h3 className="mb-3 text-xl font-semibold text-offwhite">{m.name}</h3>
+                <p className="mb-5 text-[14px] leading-relaxed text-mute">{m.bio}</p>
 
                 <div className="team-klassen">
-                  <div className="eyebrow mb-2 text-[10px]" style={{ color: 'rgba(26, 26, 46, 0.6)' }}>Klassen</div>
+                  <div className="eyebrow mb-2 text-[10px]">Klassen</div>
                   <div className="flex flex-wrap gap-1.5">
                     {m.klassen.map((k) => (
                       <span key={k} className="klasse-badge">{k}</span>
@@ -56,17 +56,17 @@ export default function Team() {
 
       <style jsx>{`
         .team-card {
-          background: rgba(255, 255, 255, 0.8);
-          border: 1px solid rgba(26, 26, 46, 0.1);
+          background: rgba(26, 26, 46, 0.5);
+          border: 1px solid var(--c-line);
           border-radius: 28px;
           overflow: hidden;
-          transition: border-color 300ms, transform 300ms, box-shadow 300ms;
-          backdrop-filter: blur(8px);
+          transition: border-color 300ms, transform 300ms, box-shadow 300ms, background 300ms;
         }
         .team-card:hover {
-          border-color: rgba(124, 58, 237, 0.3);
+          border-color: rgba(124, 58, 237, 0.4);
           transform: translateY(-4px);
-          box-shadow: 0 24px 48px -16px rgba(91, 79, 233, 0.2);
+          box-shadow: 0 24px 48px -16px rgba(124, 58, 237, 0.3);
+          background: rgba(26, 26, 46, 0.7);
         }
         .team-photo-wrap {
           position: relative;
@@ -84,7 +84,7 @@ export default function Team() {
         .team-photo-gradient {
           position: absolute;
           inset: 0;
-          background: linear-gradient(180deg, transparent 50%, rgba(255, 255, 255, 0.4) 100%);
+          background: linear-gradient(180deg, transparent 50%, rgba(15, 15, 30, 0.7) 100%);
           pointer-events: none;
         }
         .team-photo-shine {
@@ -93,7 +93,7 @@ export default function Team() {
           left: -100%;
           width: 100%;
           height: 100%;
-          background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+          background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.12) 50%, transparent 100%);
           transition: left 1100ms cubic-bezier(0.22, 1, 0.36, 1);
           pointer-events: none;
         }
@@ -107,14 +107,14 @@ export default function Team() {
           font-size: 11px;
           font-weight: 600;
           letter-spacing: 0.06em;
-          background: rgba(124, 58, 237, 0.08);
+          background: rgba(124, 58, 237, 0.1);
           border: 1px solid rgba(124, 58, 237, 0.25);
           border-radius: 6px;
-          color: #6D28D9;
+          color: #c4b5fd;
           transition: background 200ms, border-color 200ms;
         }
         .team-card:hover .klasse-badge {
-          background: rgba(124, 58, 237, 0.15);
+          background: rgba(124, 58, 237, 0.18);
           border-color: rgba(124, 58, 237, 0.4);
         }
       `}</style>

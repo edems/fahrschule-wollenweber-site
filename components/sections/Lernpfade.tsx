@@ -6,7 +6,7 @@ import { Stagger, Reveal } from '@/components/ui/ScrollMotion';
 
 export default function Lernpfade() {
   return (
-    <section id="lernpfade" className="section section-dark relative">
+    <section id="lernpfade" className="section section-dark transition-to-light relative">
       <div className="container-page">
         <SectionHeader
           eyebrow="Lernpfade"

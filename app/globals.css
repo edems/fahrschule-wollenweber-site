@@ -16,28 +16,28 @@
     --c-blue: #5B4FE9;
     --c-offwhite: #F8F8FB;
 
-    /* Dark theme tokens (default) */
-    --theme-bg: #0a0a14;
-    --theme-bg-alt: #0d0d1a;
+    /* Dark theme tokens — softer, slightly blue-tinted (not pitch-black) */
+    --theme-bg: #0F0F1E;
+    --theme-bg-alt: #12122A;
     --theme-text: #F8F8FB;
     --theme-text-mute: rgba(248, 248, 251, 0.65);
     --theme-text-strong: #F8F8FB;
-    --theme-line: rgba(248, 248, 251, 0.12);
-    --theme-line-strong: rgba(248, 248, 251, 0.2);
+    --theme-line: rgba(248, 248, 251, 0.1);
+    --theme-line-strong: rgba(248, 248, 251, 0.18);
     --theme-panel: rgba(26, 26, 46, 0.55);
     --theme-panel-solid: rgba(26, 26, 46, 0.4);
     --theme-card-bg: rgba(26, 26, 46, 0.4);
     --theme-card-border: rgba(248, 248, 251, 0.1);
     --theme-glow: radial-gradient(ellipse at 20% 50%, rgba(91, 79, 233, 0.18) 0%, transparent 60%);
 
-    /* Light theme tokens */
-    --light-bg: #FAF8F5;
-    --light-bg-alt: #F3F0EA;
+    /* Light theme tokens — warm off-white, not stark white */
+    --light-bg: #EDE9E1;
+    --light-bg-alt: #E5E0D5;
     --light-text: #1A1A2E;
     --light-text-mute: rgba(26, 26, 46, 0.7);
     --light-text-strong: #1A1A2E;
-    --light-line: rgba(26, 26, 46, 0.1);
-    --light-line-strong: rgba(26, 26, 46, 0.18);
+    --light-line: rgba(26, 26, 46, 0.08);
+    --light-line-strong: rgba(26, 26, 46, 0.15);
     --light-panel: rgba(255, 255, 255, 0.7);
     --light-card-bg: rgba(255, 255, 255, 0.7);
     --light-card-border: rgba(26, 26, 46, 0.08);
@@ -101,20 +101,32 @@
   }
   .btn-outline-light {
     @apply inline-flex items-center gap-2 rounded-full border px-6 py-4 text-sm font-semibold transition-all duration-300;
-    border-color: var(--c-navy);
+    border-color: rgba(26, 26, 46, 0.4);
     color: var(--c-navy);
     background: transparent;
   }
   .btn-outline-light:hover {
     background: var(--c-navy);
     color: #F8F8FB;
+    border-color: var(--c-navy);
   }
 
-  /* Section theme variants */
+  /* ============================================================
+     SECTION THEMES — softer contrasts with smooth gradient
+     transitions between dark and light sections.
+     ============================================================ */
+
+  .section {
+    @apply relative;
+    padding-top: clamp(80px, 12vw, 128px);
+    padding-bottom: clamp(80px, 12vw, 128px);
+  }
+
   .section-dark {
     background: var(--theme-bg);
     color: var(--theme-text);
   }
+
   .section-light {
     background: var(--light-bg);
     color: var(--light-text);
@@ -140,6 +152,44 @@
     background: var(--c-violet);
   }
 
+  /* ============================================================
+     SOFT TRANSITIONS — gradient bridges between sections
+     Use these classes on sections to fade smoothly into the
+     next/previous section's background.
+     ============================================================ */
+  .transition-to-light {
+    position: relative;
+  }
+  .transition-to-light::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent 0%, var(--light-bg) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .transition-to-dark {
+    position: relative;
+  }
+  .transition-to-dark::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent 0%, var(--theme-bg) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .section > .container-page {
+    position: relative;
+    z-index: 2;
+  }
+
   .glass-panel {
     background: var(--theme-panel);
     backdrop-filter: blur(18px) saturate(160%);
@@ -155,9 +205,6 @@
   .divider-line {
     @apply h-px w-full;
     background: var(--theme-line);
-  }
-  .section {
-    @apply relative py-24 md:py-32;
   }
   .accent-line {
     @apply h-px w-8 bg-violet;

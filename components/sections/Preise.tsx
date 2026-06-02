@@ -102,7 +102,7 @@ export default function Preise() {
         }
         .preise-stats {
           padding: 28px;
-          background: rgba(91, 79, 233, 0.04);
+          background: rgba(91, 79, 233, 0.05);
           border: 1px solid rgba(26, 26, 46, 0.08);
           border-radius: 20px;
         }

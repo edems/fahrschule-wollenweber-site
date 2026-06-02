@@ -14,7 +14,7 @@ export default function KlassenHub() {
   const Icon = ICON_MAP[aktiveKat.iconKey];
 
   return (
-    <section id="klassen" className="section section-light relative">
+    <section id="klassen" className="section section-light transition-to-dark relative">
       <div className="container-page relative">
         <SectionHeader
           eyebrow="Führerscheinklassen"
