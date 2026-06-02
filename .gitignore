@@ -27,3 +27,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts.bak
+
+# Original source media (superseded by compressed versions in public/)
+hero-*.mp4
+*Wollenweber*.png
+reference-*-keyframe-v1.png
+mockup-hero.html

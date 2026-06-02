@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring, useReducedMotion } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion';
 import type { ModeId } from '@/lib/modes';
 import { MODE_ORDER, MODES } from '@/lib/modes';
 import VideoStage from './VideoStage';
@@ -26,7 +26,6 @@ function readInitialMode(): ModeId {
 export default function Hero() {
   const [active, setActive] = useState<ModeId>('auto');
   const [mounted, setMounted] = useState(false);
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const sectionRef = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
 
@@ -42,35 +41,57 @@ export default function Hero() {
     window.history.replaceState(null, '', url.toString());
   }, [active, mounted]);
 
-  // Cursor-Follow für subtilen Glow im Hero
+  const textY = useMotionValue(0);
+  const textYSpring = useSpring(textY, { stiffness: 80, damping: 22, mass: 0.4 });
+  const textOpacity = useMotionValue(1);
+  const chipY = useMotionValue(0);
+  const chipYSpring = useSpring(chipY, { stiffness: 100, damping: 25, mass: 0.4 });
+  const chipOpacity = useMotionValue(1);
+
+  useEffect(() => {
+    if (reduce) return;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const el = sectionRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight || 1;
+      const denom = Math.max(1, rect.height - vh);
+      const progress = Math.max(0, Math.min(1, -rect.top / denom));
+      textY.set(progress * -140);
+      textOpacity.set(Math.max(0, 1 - progress * 2));
+      chipY.set(progress * -50);
+      chipOpacity.set(Math.max(0, 1 - progress / 0.6));
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [reduce, textY, textOpacity, chipY, chipOpacity]);
+
+  // Cursor-Follow Glow (sehr subtil)
+  const glowXRaw = useMotionValue(0);
+  const glowX = useSpring(glowXRaw, { stiffness: 60, damping: 20 });
+  const glowYRaw = useMotionValue(0);
+  const glowY = useSpring(glowYRaw, { stiffness: 60, damping: 20 });
+
   useEffect(() => {
     if (reduce) return;
     const onMove = (e: MouseEvent) => {
       if (!sectionRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
-      setMouse({
-        x: ((e.clientX - rect.left) / rect.width - 0.5) * 2,
-        y: ((e.clientY - rect.top) / rect.height - 0.5) * 2,
-      });
+      glowXRaw.set(((e.clientX - rect.left) / rect.width - 0.5) * 60);
+      glowYRaw.set(((e.clientY - rect.top) / rect.height - 0.5) * 60);
     };
     window.addEventListener('mousemove', onMove);
     return () => window.removeEventListener('mousemove', onMove);
-  }, [reduce]);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start start', 'end start'],
-  });
-  const textYRaw = useTransform(scrollYProgress, [0, 1], [0, -140]);
-  const textY = useSpring(textYRaw, { stiffness: 80, damping: 22, mass: 0.4 });
-  const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const chipYRaw = useTransform(scrollYProgress, [0, 0.7], [0, -50]);
-  const chipY = useSpring(chipYRaw, { stiffness: 100, damping: 25, mass: 0.4 });
-  const chipOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-
-  // Cursor-Follow Glow (sehr subtil)
-  const glowX = useSpring(mouse.x * 30, { stiffness: 60, damping: 20 });
-  const glowY = useSpring(mouse.y * 30, { stiffness: 60, damping: 20 });
+  }, [reduce, glowXRaw, glowYRaw]);
 
   return (
     <motion.section
@@ -98,7 +119,7 @@ export default function Hero() {
       {!reduce && (
         <motion.div
           className="absolute left-0 right-0 top-[96px] z-40"
-          style={{ y: chipY, opacity: chipOpacity }}
+          style={{ y: chipYSpring, opacity: chipOpacity }}
         >
           <ModeChips active={active} onChange={setActive} />
         </motion.div>
@@ -113,7 +134,7 @@ export default function Hero() {
 
       <motion.div
         className="relative z-10 flex h-full items-end justify-center pb-12 pt-32 sm:pb-16 sm:pt-32 lg:pb-20"
-        style={reduce ? undefined : { y: textY, opacity: textOpacity }}
+        style={reduce ? undefined : { y: textYSpring, opacity: textOpacity }}
       >
         <HeroContent active={active} />
       </motion.div>

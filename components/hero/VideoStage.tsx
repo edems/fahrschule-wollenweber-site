@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useTransform, useSpring, useReducedMotion } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion';
 import type { ModeId } from '@/lib/modes';
 import { MODE_ORDER, MODES } from '@/lib/modes';
 
@@ -67,17 +67,41 @@ export default function VideoStage({ active }: Props) {
   }, [active]);
 
   // Scroll-Tracking – Video skaliert raus beim Raus-Scrollen, 3D-Tilt mit Maus
-  const { scrollYProgress } = useScroll({
-    target: stageRef,
-    offset: ['start start', 'end start'],
-  });
-  const scaleRaw = useTransform(scrollYProgress, [0, 1], [1, 1.22]);
+  const scaleRaw = useMotionValue(1);
   const scale = useSpring(scaleRaw, { stiffness: 60, damping: 22, mass: 0.5 });
-  const yRaw = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const yRaw = useMotionValue(0);
   const y = useSpring(yRaw, { stiffness: 60, damping: 22, mass: 0.5 });
-  const rotateXRaw = useTransform(scrollYProgress, [0, 1], [0, -2]);
+  const rotateXRaw = useMotionValue(0);
   const rotateX = useSpring(rotateXRaw, { stiffness: 50, damping: 20 });
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.6], [0.4, 0.9]);
+  const overlayOpacityRaw = useMotionValue(0.4);
+  const overlayOpacity = useSpring(overlayOpacityRaw, { stiffness: 60, damping: 20 });
+
+  useEffect(() => {
+    if (reduce) return;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const el = stageRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight || 1;
+      const denom = Math.max(1, rect.height + vh);
+      const progress = Math.max(0, Math.min(1, (vh - rect.top) / denom));
+      scaleRaw.set(1 + progress * 0.22);
+      yRaw.set(progress * 80);
+      rotateXRaw.set(progress * -2);
+      overlayOpacityRaw.set(Math.min(0.9, 0.4 + progress * 0.83));
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [reduce, scaleRaw, yRaw, rotateXRaw, overlayOpacityRaw]);
 
   return (
     <div ref={stageRef} className="absolute inset-0 z-0 overflow-hidden" id="video-stage" style={{ perspective: '1200px' }}>
