@@ -7,8 +7,8 @@ import { Stagger, Reveal } from '@/components/ui/ScrollMotion';
 
 export default function Standorte() {
   return (
-    <section id="standorte" className="section relative bg-gradient-to-b from-[#0d0d1a] to-navy-deep">
-      <div className="container-page">
+    <section id="standorte" className="section section-light relative">
+      <div className="container-page relative">
         <SectionHeader
           eyebrow="Standorte"
           title={
@@ -24,9 +24,9 @@ export default function Standorte() {
             <article key={s.ort} className="standort-card group">
               <div className="standort-header">
                 <div>
-                  <div className="eyebrow mb-1.5">Filiale · Hauptsitz</div>
-                  <h3 className="text-2xl font-semibold text-offwhite">{s.ort}</h3>
-                  <p className="mt-1 text-[14px] text-mute">
+                  <div className="eyebrow mb-1.5" style={{ color: 'rgba(26, 26, 46, 0.6)' }}>Filiale · Hauptsitz</div>
+                  <h3 className="text-2xl font-semibold" style={{ color: 'var(--c-navy)' }}>{s.ort}</h3>
+                  <p className="mt-1 text-[14px]" style={{ color: 'rgba(26, 26, 46, 0.65)' }}>
                     {s.adresse}, {s.plz} {s.ort}
                   </p>
                 </div>
@@ -48,7 +48,7 @@ export default function Standorte() {
                   src={s.mapEmbed}
                   loading="lazy"
                   className="h-full w-full"
-                  style={{ border: 0, filter: 'invert(0.9) hue-rotate(180deg) saturate(0.7)' }}
+                  style={{ border: 0 }}
                 />
                 <div className="standort-map-overlay" />
               </div>
@@ -56,27 +56,29 @@ export default function Standorte() {
               <div className="standort-body">
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <div>
-                    <div className="eyebrow mb-2.5 text-[10px]">Öffnungszeiten</div>
+                    <div className="eyebrow mb-2.5 text-[10px]" style={{ color: 'rgba(26, 26, 46, 0.6)' }}>Öffnungszeiten</div>
                     <ul className="space-y-1.5 text-[13.5px]">
                       {s.oeffnungszeiten.map((z) => (
                         <li key={z.tag} className="flex flex-col gap-0.5">
-                          <span className="text-offwhite/90 font-medium">{z.tag}</span>
-                          <span className="text-mute">{z.zeit}</span>
+                          <span className="font-medium" style={{ color: 'var(--c-navy)' }}>{z.tag}</span>
+                          <span style={{ color: 'rgba(26, 26, 46, 0.65)' }}>{z.zeit}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
                   <div>
-                    <div className="eyebrow mb-2.5 text-[10px]">Kontakt</div>
+                    <div className="eyebrow mb-2.5 text-[10px]" style={{ color: 'rgba(26, 26, 46, 0.6)' }}>Kontakt</div>
                     <a
                       href={`tel:${s.telefon}`}
-                      className="mb-1.5 block text-[15px] font-semibold text-offwhite transition-colors hover:text-violet-light"
+                      className="mb-1.5 block text-[15px] font-semibold transition-colors"
+                      style={{ color: 'var(--c-navy)' }}
                     >
                       {s.telefonLabel}
                     </a>
                     <a
                       href={`mailto:${s.email}`}
-                      className="block break-all text-[13px] text-mute transition-colors hover:text-violet-light"
+                      className="block break-all text-[13px] transition-colors"
+                      style={{ color: 'rgba(26, 26, 46, 0.7)' }}
                     >
                       {s.email}
                     </a>
@@ -88,10 +90,17 @@ export default function Standorte() {
         </Stagger>
 
         <Reveal delay={0.2} className="mt-10">
-          <div className="glass-panel flex flex-col items-start gap-5 rounded-2xl p-6 md:flex-row md:items-center md:justify-between md:p-8">
+          <div
+            className="flex flex-col items-start gap-5 rounded-2xl p-6 md:flex-row md:items-center md:justify-between md:p-8"
+            style={{
+              background: 'rgba(255, 255, 255, 0.7)',
+              border: '1px solid rgba(26, 26, 46, 0.1)',
+              backdropFilter: 'blur(8px)',
+            }}
+          >
             <div>
-              <div className="eyebrow mb-2">Eine Frage, eine Antwort</div>
-              <h3 className="text-[18px] font-semibold text-offwhite md:text-[20px]">
+              <div className="eyebrow mb-2" style={{ color: 'rgba(26, 26, 46, 0.6)' }}>Eine Frage, eine Antwort</div>
+              <h3 className="text-[18px] font-semibold md:text-[20px]" style={{ color: 'var(--c-navy)' }}>
                 Wir sind persönlich für dich da – ruf uns an oder schreib uns.
               </h3>
             </div>
@@ -99,7 +108,7 @@ export default function Standorte() {
               <a href={`tel:${HAUPTNUMMER.festnetzTel}`} className="btn-primary">
                 {HAUPTNUMMER.festnetz} <span aria-hidden>☎</span>
               </a>
-              <a href={`tel:${HAUPTNUMMER.mobilTel}`} className="btn-ghost">
+              <a href={`tel:${HAUPTNUMMER.mobilTel}`} className="btn-outline-light">
                 {HAUPTNUMMER.mobil} <span aria-hidden>📱</span>
               </a>
             </div>
@@ -109,15 +118,17 @@ export default function Standorte() {
 
       <style jsx>{`
         .standort-card {
-          background: rgba(26, 26, 46, 0.4);
-          border: 1px solid var(--c-line);
+          background: rgba(255, 255, 255, 0.7);
+          border: 1px solid rgba(26, 26, 46, 0.1);
           border-radius: 28px;
           overflow: hidden;
-          transition: border-color 300ms, transform 300ms;
+          transition: border-color 300ms, transform 300ms, box-shadow 300ms;
+          backdrop-filter: blur(8px);
         }
         .standort-card:hover {
-          border-color: rgba(124, 58, 237, 0.4);
+          border-color: rgba(124, 58, 237, 0.3);
           transform: translateY(-3px);
+          box-shadow: 0 20px 40px -16px rgba(91, 79, 233, 0.18);
         }
         .standort-header {
           display: flex;
@@ -143,9 +154,9 @@ export default function Standorte() {
         .route-btn:hover { transform: translateY(-1px) translateX(2px); }
         .standort-map {
           height: 220px;
-          background: #0a0a14;
-          border-top: 1px solid var(--c-line);
-          border-bottom: 1px solid var(--c-line);
+          background: #e8e6e1;
+          border-top: 1px solid rgba(26, 26, 46, 0.1);
+          border-bottom: 1px solid rgba(26, 26, 46, 0.1);
           position: relative;
           overflow: hidden;
         }
@@ -153,7 +164,7 @@ export default function Standorte() {
           position: absolute;
           inset: 0;
           pointer-events: none;
-          background: linear-gradient(180deg, transparent 0%, rgba(10, 10, 20, 0.15) 100%);
+          background: linear-gradient(180deg, transparent 0%, rgba(250, 248, 245, 0.15) 100%);
         }
         .standort-body {
           padding: 24px 28px 28px 28px;

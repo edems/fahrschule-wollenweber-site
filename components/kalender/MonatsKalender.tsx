@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 
 type Props = {
-  value?: string; // ISO yyyy-mm-dd
+  value?: string;
   onChange: (date: string) => void;
 };
 
@@ -19,10 +19,8 @@ function todayISO(): string {
 }
 
 function buildMonth(year: number, month: number) {
-  // month 0-11
   const first = new Date(year, month, 1);
   const last = new Date(year, month + 1, 0);
-  // Monday=0 ... Sunday=6
   const startWeekday = (first.getDay() + 6) % 7;
   const totalDays = last.getDate();
   const cells: ({ iso: string; day: number; inMonth: boolean } | null)[] = [];
@@ -44,16 +42,12 @@ export default function MonatsKalender({ value, onChange }: Props) {
   const cells = useMemo(() => buildMonth(year, month), [year, month]);
 
   const goPrev = () => {
-    if (month === 0) {
-      setMonth(11);
-      setYear((y) => y - 1);
-    } else setMonth((m) => m - 1);
+    if (month === 0) { setMonth(11); setYear((y) => y - 1); }
+    else setMonth((m) => m - 1);
   };
   const goNext = () => {
-    if (month === 11) {
-      setMonth(0);
-      setYear((y) => y + 1);
-    } else setMonth((m) => m + 1);
+    if (month === 11) { setMonth(0); setYear((y) => y + 1); }
+    else setMonth((m) => m + 1);
   };
 
   const isPast = (iso: string) => iso < today;
@@ -61,7 +55,6 @@ export default function MonatsKalender({ value, onChange }: Props) {
     const d = new Date(iso).getDay();
     return d === 0 || d === 6;
   };
-  // Heuristik: Wochenenden + Ferienzeit (kein Ferienkalender hier) als "geschlossen"
   const isClosed = (iso: string) => isWeekend(iso);
   const isSelected = (iso: string) => value === iso;
 
@@ -117,9 +110,10 @@ export default function MonatsKalender({ value, onChange }: Props) {
       <style jsx>{`
         .kalender {
           padding: 24px;
-          background: rgba(10, 10, 20, 0.4);
-          border: 1px solid var(--c-line);
+          background: rgba(255, 255, 255, 0.9);
+          border: 1px solid rgba(26, 26, 46, 0.1);
           border-radius: 20px;
+          backdrop-filter: blur(8px);
         }
         .kalender-head {
           display: flex;
@@ -131,17 +125,17 @@ export default function MonatsKalender({ value, onChange }: Props) {
           width: 36px;
           height: 36px;
           border-radius: 50%;
-          background: rgba(255, 255, 255, 0.04);
-          color: #F8F8FB;
+          background: rgba(26, 26, 46, 0.06);
+          color: var(--c-navy);
           font-size: 20px;
           line-height: 1;
           transition: background 200ms;
         }
-        .kalender-nav:hover { background: rgba(255, 255, 255, 0.1); }
+        .kalender-nav:hover { background: rgba(124, 58, 237, 0.15); }
         .kalender-title {
           font-size: 16px;
           font-weight: 600;
-          color: #F8F8FB;
+          color: var(--c-navy);
         }
         .kalender-grid {
           display: grid;
@@ -152,7 +146,7 @@ export default function MonatsKalender({ value, onChange }: Props) {
           font-size: 10.5px;
           font-weight: 600;
           letter-spacing: 0.1em;
-          color: var(--c-mute);
+          color: rgba(26, 26, 46, 0.55);
           text-align: center;
           padding: 8px 0;
           text-transform: uppercase;
@@ -163,28 +157,29 @@ export default function MonatsKalender({ value, onChange }: Props) {
           place-items: center;
           font-size: 13.5px;
           font-weight: 500;
-          color: #F8F8FB;
-          background: rgba(255, 255, 255, 0.02);
+          color: var(--c-navy);
+          background: transparent;
           border: 1px solid transparent;
           border-radius: 10px;
           transition: all 200ms;
           position: relative;
         }
         .kalender-cell:hover:not(.is-disabled) {
-          background: rgba(124, 58, 237, 0.15);
-          border-color: rgba(124, 58, 237, 0.4);
+          background: rgba(124, 58, 237, 0.1);
+          border-color: rgba(124, 58, 237, 0.3);
         }
         .kalender-cell.is-today {
           border-color: rgba(124, 58, 237, 0.5);
+          background: rgba(124, 58, 237, 0.08);
         }
         .kalender-cell.is-selected {
           background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 100%);
           color: #F8F8FB;
           font-weight: 700;
-          box-shadow: 0 4px 14px -4px rgba(124, 58, 237, 0.6);
+          box-shadow: 0 4px 14px -4px rgba(124, 58, 237, 0.5);
         }
         .kalender-cell.is-disabled {
-          color: rgba(248, 248, 251, 0.25);
+          color: rgba(26, 26, 46, 0.25);
           background: transparent;
           cursor: not-allowed;
         }
@@ -197,7 +192,7 @@ export default function MonatsKalender({ value, onChange }: Props) {
           gap: 14px;
           margin-top: 16px;
           font-size: 11px;
-          color: var(--c-mute);
+          color: rgba(26, 26, 46, 0.6);
         }
         .kalender-legend .dot {
           display: inline-block;
@@ -207,9 +202,9 @@ export default function MonatsKalender({ value, onChange }: Props) {
           margin-right: 6px;
           vertical-align: middle;
         }
-        .dot-today { background: rgba(124, 58, 237, 0.4); border: 1px solid rgba(124, 58, 237, 0.7); }
+        .dot-today { background: rgba(124, 58, 237, 0.3); border: 1px solid rgba(124, 58, 237, 0.6); }
         .dot-selected { background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 100%); }
-        .dot-closed { background: rgba(248, 248, 251, 0.1); }
+        .dot-closed { background: rgba(26, 26, 46, 0.12); }
       `}</style>
     </div>
   );

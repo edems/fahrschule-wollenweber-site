@@ -14,8 +14,8 @@ export default function KlassenHub() {
   const Icon = ICON_MAP[aktiveKat.iconKey];
 
   return (
-    <section id="klassen" className="section relative">
-      <div className="container-page">
+    <section id="klassen" className="section section-light relative">
+      <div className="container-page relative">
         <SectionHeader
           eyebrow="Führerscheinklassen"
           title={
@@ -59,7 +59,7 @@ export default function KlassenHub() {
           id="klassen-panel"
           role="tabpanel"
           aria-labelledby={active}
-          className="glass-panel relative overflow-hidden rounded-3xl p-6 md:p-10"
+          className="light-card relative overflow-hidden rounded-3xl p-6 md:p-10"
         >
           <AnimatePresence mode="wait">
             <motion.div
@@ -74,13 +74,18 @@ export default function KlassenHub() {
                   initial={{ scale: 0.8, rotate: -10 }}
                   animate={{ scale: 1, rotate: 0 }}
                   transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  className="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-brand-blue/30 to-violet/30 text-violet-light ring-1 ring-violet/30"
+                  className="grid h-14 w-14 place-items-center rounded-2xl"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(91, 79, 233, 0.15) 0%, rgba(124, 58, 237, 0.15) 100%)',
+                    color: '#7C3AED',
+                    border: '1px solid rgba(124, 58, 237, 0.3)',
+                  }}
                 >
                   <Icon className="h-7 w-7" />
                 </motion.div>
                 <div>
                   <div className="eyebrow mb-1">Kategorie</div>
-                  <h3 className="text-2xl font-semibold text-offwhite md:text-3xl">
+                  <h3 className="text-2xl font-semibold md:text-3xl" style={{ color: 'var(--c-navy)' }}>
                     {aktiveKat.label}
                   </h3>
                 </div>
@@ -111,15 +116,16 @@ export default function KlassenHub() {
           padding: 10px 16px;
           font-size: 13.5px;
           font-weight: 500;
-          color: var(--c-mute);
-          border: 1px solid var(--c-line);
+          color: rgba(26, 26, 46, 0.7);
+          border: 1px solid rgba(26, 26, 46, 0.15);
           border-radius: 999px;
-          background: rgba(255, 255, 255, 0.02);
-          transition: color 250ms, background 250ms, border-color 250ms, transform 250ms;
+          background: rgba(255, 255, 255, 0.6);
+          backdrop-filter: blur(8px);
+          transition: all 250ms;
         }
         .klasse-tab:hover {
-          color: #F8F8FB;
-          border-color: rgba(255, 255, 255, 0.25);
+          color: var(--c-navy);
+          border-color: rgba(26, 26, 46, 0.3);
           transform: translateY(-1px);
         }
         .klasse-tab.is-active {
@@ -158,39 +164,51 @@ function KlasseCard({ k }: { k: { code: string; name: string; beschreibung: stri
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       style={{ rotateX, rotateY, transformPerspective: 1000, transformStyle: 'preserve-3d' }}
-      className="klasse-card group flex h-full flex-col rounded-2xl border border-line bg-white/[0.02] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-violet/40 hover:bg-white/[0.04]"
+      className="klasse-card group flex h-full flex-col rounded-2xl p-5 transition-all duration-300"
     >
       <div className="mb-4 flex items-baseline justify-between">
         <span className="klasse-code">{k.code}</span>
         <span
           aria-hidden
-          className="text-mute transition-transform group-hover:translate-x-1 group-hover:text-violet-light"
+          className="transition-transform group-hover:translate-x-1"
+          style={{ color: 'rgba(26, 26, 46, 0.4)' }}
         >
           →
         </span>
       </div>
-      <h4 className="mb-2 text-[15px] font-semibold text-offwhite">
+      <h4 className="mb-2 text-[15px] font-semibold" style={{ color: 'var(--c-navy)' }}>
         {k.name}
       </h4>
-      <p className="text-[13.5px] leading-relaxed text-mute">
+      <p className="text-[13.5px] leading-relaxed" style={{ color: 'rgba(26, 26, 46, 0.65)' }}>
         {k.beschreibung}
       </p>
       {k.lang && (
-        <p className="mt-2 text-[12px] leading-relaxed text-mute/80">
+        <p className="mt-2 text-[12px] leading-relaxed" style={{ color: 'rgba(26, 26, 46, 0.5)' }}>
           {k.lang}
         </p>
       )}
 
       <style jsx>{`
+        .klasse-card {
+          background: rgba(255, 255, 255, 0.8);
+          border: 1px solid rgba(26, 26, 46, 0.08);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+        .klasse-card:hover {
+          transform: translateY(-3px);
+          border-color: rgba(124, 58, 237, 0.4);
+          background: #ffffff;
+          box-shadow: 0 12px 28px -8px rgba(91, 79, 233, 0.2);
+        }
         .klasse-code {
           font-size: 12px;
           font-weight: 700;
           letter-spacing: 0.12em;
           padding: 4px 10px;
-          background: linear-gradient(135deg, rgba(91, 79, 233, 0.18) 0%, rgba(124, 58, 237, 0.18) 100%);
+          background: linear-gradient(135deg, rgba(91, 79, 233, 0.12) 0%, rgba(124, 58, 237, 0.12) 100%);
           border: 1px solid rgba(124, 58, 237, 0.3);
           border-radius: 999px;
-          color: #c4b5fd;
+          color: #6D28D9;
         }
       `}</style>
     </motion.a>

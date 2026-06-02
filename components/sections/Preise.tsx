@@ -6,8 +6,8 @@ import SectionHeader from '@/components/ui/SectionHeader';
 
 export default function Preise() {
   return (
-    <section id="preise" className="section relative">
-      <div className="container-page">
+    <section id="preise" className="section section-light relative">
+      <div className="container-page relative">
         <SectionHeader
           eyebrow="Investition"
           title={
@@ -27,16 +27,16 @@ export default function Preise() {
         >
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.2fr_1fr]">
             <div>
-              <h3 className="mb-4 text-2xl font-semibold text-offwhite">
+              <h3 className="mb-4 text-2xl font-semibold" style={{ color: 'var(--c-navy)' }}>
                 Warum wir keine Listenpreise zeigen
               </h3>
-              <p className="mb-5 text-[15px] leading-relaxed text-mute">
+              <p className="mb-5 text-[15px] leading-relaxed" style={{ color: 'rgba(26, 26, 46, 0.75)' }}>
                 Ein Führerschein ist so individuell wie du. Die Führerscheinklassen unterscheiden
                 sich stark in Theorie-Stunden, Praxis-Stunden und Prüfungsgebühren. Dazu kommt,
                 dass jede Fahrschülerin und jeder Fahrschüler unterschiedlich viele Fahrstunden
                 braucht.
               </p>
-              <p className="text-[15px] leading-relaxed text-mute">
+              <p className="text-[15px] leading-relaxed" style={{ color: 'rgba(26, 26, 46, 0.75)' }}>
                 Statt einer Liste, die am Ende nicht passt, bekommst du bei uns ein ehrliches,
                 persönliches Angebot nach einem kurzen Beratungsgespräch – kostenlos und
                 unverbindlich.
@@ -44,7 +44,7 @@ export default function Preise() {
             </div>
 
             <div className="preise-stats">
-              <div className="eyebrow mb-4">Was im Preis enthalten ist</div>
+              <div className="eyebrow mb-4" style={{ color: 'rgba(26, 26, 46, 0.6)' }}>Was im Preis enthalten ist</div>
               <ul className="space-y-3 text-[14px]">
                 {[
                   'Theorie-Unterricht',
@@ -59,10 +59,10 @@ export default function Preise() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.4, delay: i * 0.06 }}
-                    className="flex items-start gap-3 text-mute"
+                    className="flex items-start gap-3"
                   >
                     <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br from-brand-blue to-violet" />
-                    <span className="text-offwhite/90">{item}</span>
+                    <span style={{ color: 'var(--c-navy)' }}>{item}</span>
                   </motion.li>
                 ))}
               </ul>
@@ -71,7 +71,7 @@ export default function Preise() {
 
           <div className="preise-cta-row">
             <div>
-              <div className="eyebrow mb-2">Klassen-Übersicht</div>
+              <div className="eyebrow mb-2" style={{ color: 'rgba(26, 26, 46, 0.6)' }}>Klassen-Übersicht</div>
               <div className="flex flex-wrap gap-2">
                 {KATEGORIEN.map((k) => (
                   <span key={k.id} className="preise-kat-pill">
@@ -89,26 +89,27 @@ export default function Preise() {
 
       <style jsx>{`
         .preise-card {
-          background: rgba(26, 26, 46, 0.4);
-          border: 1px solid var(--c-line);
+          background: rgba(255, 255, 255, 0.85);
+          border: 1px solid rgba(26, 26, 46, 0.1);
           border-radius: 28px;
           padding: 36px 32px 32px 32px;
           backdrop-filter: blur(8px);
-          transition: border-color 300ms, transform 300ms;
+          transition: border-color 300ms, box-shadow 300ms;
         }
         .preise-card:hover {
           border-color: rgba(124, 58, 237, 0.25);
+          box-shadow: 0 20px 40px -16px rgba(91, 79, 233, 0.15);
         }
         .preise-stats {
           padding: 28px;
-          background: rgba(10, 10, 20, 0.4);
-          border: 1px solid var(--c-line);
+          background: rgba(91, 79, 233, 0.04);
+          border: 1px solid rgba(26, 26, 46, 0.08);
           border-radius: 20px;
         }
         .preise-cta-row {
           margin-top: 32px;
           padding-top: 28px;
-          border-top: 1px solid var(--c-line);
+          border-top: 1px solid rgba(26, 26, 46, 0.1);
           display: flex;
           flex-direction: column;
           gap: 20px;
@@ -123,15 +124,16 @@ export default function Preise() {
           padding: 5px 11px;
           font-size: 12px;
           font-weight: 500;
-          background: rgba(255, 255, 255, 0.04);
-          border: 1px solid var(--c-line);
+          background: rgba(255, 255, 255, 0.8);
+          border: 1px solid rgba(26, 26, 46, 0.1);
           border-radius: 999px;
-          color: var(--c-mute);
-          transition: background 200ms, border-color 200ms;
+          color: rgba(26, 26, 46, 0.7);
+          transition: all 200ms;
         }
         .preise-kat-pill:hover {
           background: rgba(124, 58, 237, 0.1);
           border-color: rgba(124, 58, 237, 0.3);
+          color: #6D28D9;
         }
       `}</style>
     </section>

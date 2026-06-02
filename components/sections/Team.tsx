@@ -6,8 +6,8 @@ import { Stagger, Reveal } from '@/components/ui/ScrollMotion';
 
 export default function Team() {
   return (
-    <section id="team" className="section relative">
-      <div className="container-page">
+    <section id="team" className="section section-light relative">
+      <div className="container-page relative">
         <SectionHeader
           eyebrow="Unser Team"
           title={
@@ -36,17 +36,15 @@ export default function Team() {
               </div>
 
               <div className="team-body">
-                <div className="eyebrow mb-1.5">{m.rolle}</div>
-                <h3 className="mb-3 text-xl font-semibold text-offwhite">{m.name}</h3>
-                <p className="mb-5 text-[14px] leading-relaxed text-mute">{m.bio}</p>
+                <div className="eyebrow mb-1.5" style={{ color: 'rgba(26, 26, 46, 0.6)' }}>{m.rolle}</div>
+                <h3 className="mb-3 text-xl font-semibold" style={{ color: 'var(--c-navy)' }}>{m.name}</h3>
+                <p className="mb-5 text-[14px] leading-relaxed" style={{ color: 'rgba(26, 26, 46, 0.7)' }}>{m.bio}</p>
 
                 <div className="team-klassen">
-                  <div className="eyebrow mb-2 text-[10px]">Klassen</div>
+                  <div className="eyebrow mb-2 text-[10px]" style={{ color: 'rgba(26, 26, 46, 0.6)' }}>Klassen</div>
                   <div className="flex flex-wrap gap-1.5">
                     {m.klassen.map((k) => (
-                      <span key={k} className="klasse-badge">
-                        {k}
-                      </span>
+                      <span key={k} className="klasse-badge">{k}</span>
                     ))}
                   </div>
                 </div>
@@ -58,16 +56,17 @@ export default function Team() {
 
       <style jsx>{`
         .team-card {
-          background: rgba(26, 26, 46, 0.4);
-          border: 1px solid var(--c-line);
+          background: rgba(255, 255, 255, 0.8);
+          border: 1px solid rgba(26, 26, 46, 0.1);
           border-radius: 28px;
           overflow: hidden;
-          transition: border-color 300ms, transform 300ms, background 300ms;
+          transition: border-color 300ms, transform 300ms, box-shadow 300ms;
+          backdrop-filter: blur(8px);
         }
         .team-card:hover {
-          border-color: rgba(124, 58, 237, 0.4);
+          border-color: rgba(124, 58, 237, 0.3);
           transform: translateY(-4px);
-          background: rgba(26, 26, 46, 0.55);
+          box-shadow: 0 24px 48px -16px rgba(91, 79, 233, 0.2);
         }
         .team-photo-wrap {
           position: relative;
@@ -85,7 +84,7 @@ export default function Team() {
         .team-photo-gradient {
           position: absolute;
           inset: 0;
-          background: linear-gradient(180deg, transparent 50%, rgba(10, 10, 20, 0.6) 100%);
+          background: linear-gradient(180deg, transparent 50%, rgba(255, 255, 255, 0.4) 100%);
           pointer-events: none;
         }
         .team-photo-shine {
@@ -94,7 +93,7 @@ export default function Team() {
           left: -100%;
           width: 100%;
           height: 100%;
-          background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+          background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
           transition: left 1100ms cubic-bezier(0.22, 1, 0.36, 1);
           pointer-events: none;
         }
@@ -108,14 +107,14 @@ export default function Team() {
           font-size: 11px;
           font-weight: 600;
           letter-spacing: 0.06em;
-          background: rgba(124, 58, 237, 0.1);
+          background: rgba(124, 58, 237, 0.08);
           border: 1px solid rgba(124, 58, 237, 0.25);
           border-radius: 6px;
-          color: #c4b5fd;
+          color: #6D28D9;
           transition: background 200ms, border-color 200ms;
         }
         .team-card:hover .klasse-badge {
-          background: rgba(124, 58, 237, 0.18);
+          background: rgba(124, 58, 237, 0.15);
           border-color: rgba(124, 58, 237, 0.4);
         }
       `}</style>

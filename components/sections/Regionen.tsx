@@ -7,8 +7,8 @@ import { Reveal } from '@/components/ui/ScrollMotion';
 
 export default function Regionen() {
   return (
-    <section id="regionen" className="section relative">
-      <div className="container-page">
+    <section id="regionen" className="section section-light relative">
+      <div className="container-page relative">
         <SectionHeader
           eyebrow="Deine Region"
           title={
@@ -19,15 +19,15 @@ export default function Regionen() {
           description={`Ob Westerburg, Hachenburg, Bad Marienberg oder Altenkirchen – wir holen dich in deiner Region ab. Über ${REGIONEN_COUNT} Orte im Westerwald zählen auf Fahrschule Wollenweber.`}
         />
 
-        <Reveal delay={0.1} className="glass-panel rounded-3xl p-6 md:p-10">
+        <Reveal delay={0.1} className="light-card rounded-3xl p-6 md:p-10">
           <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <div className="eyebrow mb-1">Alle Orte im Einzugsgebiet</div>
-              <div className="text-[15px] font-semibold text-offwhite">
+              <div className="eyebrow mb-1" style={{ color: 'rgba(26, 26, 46, 0.6)' }}>Alle Orte im Einzugsgebiet</div>
+              <div className="text-[15px] font-semibold" style={{ color: 'var(--c-navy)' }}>
                 {REGIONEN_COUNT} Orte · gesamter Westerwald
               </div>
             </div>
-            <div className="flex items-center gap-2 text-[11px] uppercase tracking-eyebrow text-mute">
+            <div className="flex items-center gap-2 text-[11px] uppercase tracking-eyebrow" style={{ color: 'rgba(26, 26, 46, 0.55)' }}>
               <span className="h-2 w-2 rounded-full bg-violet" />
               Live-Liste
             </div>
@@ -54,11 +54,11 @@ export default function Regionen() {
             ))}
           </ul>
 
-          <div className="mt-8 flex flex-col gap-3 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-[13.5px] text-mute">
+          <div className="mt-8 flex flex-col gap-3 border-t pt-6 sm:flex-row sm:items-center sm:justify-between" style={{ borderColor: 'rgba(26, 26, 46, 0.1)' }}>
+            <p className="text-[13.5px]" style={{ color: 'rgba(26, 26, 46, 0.65)' }}>
               Dein Ort ist nicht dabei? Ruf uns an – wir prüfen, ob wir dich einsammeln können.
             </p>
-            <a href="tel:02661-915550" className="btn-ghost shrink-0">
+            <a href="tel:02661-915550" className="btn-outline-light shrink-0">
               02661 - 91 55 50 <span aria-hidden>☎</span>
             </a>
           </div>
@@ -73,21 +73,22 @@ export default function Regionen() {
           padding: 7px 13px;
           font-size: 12.5px;
           font-weight: 500;
-          color: #F8F8FB;
-          background: rgba(255, 255, 255, 0.04);
-          border: 1px solid var(--c-line);
+          color: var(--c-navy);
+          background: rgba(255, 255, 255, 0.8);
+          border: 1px solid rgba(26, 26, 46, 0.1);
           border-radius: 999px;
           transition: all 200ms;
           cursor: default;
         }
         .region-pill:hover {
-          background: linear-gradient(135deg, rgba(91, 79, 233, 0.15) 0%, rgba(124, 58, 237, 0.15) 100%);
+          background: linear-gradient(135deg, rgba(91, 79, 233, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
           border-color: rgba(124, 58, 237, 0.4);
           transform: translateY(-1px);
+          color: #6D28D9;
         }
         .region-pin {
           font-size: 7px;
-          color: #c4b5fd;
+          color: #7C3AED;
         }
       `}</style>
     </section>

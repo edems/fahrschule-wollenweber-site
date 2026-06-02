@@ -5,6 +5,7 @@ import Spezialleistungen from '@/components/sections/Spezialleistungen';
 import Team from '@/components/sections/Team';
 import Standorte from '@/components/sections/Standorte';
 import Regionen from '@/components/sections/Regionen';
+import Bewertungen from '@/components/sections/Bewertungen';
 import Preise from '@/components/sections/Preise';
 import Kontakt from '@/components/sections/Kontakt';
 import Footer from '@/components/Footer';
@@ -18,6 +19,7 @@ export default function Home() {
       <Spezialleistungen />
       <Team />
       <Standorte />
+      <Bewertungen />
       <Regionen />
       <Preise />
       <Kontakt />

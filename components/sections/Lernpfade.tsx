@@ -6,7 +6,7 @@ import { Stagger, Reveal } from '@/components/ui/ScrollMotion';
 
 export default function Lernpfade() {
   return (
-    <section id="lernpfade" className="section relative bg-gradient-to-b from-navy-deep via-navy-deep to-[#0d0d1a]">
+    <section id="lernpfade" className="section section-dark relative">
       <div className="container-page">
         <SectionHeader
           eyebrow="Lernpfade"
@@ -66,9 +66,7 @@ export default function Lernpfade() {
           transition: left 800ms cubic-bezier(0.22, 1, 0.36, 1);
           pointer-events: none;
         }
-        .lernpfad-card:hover .lernpfad-shine {
-          left: 100%;
-        }
+        .lernpfad-card:hover .lernpfad-shine { left: 100%; }
         .lernpfad-card:hover {
           border-color: rgba(124, 58, 237, 0.4);
           background: rgba(26, 26, 46, 0.6);

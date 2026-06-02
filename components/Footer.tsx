@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { href: '#klassen', label: 'Klassen' },
   { href: '#lernpfade', label: 'Lernpfade' },
   { href: '#spezialleistungen', label: 'Spezialleistungen' },
+  { href: '#bewertungen', label: 'Bewertungen' },
   { href: '#team', label: 'Team' },
   { href: '#standorte', label: 'Standorte' },
   { href: '#regionen', label: 'Regionen' },
@@ -21,14 +22,14 @@ export default function Footer() {
       <div className="container-page">
         <div className="footer-cta-strip">
           <div>
-            <div className="eyebrow mb-2">Bereit loszufahren?</div>
+            <div className="eyebrow mb-2" style={{ color: 'rgba(248, 248, 251, 0.7)' }}>Bereit loszufahren?</div>
             <h3 className="text-2xl font-semibold text-offwhite md:text-3xl">
               {BRAND_SLOGAN} – <span className="gradient-text gradient-text-italic">mit Wollenweber.</span>
             </h3>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <a href="#kontakt" className="btn-primary">Termin anfragen →</a>
-            <a href={`tel:${HAUPTNUMMER.festnetzTel}`} className="btn-ghost">
+            <a href={`tel:${HAUPTNUMMER.festnetzTel}`} className="btn-ghost-dark">
               {HAUPTNUMMER.festnetz} <span aria-hidden>☎</span>
             </a>
           </div>
@@ -55,6 +56,15 @@ export default function Footer() {
                 className="footer-social-link"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+              </a>
+              <a
+                href="https://www.google.com/maps/place/Fahrschule+Wollenweber+GmbH/@50.65366,7.81984,17z/data=!3m1!4b1!4m10!1m2!2m1!1swollenweber!3m6!1s0x47be9c332a03053f:0x27bf16399d07a349!8m2!3d50.65366!4d7.81984!16s%2Fg%2F124ynm5lb"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Google Maps"
+                className="footer-social-link"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.5 17.6l-1.4-2.4c-.2-.4-.6-.6-1-.4-.4.2-.6.6-.4 1l1.4 2.4c-1.6 1-3.4 1.6-5.1 1.6-5 0-9-4-9-9s4-9 9-9 9 4 9 9c0 2.7-1.2 5.1-3 6.8zM12 5.5c-3.6 0-6.5 2.9-6.5 6.5s2.9 6.5 6.5 6.5 6.5-2.9 6.5-6.5-2.9-6.5-6.5-6.5zm0 11c-2.5 0-4.5-2-4.5-4.5S9.5 7.5 12 7.5s4.5 2 4.5 4.5-2 4.5-4.5 4.5zm0-7c-1.4 0-2.5 1.1-2.5 2.5S10.6 14.5 12 14.5s2.5-1.1 2.5-2.5S13.4 9.5 12 9.5z"/></svg>
               </a>
               <a href={`mailto:${HAUPTNUMMER.email}`} aria-label="E-Mail" className="footer-social-link">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -259,8 +269,8 @@ export default function Footer() {
           color: var(--c-mute);
           align-items: center;
         }
-        .footer-meta-left a { color: var(--c-mute); transition: color 200ms; }
-        .footer-meta-left a:hover { color: #F8F8FB; }
+        .footer-meta-left :global(a) { color: var(--c-mute); transition: color 200ms; }
+        .footer-meta-left :global(a:hover) { color: #F8F8FB; }
         .dot-sep { opacity: 0.4; }
         .footer-cta {
           display: inline-flex;

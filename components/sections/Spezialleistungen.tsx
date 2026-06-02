@@ -29,8 +29,8 @@ export default function Spezialleistungen() {
   const Icon = ICON_MAP[aktive.icon];
 
   return (
-    <section id="spezialleistungen" className="section relative">
-      <div className="container-page">
+    <section id="spezialleistungen" className="section section-light relative">
+      <div className="container-page relative">
         <SectionHeader
           eyebrow="Spezialleistungen"
           title={
@@ -73,46 +73,46 @@ export default function Spezialleistungen() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -12 }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="glass-panel rounded-3xl p-6 md:p-8"
+              className="light-card relative overflow-hidden rounded-3xl p-6 md:p-8"
             >
               <div className="mb-5 flex items-start gap-4">
                 <div className="seminare-detail-icon">
                   <Icon className="h-7 w-7" />
                 </div>
                 <div>
-                  <div className="eyebrow mb-1">{aktive.kurz}</div>
-                  <h3 className="text-2xl font-semibold text-offwhite">{aktive.titel}</h3>
+                  <div className="eyebrow mb-1" style={{ color: 'rgba(26, 26, 46, 0.6)' }}>{aktive.kurz}</div>
+                  <h3 className="text-2xl font-semibold" style={{ color: 'var(--c-navy)' }}>{aktive.titel}</h3>
                 </div>
               </div>
 
-              <p className="mb-6 text-[15px] leading-relaxed text-mute">{aktive.beschreibung}</p>
+              <p className="mb-6 text-[15px] leading-relaxed" style={{ color: 'rgba(26, 26, 46, 0.75)' }}>{aktive.beschreibung}</p>
 
               <div className="mb-6 grid grid-cols-2 gap-4">
                 <div>
-                  <div className="eyebrow mb-1.5 text-[10px]">Zielgruppe</div>
-                  <div className="text-[13.5px] text-offwhite/90">{aktive.zielgruppe}</div>
+                  <div className="eyebrow mb-1.5 text-[10px]" style={{ color: 'rgba(26, 26, 46, 0.6)' }}>Zielgruppe</div>
+                  <div className="text-[13.5px]" style={{ color: 'var(--c-navy)' }}>{aktive.zielgruppe}</div>
                 </div>
                 <div>
-                  <div className="eyebrow mb-1.5 text-[10px]">Dauer</div>
-                  <div className="text-[13.5px] text-offwhite/90">{aktive.dauer}</div>
+                  <div className="eyebrow mb-1.5 text-[10px]" style={{ color: 'rgba(26, 26, 46, 0.6)' }}>Dauer</div>
+                  <div className="text-[13.5px]" style={{ color: 'var(--c-navy)' }}>{aktive.dauer}</div>
                 </div>
               </div>
 
               <div className="mb-6">
-                <div className="eyebrow mb-2.5 text-[10px]">Inhalte</div>
+                <div className="eyebrow mb-2.5 text-[10px]" style={{ color: 'rgba(26, 26, 46, 0.6)' }}>Inhalte</div>
                 <ul className="space-y-2">
                   {aktive.details.map((d) => (
-                    <li key={d} className="flex items-start gap-2.5 text-[13.5px] leading-relaxed text-mute">
+                    <li key={d} className="flex items-start gap-2.5 text-[13.5px] leading-relaxed" style={{ color: 'rgba(26, 26, 46, 0.75)' }}>
                       <span className="mt-[7px] inline-block h-1 w-1 shrink-0 rounded-full bg-gradient-to-br from-brand-blue to-violet" />
-                      <span className="text-offwhite/90">{d}</span>
+                      <span style={{ color: 'var(--c-navy)' }}>{d}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
               <div className="seminare-abschluss">
-                <div className="eyebrow mb-1 text-[10px] text-violet-light">Abschluss</div>
-                <div className="text-[14px] font-semibold text-offwhite">{aktive.abschluss}</div>
+                <div className="eyebrow mb-1 text-[10px]" style={{ color: '#7C3AED' }}>Abschluss</div>
+                <div className="text-[14px] font-semibold" style={{ color: 'var(--c-navy)' }}>{aktive.abschluss}</div>
               </div>
 
               <a href="#kontakt" className="btn-primary mt-6 w-full justify-center">
@@ -130,20 +130,21 @@ export default function Spezialleistungen() {
           align-items: center;
           gap: 14px;
           padding: 16px 18px;
-          background: rgba(26, 26, 46, 0.4);
-          border: 1px solid var(--c-line);
+          background: rgba(255, 255, 255, 0.7);
+          border: 1px solid rgba(26, 26, 46, 0.1);
           border-radius: 18px;
           transition: all 250ms;
           width: 100%;
         }
         .seminare-tab:hover {
           border-color: rgba(124, 58, 237, 0.3);
-          background: rgba(26, 26, 46, 0.55);
+          background: #ffffff;
+          transform: translateX(2px);
         }
         .seminare-tab.is-active {
           border-color: rgba(124, 58, 237, 0.5);
-          background: linear-gradient(135deg, rgba(91, 79, 233, 0.12) 0%, rgba(124, 58, 237, 0.12) 100%);
-          box-shadow: 0 8px 28px -10px rgba(124, 58, 237, 0.4);
+          background: linear-gradient(135deg, rgba(91, 79, 233, 0.08) 0%, rgba(124, 58, 237, 0.08) 100%);
+          box-shadow: 0 8px 28px -10px rgba(124, 58, 237, 0.3);
         }
         .seminare-tab-icon {
           display: grid;
@@ -151,10 +152,10 @@ export default function Spezialleistungen() {
           width: 40px;
           height: 40px;
           border-radius: 10px;
-          background: rgba(124, 58, 237, 0.12);
-          color: #c4b5fd;
+          background: rgba(124, 58, 237, 0.1);
+          color: #7C3AED;
           border: 1px solid rgba(124, 58, 237, 0.2);
-          transition: background 250ms;
+          transition: background 250ms, color 250ms;
         }
         .seminare-tab.is-active .seminare-tab-icon {
           background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 100%);
@@ -166,25 +167,25 @@ export default function Spezialleistungen() {
           font-size: 10.5px;
           font-weight: 700;
           letter-spacing: 0.18em;
-          color: var(--c-mute);
+          color: rgba(26, 26, 46, 0.55);
           text-transform: uppercase;
         }
-        .seminare-tab.is-active .seminare-tab-kurz { color: #c4b5fd; }
+        .seminare-tab.is-active .seminare-tab-kurz { color: #6D28D9; }
         .seminare-tab-titel {
           display: block;
           font-size: 14px;
           font-weight: 600;
-          color: #F8F8FB;
+          color: var(--c-navy);
           line-height: 1.3;
           margin-top: 2px;
         }
         .seminare-tab-arrow {
-          color: var(--c-mute);
+          color: rgba(26, 26, 46, 0.4);
           transition: all 250ms;
           font-size: 16px;
         }
         .seminare-tab-arrow.is-active {
-          color: #c4b5fd;
+          color: #7C3AED;
           transform: translateX(4px);
         }
         .seminare-detail-icon {
@@ -199,7 +200,7 @@ export default function Spezialleistungen() {
         }
         .seminare-abschluss {
           padding: 16px 18px;
-          background: rgba(124, 58, 237, 0.08);
+          background: rgba(124, 58, 237, 0.06);
           border: 1px solid rgba(124, 58, 237, 0.2);
           border-radius: 12px;
         }
