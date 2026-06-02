@@ -30,7 +30,7 @@ export const STANDORTE: Standort[] = [
     mapEmbed:
       'https://www.openstreetmap.org/export/embed.html?bbox=7.96%2C50.64%2C8.00%2C50.66&layer=mapnik&marker=50.6517%2C7.9833',
     mapLink: 'https://www.openstreetmap.org/?mlat=50.6517&mlon=7.9833#map=17/50.6517/7.9833',
-    dummyImage: '/images/standort-bad-marienberg.jpg',
+    dummyImage: 'images/standort-bad-marienberg.jpg',
   },
   {
     name: 'Hachenburg',
@@ -48,7 +48,7 @@ export const STANDORTE: Standort[] = [
     mapEmbed:
       'https://www.openstreetmap.org/export/embed.html?bbox=7.81%2C50.65%2C7.85%2C50.67&layer=mapnik&marker=50.6583%2C7.8333',
     mapLink: 'https://www.openstreetmap.org/?mlat=50.6583&mlon=7.8333#map=17/50.6583/7.8333',
-    dummyImage: '/images/standort-hachenburg.jpg',
+    dummyImage: 'images/standort-hachenburg.jpg',
   },
 ];
 

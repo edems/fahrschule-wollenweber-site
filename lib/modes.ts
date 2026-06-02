@@ -25,8 +25,8 @@ export const MODES: Record<ModeId, ModeConfig> = {
   auto: {
     id: 'auto',
     label: 'Auto',
-    video: '/videos/hero-auto-v1.mp4',
-    poster: '/images/poster-auto.jpg',
+    video: 'videos/hero-auto-v1.mp4',
+    poster: 'images/poster-auto.jpg',
     badge: 'Klasse B · BF17',
     headline: ['Dein Weg', 'zum Führerschein.', 'Im Westerwald.'],
     versprechen: [
@@ -45,8 +45,8 @@ export const MODES: Record<ModeId, ModeConfig> = {
   motorrad: {
     id: 'motorrad',
     label: 'Motorrad',
-    video: '/videos/hero-motorrad-v1.mp4',
-    poster: '/images/poster-motorrad.jpg',
+    video: 'videos/hero-motorrad-v1.mp4',
+    poster: 'images/poster-motorrad.jpg',
     badge: 'AM · A1 · A2 · A',
     headline: ['Freiheit', 'auf zwei Rädern.', 'Kurvig, ehrlich.'],
     versprechen: [
@@ -65,8 +65,8 @@ export const MODES: Record<ModeId, ModeConfig> = {
   lkw: {
     id: 'lkw',
     label: 'LKW',
-    video: '/videos/hero-lkw-v1.mp4',
-    poster: '/images/poster-lkw.jpg',
+    video: 'videos/hero-lkw-v1.mp4',
+    poster: 'images/poster-lkw.jpg',
     badge: 'C1 · C1E · C · CE',
     headline: ['Profi am Steuer.', 'Jeder Zentner.', 'Sicher unterwegs.'],
     versprechen: [
@@ -85,8 +85,8 @@ export const MODES: Record<ModeId, ModeConfig> = {
   landwirtschaft: {
     id: 'landwirtschaft',
     label: 'Landwirtschaft',
-    video: '/videos/hero-Landwirtschaft-v1.mp4',
-    poster: '/images/poster-landwirtschaft.jpg',
+    video: 'videos/hero-Landwirtschaft-v1.mp4',
+    poster: 'images/poster-landwirtschaft.jpg',
     badge: 'L · T',
     headline: ['Vom Hof', 'auf die Straße.', 'Direkt aus der Region.'],
     versprechen: [
@@ -105,8 +105,8 @@ export const MODES: Record<ModeId, ModeConfig> = {
   bus: {
     id: 'bus',
     label: 'Bus',
-    video: '/videos/hero-bus-v1.mp4',
-    poster: '/images/poster-bus.jpg',
+    video: 'videos/hero-bus-v1.mp4',
+    poster: 'images/poster-bus.jpg',
     badge: 'D1 · D1E · D · DE',
     headline: ['Menschen bewegen.', 'Sicher ankommen.', 'Täglich.'],
     versprechen: [

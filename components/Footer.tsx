@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { KATEGORIEN } from '@/lib/klassen';
 import { STANDORTE, HAUPTNUMMER } from '@/lib/standorte';
 import { BRAND_SLOGAN } from '@/lib/modes';
@@ -111,11 +112,11 @@ export default function Footer() {
           <div className="footer-meta-left">
             <span>© {new Date().getFullYear()} Fahrschule-Wollenweber GmbH</span>
             <span className="dot-sep">·</span>
-            <a href="/impressum">Impressum</a>
+            <Link href="/impressum/">Impressum</Link>
             <span className="dot-sep">·</span>
-            <a href="/datenschutz">Datenschutz</a>
+            <Link href="/datenschutz/">Datenschutz</Link>
             <span className="dot-sep">·</span>
-            <a href="/agb">AGB</a>
+            <Link href="/agb/">AGB</Link>
           </div>
           <div className="footer-meta-right">
             <a href={NAV_LINKS.find((l) => l.label === 'Kontakt')!.href} className="footer-cta">Jetzt anmelden →</a>
