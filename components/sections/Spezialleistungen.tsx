@@ -1,10 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { SEMINARE } from '@/lib/seminare';
 import SectionHeader from '@/components/ui/SectionHeader';
-import { Reveal, Stagger } from '@/components/ui/ScrollMotion';
+import { Stagger } from '@/components/ui/ScrollMotion';
 import {
   LifebuoyIcon,
   TruckIcon,
@@ -24,10 +23,6 @@ const ICON_MAP = {
 } as const;
 
 export default function Spezialleistungen() {
-  const [active, setActive] = useState(SEMINARE[0].id);
-  const aktive = SEMINARE.find((s) => s.id === active)!;
-  const Icon = ICON_MAP[aktive.icon];
-
   return (
     <section id="spezialleistungen" className="section section-light relative">
       <div className="container-page relative">
@@ -41,168 +36,150 @@ export default function Spezialleistungen() {
           description="Berufskraftfahrer-Weiterbildung, Staplerschein, Baumaschinenführer, Aufbauseminare, Fahreignungsseminar – bei uns bist du fachlich richtig."
         />
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <Stagger delayStep={0.06} className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1">
-            {SEMINARE.map((s) => {
-              const ItemIcon = ICON_MAP[s.icon];
-              const isActive = s.id === active;
-              return (
-                <button
-                  key={s.id}
-                  type="button"
-                  onClick={() => setActive(s.id)}
-                  className={`seminare-tab ${isActive ? 'is-active' : ''}`}
-                >
-                  <span className="seminare-tab-icon">
-                    <ItemIcon className="h-5 w-5" />
-                  </span>
-                  <span className="flex-1 text-left">
-                    <span className="seminare-tab-kurz">{s.kurz}</span>
-                    <span className="seminare-tab-titel">{s.titel}</span>
-                  </span>
-                  <span aria-hidden className={`seminare-tab-arrow ${isActive ? 'is-active' : ''}`}>→</span>
-                </button>
-              );
-            })}
-          </Stagger>
-
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={aktive.id}
-              initial={{ opacity: 0, x: 12 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -12 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="light-card relative overflow-hidden rounded-3xl p-6 md:p-8"
-            >
-              <div className="mb-5 flex items-start gap-4">
-                <div className="seminare-detail-icon">
+        <Stagger delayStep={0.08} className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {SEMINARE.map((s) => {
+            const Icon = ICON_MAP[s.icon];
+            return (
+              <article key={s.id} className="seminare-card group">
+                <div className="seminare-icon-wrap">
                   <Icon className="h-7 w-7" />
                 </div>
-                <div>
-                  <div className="eyebrow mb-1" style={{ color: 'rgba(26, 26, 46, 0.6)' }}>{aktive.kurz}</div>
-                  <h3 className="text-2xl font-semibold" style={{ color: 'var(--c-navy)' }}>{aktive.titel}</h3>
+                <div className="seminare-tag-pill">{s.kurz}</div>
+                <h3 className="seminare-title">{s.titel}</h3>
+                <p className="seminare-desc">{s.beschreibung}</p>
+
+                <div className="seminare-meta">
+                  <div>
+                    <div className="seminare-meta-label">Dauer</div>
+                    <div className="seminare-meta-value">{s.dauer}</div>
+                  </div>
+                  <div>
+                    <div className="seminare-meta-label">Zielgruppe</div>
+                    <div className="seminare-meta-value">{s.zielgruppe}</div>
+                  </div>
                 </div>
-              </div>
 
-              <p className="mb-6 text-[15px] leading-relaxed" style={{ color: 'rgba(26, 26, 46, 0.75)' }}>{aktive.beschreibung}</p>
-
-              <div className="mb-6 grid grid-cols-2 gap-4">
-                <div>
-                  <div className="eyebrow mb-1.5 text-[10px]" style={{ color: 'rgba(26, 26, 46, 0.6)' }}>Zielgruppe</div>
-                  <div className="text-[13.5px]" style={{ color: 'var(--c-navy)' }}>{aktive.zielgruppe}</div>
+                <div className="seminare-abschluss">
+                  <div className="seminare-meta-label">Abschluss</div>
+                  <div className="seminare-meta-value-strong">{s.abschluss}</div>
                 </div>
-                <div>
-                  <div className="eyebrow mb-1.5 text-[10px]" style={{ color: 'rgba(26, 26, 46, 0.6)' }}>Dauer</div>
-                  <div className="text-[13.5px]" style={{ color: 'var(--c-navy)' }}>{aktive.dauer}</div>
-                </div>
-              </div>
 
-              <div className="mb-6">
-                <div className="eyebrow mb-2.5 text-[10px]" style={{ color: 'rgba(26, 26, 46, 0.6)' }}>Inhalte</div>
-                <ul className="space-y-2">
-                  {aktive.details.map((d) => (
-                    <li key={d} className="flex items-start gap-2.5 text-[13.5px] leading-relaxed" style={{ color: 'rgba(26, 26, 46, 0.75)' }}>
-                      <span className="mt-[7px] inline-block h-1 w-1 shrink-0 rounded-full bg-gradient-to-br from-brand-blue to-violet" />
-                      <span style={{ color: 'var(--c-navy)' }}>{d}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="seminare-abschluss">
-                <div className="eyebrow mb-1 text-[10px]" style={{ color: '#7C3AED' }}>Abschluss</div>
-                <div className="text-[14px] font-semibold" style={{ color: 'var(--c-navy)' }}>{aktive.abschluss}</div>
-              </div>
-
-              <a href="#kontakt" className="btn-primary mt-6 w-full justify-center">
-                {aktive.titel} anfragen
-                <span aria-hidden>→</span>
-              </a>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+                <a href="#kontakt" className="seminare-cta">
+                  Seminar anfragen
+                  <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
+                </a>
+              </article>
+            );
+          })}
+        </Stagger>
       </div>
 
       <style jsx>{`
-        .seminare-tab {
+        .seminare-card {
           display: flex;
-          align-items: center;
+          flex-direction: column;
           gap: 14px;
-          padding: 16px 18px;
-          background: rgba(255, 255, 255, 0.7);
-          border: 1px solid rgba(26, 26, 46, 0.1);
-          border-radius: 18px;
-          transition: all 250ms;
-          width: 100%;
+          padding: 28px 26px 24px 26px;
+          background: rgba(255, 255, 255, 0.9);
+          border: 1px solid rgba(26, 26, 46, 0.08);
+          border-radius: 24px;
+          backdrop-filter: blur(8px);
+          box-shadow: 0 4px 16px -4px rgba(0, 0, 0, 0.04);
+          transition: border-color 300ms, transform 300ms, box-shadow 300ms;
+          height: 100%;
         }
-        .seminare-tab:hover {
+        .seminare-card:hover {
           border-color: rgba(124, 58, 237, 0.3);
-          background: #ffffff;
-          transform: translateX(2px);
+          transform: translateY(-4px);
+          box-shadow: 0 20px 40px -16px rgba(91, 79, 233, 0.18);
         }
-        .seminare-tab.is-active {
-          border-color: rgba(124, 58, 237, 0.5);
-          background: linear-gradient(135deg, rgba(91, 79, 233, 0.08) 0%, rgba(124, 58, 237, 0.08) 100%);
-          box-shadow: 0 8px 28px -10px rgba(124, 58, 237, 0.3);
-        }
-        .seminare-tab-icon {
-          display: grid;
-          place-items: center;
-          width: 40px;
-          height: 40px;
-          border-radius: 10px;
-          background: rgba(124, 58, 237, 0.1);
-          color: #7C3AED;
-          border: 1px solid rgba(124, 58, 237, 0.2);
-          transition: background 250ms, color 250ms;
-        }
-        .seminare-tab.is-active .seminare-tab-icon {
-          background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 100%);
-          color: #F8F8FB;
-          border-color: transparent;
-        }
-        .seminare-tab-kurz {
-          display: block;
-          font-size: 10.5px;
-          font-weight: 700;
-          letter-spacing: 0.18em;
-          color: rgba(26, 26, 46, 0.55);
-          text-transform: uppercase;
-        }
-        .seminare-tab.is-active .seminare-tab-kurz { color: #6D28D9; }
-        .seminare-tab-titel {
-          display: block;
-          font-size: 14px;
-          font-weight: 600;
-          color: var(--c-navy);
-          line-height: 1.3;
-          margin-top: 2px;
-        }
-        .seminare-tab-arrow {
-          color: rgba(26, 26, 46, 0.4);
-          transition: all 250ms;
-          font-size: 16px;
-        }
-        .seminare-tab-arrow.is-active {
-          color: #7C3AED;
-          transform: translateX(4px);
-        }
-        .seminare-detail-icon {
+        .seminare-icon-wrap {
           display: grid;
           place-items: center;
           width: 56px;
           height: 56px;
-          border-radius: 14px;
+          border-radius: 16px;
           background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 100%);
           color: #F8F8FB;
-          box-shadow: 0 8px 28px -10px rgba(124, 58, 237, 0.6);
+          box-shadow: 0 8px 24px -8px rgba(124, 58, 237, 0.6);
+        }
+        .seminare-tag-pill {
+          display: inline-block;
+          align-self: flex-start;
+          padding: 4px 10px;
+          font-size: 10.5px;
+          font-weight: 700;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          background: rgba(124, 58, 237, 0.1);
+          border: 1px solid rgba(124, 58, 237, 0.25);
+          border-radius: 999px;
+          color: #6D28D9;
+        }
+        .seminare-title {
+          font-size: 19px;
+          font-weight: 700;
+          color: var(--c-navy);
+          line-height: 1.25;
+          letter-spacing: -0.01em;
+        }
+        .seminare-desc {
+          font-size: 13.5px;
+          line-height: 1.55;
+          color: rgba(26, 26, 46, 0.7);
+        }
+        .seminare-meta {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+          padding: 12px 0;
+          border-top: 1px solid rgba(26, 26, 46, 0.08);
+          border-bottom: 1px solid rgba(26, 26, 46, 0.08);
+        }
+        .seminare-meta-label {
+          font-size: 9.5px;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: rgba(26, 26, 46, 0.55);
+          margin-bottom: 3px;
+        }
+        .seminare-meta-value {
+          font-size: 12.5px;
+          color: var(--c-navy);
+          line-height: 1.4;
         }
         .seminare-abschluss {
-          padding: 16px 18px;
-          background: rgba(124, 58, 237, 0.06);
+          padding: 12px 14px;
+          background: linear-gradient(135deg, rgba(91, 79, 233, 0.06) 0%, rgba(124, 58, 237, 0.04) 100%);
           border: 1px solid rgba(124, 58, 237, 0.2);
           border-radius: 12px;
+        }
+        .seminare-meta-value-strong {
+          font-size: 12.5px;
+          font-weight: 600;
+          color: #6D28D9;
+          line-height: 1.4;
+          margin-top: 3px;
+        }
+        .seminare-cta {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          padding: 12px 20px;
+          font-size: 13.5px;
+          font-weight: 600;
+          color: #F8F8FB;
+          background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 100%);
+          border-radius: 12px;
+          margin-top: 4px;
+          transition: transform 250ms, box-shadow 250ms;
+          box-shadow: 0 8px 20px -6px rgba(124, 58, 237, 0.5);
+        }
+        .seminare-cta:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 12px 28px -8px rgba(124, 58, 237, 0.6);
         }
       `}</style>
     </section>

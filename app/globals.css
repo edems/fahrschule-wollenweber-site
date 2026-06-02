@@ -1,11 +1,11 @@
 /* =========================================================
-   FAHRSCHULE WOLLENWEBER · GLOBAL STYLES
+   FAHRSCHULE WOLLENWEBER · GLOBAL STYLES · REDESIGN v2
    ========================================================= */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Inter via Google Fonts CSS2 (CDN) */
+/* Inter + Instrument Serif via Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap');
 
 @layer base {
@@ -16,21 +16,21 @@
     --c-blue: #5B4FE9;
     --c-offwhite: #F8F8FB;
 
-    /* Dark theme tokens — softer, slightly blue-tinted (not pitch-black) */
-    --theme-bg: #0F0F1E;
-    --theme-bg-alt: #12122A;
+    /* Dark theme tokens — wärmeres Brand-Navy, nicht fast-schwarz */
+    --theme-bg: #1A1A2E;
+    --theme-bg-alt: #14142A;
     --theme-text: #F8F8FB;
     --theme-text-mute: rgba(248, 248, 251, 0.65);
     --theme-text-strong: #F8F8FB;
     --theme-line: rgba(248, 248, 251, 0.1);
     --theme-line-strong: rgba(248, 248, 251, 0.18);
-    --theme-panel: rgba(26, 26, 46, 0.55);
-    --theme-panel-solid: rgba(26, 26, 46, 0.4);
-    --theme-card-bg: rgba(26, 26, 46, 0.4);
+    --theme-panel: rgba(10, 10, 20, 0.4);
+    --theme-panel-solid: rgba(10, 10, 20, 0.6);
+    --theme-card-bg: rgba(255, 255, 255, 0.04);
     --theme-card-border: rgba(248, 248, 251, 0.1);
     --theme-glow: radial-gradient(ellipse at 20% 50%, rgba(91, 79, 233, 0.18) 0%, transparent 60%);
 
-    /* Light theme tokens — warm off-white, not stark white */
+    /* Light theme tokens — warmes Off-White, beige */
     --light-bg: #EDE9E1;
     --light-bg-alt: #E5E0D5;
     --light-text: #1A1A2E;
@@ -39,15 +39,23 @@
     --light-line: rgba(26, 26, 46, 0.08);
     --light-line-strong: rgba(26, 26, 46, 0.15);
     --light-panel: rgba(255, 255, 255, 0.7);
-    --light-card-bg: rgba(255, 255, 255, 0.7);
+    --light-card-bg: rgba(255, 255, 255, 0.85);
     --light-card-border: rgba(26, 26, 46, 0.08);
     --light-glow: radial-gradient(ellipse at 80% 0%, rgba(91, 79, 233, 0.08) 0%, transparent 60%);
+
+    /* WhatsApp brand color */
+    --c-whatsapp: #25D366;
+    --c-whatsapp-dark: #128C7E;
   }
+
+  /* Body is transparent — section backgrounds are rendered ON the body,
+     and the body color animates based on scroll position via useScrollColor. */
   html, body { background: var(--theme-bg); color: var(--theme-text); }
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 600ms cubic-bezier(0.22, 1, 0.36, 1);
   }
   ::selection { background: var(--c-violet); color: var(--c-offwhite); }
 }
@@ -76,6 +84,8 @@
   .gradient-text-italic {
     @apply font-serif italic font-normal;
   }
+
+  /* ===== BUTTONS ===== */
   .btn-primary {
     @apply inline-flex items-center gap-2 rounded-full px-7 py-4 text-sm font-semibold text-offwhite shadow-[0_12px_32px_-10px_rgba(124,58,237,0.6)] transition-all duration-300;
     background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 100%);
@@ -90,14 +100,8 @@
     background: rgba(255, 255, 255, 0.03);
   }
   .btn-ghost-dark:hover {
-    border-color: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.3);
     background: rgba(255, 255, 255, 0.08);
-  }
-  .btn-ghost {
-    @apply inline-flex items-center gap-2 rounded-full border border-line bg-white/[0.03] px-6 py-4 text-sm font-medium text-offwhite backdrop-blur-md transition-all duration-300;
-  }
-  .btn-ghost:hover {
-    @apply border-white/25 bg-white/[0.08];
   }
   .btn-outline-light {
     @apply inline-flex items-center gap-2 rounded-full border px-6 py-4 text-sm font-semibold transition-all duration-300;
@@ -110,23 +114,37 @@
     color: #F8F8FB;
     border-color: var(--c-navy);
   }
-
-  /* ============================================================
-     SECTION THEMES — softer contrasts with smooth gradient
-     transitions between dark and light sections.
-     ============================================================ */
-
-  .section {
-    @apply relative;
-    padding-top: clamp(80px, 12vw, 128px);
-    padding-bottom: clamp(80px, 12vw, 128px);
+  .btn-whatsapp {
+    @apply inline-flex items-center gap-2 rounded-full px-6 py-4 text-sm font-semibold text-white transition-all duration-300;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    box-shadow: 0 8px 24px -8px rgba(37, 211, 102, 0.5);
+  }
+  .btn-whatsapp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px -8px rgba(37, 211, 102, 0.6);
+  }
+  .btn-call {
+    @apply inline-flex items-center gap-2 rounded-full px-6 py-4 text-sm font-semibold transition-all duration-300;
+    background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 100%);
+    box-shadow: 0 8px 24px -8px rgba(124, 58, 237, 0.5);
+    color: #F8F8FB;
+  }
+  .btn-call:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px -8px rgba(124, 58, 237, 0.6);
   }
 
+  /* ===== SECTION THEMES — each section has its OWN background,
+     so light→light and dark→dark have no hard transition. ===== */
+  .section {
+    @apply relative;
+    padding-top: clamp(72px, 11vw, 120px);
+    padding-bottom: clamp(72px, 11vw, 120px);
+  }
   .section-dark {
     background: var(--theme-bg);
     color: var(--theme-text);
   }
-
   .section-light {
     background: var(--light-bg);
     color: var(--light-text);
@@ -150,44 +168,6 @@
   }
   .section-light .accent-line {
     background: var(--c-violet);
-  }
-
-  /* ============================================================
-     SOFT TRANSITIONS — gradient bridges between sections
-     Use these classes on sections to fade smoothly into the
-     next/previous section's background.
-     ============================================================ */
-  .transition-to-light {
-    position: relative;
-  }
-  .transition-to-light::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 120px;
-    background: linear-gradient(to bottom, transparent 0%, var(--light-bg) 100%);
-    pointer-events: none;
-    z-index: 1;
-  }
-  .transition-to-dark {
-    position: relative;
-  }
-  .transition-to-dark::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 120px;
-    background: linear-gradient(to bottom, transparent 0%, var(--theme-bg) 100%);
-    pointer-events: none;
-    z-index: 1;
-  }
-  .section > .container-page {
-    position: relative;
-    z-index: 2;
   }
 
   .glass-panel {
@@ -222,16 +202,14 @@
   }
 }
 
-/* Native browser scroll — no Lenis, no artificial lerp. */
+/* Native browser scroll */
 html { scroll-behavior: auto; }
 
-/* Hide scrollbar visual noise but keep functionality */
 body::-webkit-scrollbar { width: 8px; }
 body::-webkit-scrollbar-track { background: var(--theme-bg); }
 body::-webkit-scrollbar-thumb { background: rgba(124, 58, 237, 0.4); border-radius: 4px; }
 body::-webkit-scrollbar-thumb:hover { background: rgba(124, 58, 237, 0.7); }
 
-/* Reduce-motion respect */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
