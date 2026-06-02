@@ -88,6 +88,27 @@ export default function VideoStage({ active }: Props) {
     return () => window.removeEventListener('wollenweber:loader-hidden', onLoaderHidden);
   }, [active, reducedMotion]);
 
+  // iOS Safari lehnt muted autoplay stillschweigend ab, wenn das <video>
+  // beim Mount verdeckt war (hinter dem PageLoader) und kein User-Gesture
+  // vorliegt. Der wollenweber:loader-hidden-CustomEvent wird in einem
+  // setTimeout dispatcht und zählt auf iOS NICHT als User-Gesture, daher
+  // würde auch der Retry scheitern. Fallback: einmaliger pointerdown-
+  // Listener auf document, der beim ersten Tap/Scroll/Klick play() triggert.
+  useEffect(() => {
+    if (reducedMotion) return;
+    let done = false;
+    const onFirstInteraction = () => {
+      if (done) return;
+      done = true;
+      const v = refs.current[active];
+      if (v && v.paused) {
+        v.play().catch(() => undefined);
+      }
+    };
+    document.addEventListener('pointerdown', onFirstInteraction, { once: true, passive: true });
+    return () => document.removeEventListener('pointerdown', onFirstInteraction);
+  }, [active, reducedMotion]);
+
   useEffect(() => {
     const currentIdx = MODE_ORDER.indexOf(active);
     const next = MODE_ORDER[(currentIdx + 1) % MODE_ORDER.length];
