@@ -36,14 +36,17 @@ export default function VideoStage({ active }: Props) {
       if (!v) return;
       if (id === active && !reducedMotion) {
         v.classList.add('is-active');
+        v.preload = 'auto';
         if (v.paused) {
           v.currentTime = 0;
           v.play().catch(() => undefined);
         }
       } else if (id === active && reducedMotion) {
         v.classList.add('is-active', 'is-paused');
+        v.preload = 'auto';
       } else {
         v.classList.remove('is-active', 'is-paused');
+        v.preload = 'none';
       }
     });
   }, [active, reducedMotion]);
@@ -54,7 +57,12 @@ export default function VideoStage({ active }: Props) {
     const prev = MODE_ORDER[(currentIdx - 1 + MODE_ORDER.length) % MODE_ORDER.length];
     [next, prev].forEach((id) => {
       const v = refs.current[id];
-      if (v && v.preload !== 'auto') v.preload = 'auto';
+      if (v) v.preload = 'metadata';
+    });
+    MODE_ORDER.forEach((id) => {
+      if (id === active || id === next || id === prev) return;
+      const v = refs.current[id];
+      if (v) v.preload = 'none';
     });
   }, [active]);
 
@@ -97,7 +105,7 @@ export default function VideoStage({ active }: Props) {
               muted
               loop
               playsInline
-              preload={isActive ? 'auto' : 'metadata'}
+              preload="none"
               aria-hidden={!isActive}
               className={`hero-video ${isActive ? 'is-active' : ''} ${reducedMotion && isActive ? 'is-paused' : ''}`}
             />
