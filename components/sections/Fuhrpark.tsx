@@ -3,29 +3,32 @@
 import { motion } from 'framer-motion';
 import { MODES } from '@/lib/modes';
 import SectionHeader from '@/components/ui/SectionHeader';
-import { Stagger } from '@/components/ui/ScrollMotion';
+import { PremiumReveal, Stagger } from '@/components/ui/ScrollMotion';
+import { KLASSEN_ICON_MAP } from '@/components/icons/KlassenIcons';
 
 const FUHRPARK = [
-  { id: 'auto', title: 'Pkw', sublabel: 'Klasse B', icon: '🚗' },
-  { id: 'motorrad', title: 'Motorrad', sublabel: 'A1 / A2 / A', icon: '🏍' },
-  { id: 'lkw', title: 'LKW', sublabel: 'C / CE', icon: '🚚' },
-  { id: 'bus', title: 'Bus', sublabel: 'D / DE', icon: '🚌' },
-  { id: 'landwirtschaft', title: 'Traktor', sublabel: 'L / T', icon: '🚜' },
+  { id: 'auto', title: 'Pkw', sublabel: 'Klasse B', iconKey: 'auto', tone: 'blue' },
+  { id: 'motorrad', title: 'Motorrad', sublabel: 'A1 / A2 / A', iconKey: 'motorrad', tone: 'violet' },
+  { id: 'lkw', title: 'LKW', sublabel: 'C / CE', iconKey: 'lkw', tone: 'amber' },
+  { id: 'bus', title: 'Bus', sublabel: 'D / DE', iconKey: 'bus', tone: 'cyan' },
+  { id: 'landwirtschaft', title: 'Traktor', sublabel: 'L / T', iconKey: 'landwirtschaft', tone: 'green' },
 ] as const;
 
 export default function Fuhrpark() {
   return (
     <section id="fuhrpark" className="section section-dark relative">
       <div className="container-page">
-        <SectionHeader
-          eyebrow="Moderner Fuhrpark"
-          title={
-            <>
-              Modern, gewartet, <span className="gradient-text gradient-text-italic">sicher.</span>
-            </>
-          }
-          description="Unsere Schulungsfahrzeuge werden regelmäßig gewartet, geprüft und auf dem neuesten Stand gehalten. Du lernst auf modernen Fahrzeugen mit aktueller Sicherheitstechnik."
-        />
+        <PremiumReveal>
+          <SectionHeader
+            eyebrow="Moderner Fuhrpark"
+            title={
+              <>
+                Modern, gewartet, <span className="gradient-text gradient-text-italic">sicher.</span>
+              </>
+            }
+            description="Unsere Schulungsfahrzeuge werden regelmäßig gewartet, geprüft und auf dem neuesten Stand gehalten. Du lernst auf modernen Fahrzeugen mit aktueller Sicherheitstechnik."
+          />
+        </PremiumReveal>
 
         <Stagger delayStep={0.08} className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {FUHRPARK.map((f) => {
@@ -34,16 +37,28 @@ export default function Fuhrpark() {
               <article key={f.id} className="fuhrpark-card group">
                 <div className="fuhrpark-video">
                   <video
-                    src={mode.video}
                     muted
                     loop
                     playsInline
                     autoPlay
+                    poster={mode.poster}
                     preload="metadata"
                     className="fuhrpark-video-el"
-                  />
+                  >
+                    <source src={mode.videoMobile} type="video/mp4" media="(max-width: 640px)" />
+                    <source src={mode.video} type="video/mp4" />
+                  </video>
                   <div className="fuhrpark-video-overlay" />
-                  <div className="fuhrpark-icon" aria-hidden>{f.icon}</div>
+                  <div className={`fuhrpark-icon fuhrpark-icon-${f.tone}`} aria-hidden>
+                    <img
+                      src={KLASSEN_ICON_MAP[f.iconKey]}
+                      alt=""
+                      width={28}
+                      height={28}
+                      className="fuhrpark-icon-img"
+                      loading="lazy"
+                    />
+                  </div>
                   <div className="fuhrpark-live-badge">
                     <span className="dot" aria-hidden />
                     Loop
@@ -127,15 +142,60 @@ export default function Fuhrpark() {
           position: absolute;
           top: 14px;
           left: 14px;
-          width: 44px;
-          height: 44px;
+          width: 52px;
+          height: 52px;
           display: grid;
           place-items: center;
-          font-size: 22px;
-          background: rgba(10, 10, 20, 0.7);
-          backdrop-filter: blur(8px);
-          border: 1px solid rgba(124, 58, 237, 0.3);
-          border-radius: 12px;
+          background:
+            linear-gradient(145deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.04)),
+            linear-gradient(135deg, rgba(91, 79, 233, 0.85), rgba(124, 58, 237, 0.72));
+          backdrop-filter: blur(14px) saturate(170%);
+          -webkit-backdrop-filter: blur(14px) saturate(170%);
+          border: 1px solid rgba(248, 248, 251, 0.28);
+          border-radius: 16px;
+          box-shadow:
+            0 14px 30px -14px rgba(0, 0, 0, 0.8),
+            inset 0 1px 0 rgba(255, 255, 255, 0.28);
+        }
+        .fuhrpark-icon::before {
+          content: '';
+          position: absolute;
+          inset: -1px;
+          border-radius: inherit;
+          background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.32), transparent 55%);
+          pointer-events: none;
+        }
+        .fuhrpark-icon-blue {
+          background:
+            linear-gradient(145deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.04)),
+            linear-gradient(135deg, #5B4FE9, #2DD4BF);
+        }
+        .fuhrpark-icon-violet {
+          background:
+            linear-gradient(145deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.04)),
+            linear-gradient(135deg, #7C3AED, #EC4899);
+        }
+        .fuhrpark-icon-amber {
+          background:
+            linear-gradient(145deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.04)),
+            linear-gradient(135deg, #F59E0B, #7C3AED);
+        }
+        .fuhrpark-icon-cyan {
+          background:
+            linear-gradient(145deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.04)),
+            linear-gradient(135deg, #06B6D4, #5B4FE9);
+        }
+        .fuhrpark-icon-green {
+          background:
+            linear-gradient(145deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.04)),
+            linear-gradient(135deg, #25D366, #128C7E);
+        }
+        .fuhrpark-icon-img {
+          position: relative;
+          width: 30px;
+          height: 30px;
+          object-fit: contain;
+          filter: brightness(0) invert(1) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.25));
         }
         .fuhrpark-live-badge {
           position: absolute;

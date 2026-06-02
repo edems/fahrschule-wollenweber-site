@@ -1,12 +1,16 @@
 /** @type {import('next').NextConfig} */
+const isGithubPages = process.env.GITHUB_PAGES === 'true';
+
 const nextConfig = {
   output: 'export',
-  // GitHub Pages-URL: https://<user>.github.io/<repo-name>/
-  // basePath + assetPrefix sorgen dafür, dass Next.js _alle_ Asset-Pfade
-  // (CSS, JS, Images, Videos, manuell referenzierte /videos/ und /images/)
-  // automatisch mit dem Subpath generiert.
-  basePath: '/fahrschule-wollenweber-site',
-  assetPrefix: '/fahrschule-wollenweber-site/',
+  ...(isGithubPages
+    ? {
+        // GitHub Pages-URL: https://<user>.github.io/<repo-name>/
+        // Lokal bleibt die App unter / erreichbar; Pages bekommt den Repo-Subpath.
+        basePath: '/fahrschule-wollenweber-site',
+        assetPrefix: '/fahrschule-wollenweber-site/',
+      }
+    : {}),
   trailingSlash: true,
   images: {
     unoptimized: true,

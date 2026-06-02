@@ -6,6 +6,7 @@ import { KATEGORIEN } from '@/lib/klassen';
 import { STANDORTE, HAUPTNUMMER } from '@/lib/standorte';
 import MonatsKalender from '@/components/kalender/MonatsKalender';
 import SectionHeader from '@/components/ui/SectionHeader';
+import { PremiumReveal } from '@/components/ui/ScrollMotion';
 
 const WHATSAPP_URL = 'https://wa.me/491704769911?text=Hi%2C%20ich%20möchte%20mich%20gerne%20anmelden.';
 
@@ -20,15 +21,30 @@ export default function Kontakt() {
     k.klassen.map((kl) => ({ ...kl, kategorie: k.label }))
   );
 
+  const handleDateChange = (nextDate: string) => {
+    setDatum(nextDate);
+    if (status === 'error') {
+      setStatus('idle');
+      setStatusMessage('');
+    }
+  };
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
+    if (!form.checkValidity()) {
+      setStatus('error');
+      setStatusMessage('Bitte fülle alle Pflichtfelder korrekt aus.');
+      form.reportValidity();
+      return;
+    }
     if (!datum) {
       setStatus('error');
       setStatusMessage('Bitte wähle einen Termin im Kalender.');
       return;
     }
     setStatus('sending');
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(form);
     const data = {
       vorname: formData.get('vorname'),
       name: formData.get('name'),
@@ -66,20 +82,22 @@ export default function Kontakt() {
   return (
     <section id="kontakt" className="section section-light relative">
       <div className="container-page relative">
-        <SectionHeader
-          eyebrow="Anmeldung & Kontakt"
-          title={
-            <>
-              Bereit <span className="gradient-text gradient-text-italic">loszufahren?</span>
-            </>
-          }
-          description={
-            <>
-              <strong>Keine Angst, wir beraten gerne — kostenlos und unverbindlich.</strong>{' '}
-              Wähle deinen Wunschtermin und deinen Lieblings-Kontaktweg.
-            </>
-          }
-        />
+        <PremiumReveal>
+          <SectionHeader
+            eyebrow="Anmeldung & Kontakt"
+            title={
+              <>
+                Bereit <span className="gradient-text gradient-text-italic">loszufahren?</span>
+              </>
+            }
+            description={
+              <>
+                <strong>Keine Angst, wir beraten gerne — kostenlos und unverbindlich.</strong>{' '}
+                Wähle deinen Wunschtermin und deinen Lieblings-Kontaktweg.
+              </>
+            }
+          />
+        </PremiumReveal>
 
         {/* 5-Kanal Quick-Contact: Festnetz, Mobil, WhatsApp, E-Mail, Online-Termin */}
         <motion.div
@@ -138,7 +156,7 @@ export default function Kontakt() {
         >
           <div>
             <div className="eyebrow mb-4" style={{ color: 'rgba(26, 26, 46, 0.6)' }}>Schritt 1 · Termin wählen</div>
-            <MonatsKalender value={datum} onChange={setDatum} />
+            <MonatsKalender value={datum} onChange={handleDateChange} />
           </div>
 
           <form onSubmit={handleSubmit} className="kontakt-form" noValidate>
@@ -213,12 +231,12 @@ export default function Kontakt() {
             </button>
 
             {status === 'success' && (
-              <div className="form-status form-status-success" role="status">
+              <div className="form-status form-status-success" role="status" aria-live="polite">
                 ✓ {statusMessage}
               </div>
             )}
             {status === 'error' && (
-              <div className="form-status form-status-error" role="alert">
+              <div className="form-status form-status-error" role="alert" aria-live="assertive">
                 ⚠ {statusMessage}
               </div>
             )}
@@ -230,30 +248,27 @@ export default function Kontakt() {
         </motion.div>
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         .kontakt-channels {
           display: grid;
-          grid-template-columns: 1fr;
-          gap: 16px;
+          grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+          gap: 18px;
           margin-bottom: 56px;
         }
-        @media (min-width: 600px) {
-          .kontakt-channels { grid-template-columns: 1fr 1fr; gap: 16px; }
-        }
-        @media (min-width: 1024px) {
-          .kontakt-channels { grid-template-columns: repeat(5, 1fr); gap: 18px; }
+        @media (min-width: 1280px) {
+          .kontakt-channels { grid-template-columns: repeat(3, minmax(0, 1fr)); }
         }
         .kontakt-channel {
           display: flex;
           align-items: center;
-          gap: 14px;
-          padding: 20px 22px;
-          border-radius: 18px;
+          gap: 16px;
+          padding: 22px 24px;
+          border-radius: 20px;
           background: rgba(255, 255, 255, 0.92);
           border: 1px solid rgba(26, 26, 46, 0.1);
           text-decoration: none;
           transition: all 250ms cubic-bezier(0.22, 1, 0.36, 1);
-          min-height: 88px;
+          min-height: 104px;
         }
         .kontakt-channel:hover {
           transform: translateY(-3px);
@@ -272,14 +287,14 @@ export default function Kontakt() {
         }
         .kontakt-channel-form:hover { border-color: rgba(124, 58, 237, 0.5); }
         .kontakt-channel-icon {
-          width: 48px;
-          height: 48px;
+          width: 54px;
+          height: 54px;
           display: grid;
           place-items: center;
           font-size: 22px;
           background: rgba(255, 255, 255, 0.7);
           border: 1px solid rgba(26, 26, 46, 0.08);
-          border-radius: 14px;
+          border-radius: 16px;
           color: var(--c-navy);
           flex-shrink: 0;
         }
@@ -291,11 +306,11 @@ export default function Kontakt() {
         .kontakt-channel-meta {
           display: flex;
           flex-direction: column;
-          gap: 2px;
+          gap: 4px;
           min-width: 0;
         }
         .kontakt-channel-label {
-          font-size: 10px;
+          font-size: 10.5px;
           font-weight: 700;
           letter-spacing: 0.14em;
           text-transform: uppercase;
@@ -303,10 +318,20 @@ export default function Kontakt() {
           line-height: 1.2;
         }
         .kontakt-channel-value {
-          font-size: 13.5px;
+          font-size: 15px;
           font-weight: 700;
           color: var(--c-navy);
           line-height: 1.3;
+          overflow-wrap: anywhere;
+        }
+        @media (max-width: 520px) {
+          .kontakt-channels {
+            grid-template-columns: 1fr;
+          }
+          .kontakt-channel {
+            min-height: 94px;
+            padding: 20px;
+          }
         }
 
         .kontakt-grid {

@@ -32,6 +32,8 @@ jobs:
 
       - name: Build static export
         run: npx next build
+        env:
+          GITHUB_PAGES: 'true'
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

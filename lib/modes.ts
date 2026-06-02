@@ -4,7 +4,8 @@ export type ModeConfig = {
   id: ModeId;
   label: string;
   video: string;
-  poster?: string;
+  videoMobile: string;
+  poster: string;
   badge: string;
   headline: [string, string, string];
   versprechen: string[];
@@ -26,7 +27,8 @@ export const MODES: Record<ModeId, ModeConfig> = {
     id: 'auto',
     label: 'Auto',
     video: 'videos/hero-auto-v1.mp4',
-    poster: 'images/poster-auto.jpg',
+    videoMobile: 'videos/mobile/hero-auto-v1-mobile.mp4',
+    poster: 'videos/mobile/hero-auto-v1-poster.webp',
     badge: 'Klasse B · BF17',
     headline: ['Dein Weg', 'zum Führerschein.', 'Im Westerwald.'],
     versprechen: [
@@ -46,7 +48,8 @@ export const MODES: Record<ModeId, ModeConfig> = {
     id: 'motorrad',
     label: 'Motorrad',
     video: 'videos/hero-motorrad-v1.mp4',
-    poster: 'images/poster-motorrad.jpg',
+    videoMobile: 'videos/mobile/hero-motorrad-v1-mobile.mp4',
+    poster: 'videos/mobile/hero-motorrad-v1-poster.webp',
     badge: 'AM · A1 · A2 · A',
     headline: ['Freiheit', 'auf zwei Rädern.', 'Kurvig, ehrlich.'],
     versprechen: [
@@ -66,7 +69,8 @@ export const MODES: Record<ModeId, ModeConfig> = {
     id: 'lkw',
     label: 'LKW',
     video: 'videos/hero-lkw-v1.mp4',
-    poster: 'images/poster-lkw.jpg',
+    videoMobile: 'videos/mobile/hero-lkw-v1-mobile.mp4',
+    poster: 'videos/mobile/hero-lkw-v1-poster.webp',
     badge: 'C1 · C1E · C · CE',
     headline: ['Profi am Steuer.', 'Jeder Zentner.', 'Sicher unterwegs.'],
     versprechen: [
@@ -86,7 +90,8 @@ export const MODES: Record<ModeId, ModeConfig> = {
     id: 'landwirtschaft',
     label: 'Landwirtschaft',
     video: 'videos/hero-Landwirtschaft-v1.mp4',
-    poster: 'images/poster-landwirtschaft.jpg',
+    videoMobile: 'videos/mobile/hero-Landwirtschaft-v1-mobile.mp4',
+    poster: 'videos/mobile/hero-Landwirtschaft-v1-poster.webp',
     badge: 'L · T',
     headline: ['Vom Hof', 'auf die Straße.', 'Direkt aus der Region.'],
     versprechen: [
@@ -106,7 +111,8 @@ export const MODES: Record<ModeId, ModeConfig> = {
     id: 'bus',
     label: 'Bus',
     video: 'videos/hero-bus-v1.mp4',
-    poster: 'images/poster-bus.jpg',
+    videoMobile: 'videos/mobile/hero-bus-v1-mobile.mp4',
+    poster: 'videos/mobile/hero-bus-v1-poster.webp',
     badge: 'D1 · D1E · D · DE',
     headline: ['Menschen bewegen.', 'Sicher ankommen.', 'Täglich.'],
     versprechen: [

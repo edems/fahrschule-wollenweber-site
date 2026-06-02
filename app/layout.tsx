@@ -25,6 +25,10 @@ export const metadata: Metadata = {
     'Dein Weg zum Führerschein',
   ],
   authors: [{ name: 'Fahrschule Wollenweber GmbH' }],
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+  },
   openGraph: {
     title: 'Fahrschule Wollenweber · Dein Weg zum Führerschein im Westerwald',
     description:

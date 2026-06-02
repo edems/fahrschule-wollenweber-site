@@ -34,8 +34,8 @@ export default function TopNav() {
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'border-b border-line bg-navy-deep/80 backdrop-blur-2xl shadow-[0_8px_32px_-12px_rgba(0,0,0,0.5)]'
-          : 'border-b border-transparent bg-gradient-to-b from-navy-deep/60 to-transparent backdrop-blur-md'
+          ? 'border-b border-white/[0.12] bg-navy-deep/70 backdrop-blur-2xl shadow-[0_18px_60px_-36px_rgba(0,0,0,0.9)]'
+          : 'border-b border-white/[0.06] bg-navy-deep/34 backdrop-blur-xl'
       }`}
     >
       <motion.div
@@ -47,7 +47,7 @@ export default function TopNav() {
         <a href="#top" className="group flex items-center gap-3">
           <motion.div
             whileHover={{ rotate: [0, -5, 5, 0], transition: { duration: 0.6 } }}
-            className="grid h-9 w-9 place-items-center rounded-[10px] bg-gradient-to-br from-brand-blue to-violet text-sm font-extrabold text-offwhite shadow-[0_6px_24px_-8px_rgba(124,58,237,0.6)]"
+            className="premium-edge grid h-9 w-9 place-items-center rounded-[10px] bg-gradient-to-br from-brand-blue to-violet text-sm font-extrabold text-offwhite shadow-[0_6px_24px_-8px_rgba(124,58,237,0.6)]"
           >
             W
           </motion.div>
@@ -61,7 +61,7 @@ export default function TopNav() {
           </div>
         </a>
 
-        <div className="hidden items-center gap-9 text-[14px] font-medium text-mute md:flex">
+        <div className="hidden items-center gap-7 text-[14px] font-medium text-mute xl:flex">
           {LINKS.map((l) => (
             <a key={l.href} href={l.href} className="nav-link">
               {l.label}
@@ -72,14 +72,14 @@ export default function TopNav() {
         <div className="flex items-center gap-3">
           <a
             href="#kontakt"
-            className="hidden md:inline-flex btn-primary !py-2.5 !px-5 !text-[13px]"
+            className="premium-press premium-edge hidden xl:inline-flex btn-primary !py-2.5 !px-5 !text-[13px]"
           >
             Anmelden <span aria-hidden>→</span>
           </a>
           <button
             aria-label="Menü öffnen"
             onClick={() => setOpen((v) => !v)}
-            className="grid h-10 w-10 place-items-center rounded-full border border-line bg-white/[0.04] md:hidden"
+            className="grid h-10 w-10 place-items-center rounded-full border border-line bg-white/[0.04] xl:hidden"
           >
             <span className="flex flex-col gap-1.5">
               <span className={`block h-px w-4 bg-offwhite transition-transform ${open ? 'translate-y-[3px] rotate-45' : ''}`} />
@@ -96,7 +96,7 @@ export default function TopNav() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="overflow-hidden border-t border-line bg-navy-deep/90 backdrop-blur-xl md:hidden"
+            className="overflow-hidden border-t border-white/[0.1] bg-navy-deep/86 backdrop-blur-2xl xl:hidden"
           >
             <div className="container-page flex flex-col gap-1 py-4">
               {LINKS.map((l) => (

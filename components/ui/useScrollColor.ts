@@ -40,11 +40,16 @@ const THEME_MAP: Array<[number, Theme]> = [
 ];
 
 function interpolateTheme(progress: number): { bg: string; text: string } {
+  const safeProgress = Math.max(0, Math.min(1, progress));
+
   // Find current and next anchor
   let i = 0;
-  while (i < THEME_MAP.length - 1 && progress > THEME_MAP[i + 1][0]) i++;
-  const [startProgress, startTheme] = THEME_MAP[i];
+  while (i < THEME_MAP.length - 1 && safeProgress >= THEME_MAP[i + 1][0]) i++;
+  const [, startTheme] = THEME_MAP[i];
   const endEntry = THEME_MAP[i + 1];
+  if (!endEntry) {
+    return themeColors(startTheme);
+  }
   const [endProgress, endTheme] = endEntry;
 
   // If both are the same, no blend needed
@@ -56,10 +61,10 @@ function interpolateTheme(progress: number): { bg: string; text: string } {
   const blendZone = 0.04;
   const fadeStart = endProgress - blendZone;
   let t: number;
-  if (progress < fadeStart) {
+  if (safeProgress < fadeStart) {
     t = 0;
   } else {
-    t = (progress - fadeStart) / blendZone;
+    t = (safeProgress - fadeStart) / blendZone;
     t = Math.max(0, Math.min(1, t));
     // Smooth ease in/out
     t = t * t * (3 - 2 * t);

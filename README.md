@@ -29,6 +29,8 @@ Node 18+ erforderlich.
 
 GitHub Pages ist konfiguriert. Push auf `main` → `.github/workflows/deploy.yml` baut und deployed automatisch.
 
+Der lokale Dev-Server läuft bewusst ohne `basePath` unter `/`. Der GitHub-Pages-Build setzt `GITHUB_PAGES=true` und exportiert die App unter `/fahrschule-wollenweber-site/`.
+
 **Wichtig für Custom Domain** (`www.fahrschule-wollenweber.de`):
 1. In GitHub Repo → Settings → Pages → Custom Domain: `www.fahrschule-wollenweber.de`
 2. CNAME-File in `/public/CNAME` mit Inhalt `www.fahrschule-wollenweber.de`

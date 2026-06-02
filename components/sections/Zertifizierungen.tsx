@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import SectionHeader from '@/components/ui/SectionHeader';
-import { Stagger } from '@/components/ui/ScrollMotion';
+import { PremiumReveal, Stagger } from '@/components/ui/ScrollMotion';
 
 const BADGES = [
   {
@@ -47,15 +47,17 @@ export default function Zertifizierungen() {
   return (
     <section id="zertifizierungen" className="section section-light relative">
       <div className="container-page relative">
-        <SectionHeader
-          eyebrow="Erfahrung & Zertifizierungen"
-          title={
-            <>
-              Die Besten vor Ort — <span className="gradient-text gradient-text-italic">mit Erfahrung, die zählt.</span>
-            </>
-          }
-          description="Inhabergeführt seit über 20 Jahren. Fahrlehrer-Erlaubnis, BKrFQG-anerkannt, eingetragene GmbH. Bei uns bist du in geprüften Händen."
-        />
+        <PremiumReveal>
+          <SectionHeader
+            eyebrow="Erfahrung & Zertifizierungen"
+            title={
+              <>
+                Die Besten vor Ort — <span className="gradient-text gradient-text-italic">mit Erfahrung, die zählt.</span>
+              </>
+            }
+            description="Inhabergeführt seit über 20 Jahren. Fahrlehrer-Erlaubnis, BKrFQG-anerkannt, eingetragene GmbH. Bei uns bist du in geprüften Händen."
+          />
+        </PremiumReveal>
 
         <Stagger delayStep={0.06} className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {BADGES.map((b) => (

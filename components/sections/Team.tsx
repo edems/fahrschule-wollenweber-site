@@ -3,22 +3,24 @@
 import { motion } from 'framer-motion';
 import { TEAM } from '@/lib/team';
 import SectionHeader from '@/components/ui/SectionHeader';
-import { Stagger } from '@/components/ui/ScrollMotion';
+import { PremiumReveal, Stagger } from '@/components/ui/ScrollMotion';
 
 export default function Team() {
   return (
     <section id="team" className="section section-dark relative">
       <div className="container-page">
-        <SectionHeader
-          eyebrow="Unser Team"
-          title={
-            <>
-              Familie Wollenweber —<br />
-              <span className="gradient-text gradient-text-italic">drei Fahrlehrer,</span> eine Mission.
-            </>
-          }
-          description="Bei uns bist du nicht irgendwo. Du wirst von einer Familie ausgebildet, die den Westerwald kennt und seit Jahrzehnten Fahrschüler begleitet."
-        />
+        <PremiumReveal>
+          <SectionHeader
+            eyebrow="Unser Team"
+            title={
+              <>
+                Familie Wollenweber —<br />
+                <span className="gradient-text gradient-text-italic">drei Fahrlehrer,</span> eine Mission.
+              </>
+            }
+            description="Bei uns bist du nicht irgendwo. Du wirst von einer Familie ausgebildet, die den Westerwald kennt und seit Jahrzehnten Fahrschüler begleitet."
+          />
+        </PremiumReveal>
 
         <Stagger delayStep={0.15} className="grid grid-cols-1 gap-7 md:grid-cols-3">
           {TEAM.map((m) => (

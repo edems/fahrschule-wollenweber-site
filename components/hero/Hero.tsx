@@ -26,6 +26,7 @@ function readInitialMode(): ModeId {
 export default function Hero() {
   const [active, setActive] = useState<ModeId>('auto');
   const [mounted, setMounted] = useState(false);
+  const [loadComplete, setLoadComplete] = useState(false);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const sectionRef = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
@@ -36,7 +37,13 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
+    const timer = window.setTimeout(() => setLoadComplete(true), 1150);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
     if (!mounted) return;
+    if (window.location.hash && !window.location.hash.startsWith('#mode=')) return;
     const url = new URL(window.location.href);
     url.hash = `mode=${active}`;
     window.history.replaceState(null, '', url.toString());
@@ -76,14 +83,23 @@ export default function Hero() {
     <motion.section
       ref={sectionRef}
       id="top"
-      className="hero-section relative h-[100vh] min-h-[720px] w-full overflow-hidden"
+      className="hero-section relative min-h-[844px] w-full overflow-hidden sm:h-[100vh] sm:min-h-[720px]"
     >
       <ModeEffects active={active} />
       <VideoStage active={active} />
 
       {/* Cinematic overlays */}
       <div className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(180deg,rgba(10,10,20,0.55)_0%,rgba(10,10,20,0.25)_30%,rgba(10,10,20,0.15)_55%,rgba(10,10,20,0.45)_100%)]" />
-      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_20%_50%,rgba(91,79,233,0.18)_0%,transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_20%_50%,rgba(91,79,233,0.12)_0%,transparent_58%)]" />
+
+      {!reduce && (
+        <motion.div
+          className="pointer-events-none absolute inset-x-0 top-0 z-[45] h-px origin-left bg-gradient-to-r from-transparent via-white to-transparent"
+          initial={{ scaleX: 0, opacity: 0.9 }}
+          animate={{ scaleX: loadComplete ? 1 : 0.72, opacity: loadComplete ? 0 : 0.9 }}
+          transition={{ duration: loadComplete ? 0.55 : 1.05, ease: [0.22, 1, 0.36, 1] }}
+        />
+      )}
 
       {/* Cursor-Follow Glow */}
       {!reduce && (
@@ -103,7 +119,11 @@ export default function Hero() {
           <ModeChips active={active} onChange={setActive} />
         </motion.div>
       )}
-      {reduce && <ModeChips active={active} onChange={setActive} />}
+      {reduce && (
+        <div className="absolute left-0 right-0 top-[96px] z-40">
+          <ModeChips active={active} onChange={setActive} />
+        </div>
+      )}
 
       {/* Scroll indicator (centered-right) */}
       <div className="pointer-events-none absolute right-12 top-1/2 z-10 hidden -translate-y-1/2 flex-col items-center gap-3 lg:flex">
@@ -112,7 +132,7 @@ export default function Hero() {
       </div>
 
       <motion.div
-        className="relative z-10 flex h-full items-end justify-center pt-32 sm:pt-32"
+        className="relative z-10 flex min-h-[844px] items-center justify-center pt-32 sm:h-full sm:min-h-0 sm:pt-32"
         style={reduce ? undefined : { y: textY, opacity: textOpacity }}
       >
         <HeroContent active={active} />
@@ -120,6 +140,7 @@ export default function Hero() {
 
       <style jsx>{`
         .hero-section {
+          isolation: isolate;
           animation: hero-in 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
         }
         @keyframes hero-in {
