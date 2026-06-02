@@ -193,7 +193,7 @@ export default function Fuhrpark() {
           color: #F8F8FB;
           letter-spacing: -0.01em;
         }
-        .fuhrpark-trustline {
+        :global(.fuhrpark-trustline) {
           margin-top: 40px;
           padding: 24px 32px;
           background: linear-gradient(135deg, rgba(91, 79, 233, 0.1) 0%, rgba(124, 58, 237, 0.04) 100%);
@@ -204,25 +204,25 @@ export default function Fuhrpark() {
           gap: 16px;
         }
         @media (min-width: 768px) {
-          .fuhrpark-trustline {
+          :global(.fuhrpark-trustline) {
             grid-template-columns: repeat(3, 1fr);
           }
         }
-        .fuhrpark-trustline-item {
+        :global(.fuhrpark-trustline-item) {
           display: flex;
           align-items: center;
           gap: 14px;
         }
-        .fuhrpark-trustline-icon {
+        :global(.fuhrpark-trustline-icon) {
           font-size: 28px;
         }
-        .fuhrpark-trustline-label {
+        :global(.fuhrpark-trustline-label) {
           font-size: 14px;
           font-weight: 600;
           color: #F8F8FB;
           margin-bottom: 2px;
         }
-        .fuhrpark-trustline-desc {
+        :global(.fuhrpark-trustline-desc) {
           font-size: 12.5px;
           color: rgba(248, 248, 251, 0.7);
         }

@@ -137,6 +137,7 @@ export default function TrustBar() {
           background: #FFFFFF;
           border: 1px solid rgba(26, 26, 46, 0.08);
           box-shadow: 0 1px 3px rgba(26, 26, 46, 0.04);
+          min-width: 0;
           transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1),
                       background 250ms,
                       border-color 250ms,
@@ -165,6 +166,24 @@ export default function TrustBar() {
           display: flex;
           flex-direction: column;
           min-width: 0;
+          flex: 1;
+        }
+        :global(.trustbar-label) {
+          font-size: 10.5px;
+          font-weight: 500;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: rgba(26, 26, 46, 0.6);
+          margin-top: 4px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        @media (min-width: 640px) {
+          :global(.trustbar-label) {
+            letter-spacing: 0.1em;
+            white-space: normal;
+          }
         }
         :global(.trustbar-value) {
           font-size: 18px;
@@ -173,17 +192,8 @@ export default function TrustBar() {
           color: #1A1A2E;
           line-height: 1.1;
         }
-        :global(.trustbar-label) {
-          font-size: 10.5px;
-          font-weight: 500;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: rgba(26, 26, 46, 0.6);
-          margin-top: 4px;
-        }
         @media (min-width: 640px) {
           :global(.trustbar-value) { font-size: 20px; }
-          :global(.trustbar-label) { font-size: 11px; }
         }
       `}</style>
     </section>

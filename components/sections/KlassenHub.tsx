@@ -116,12 +116,12 @@ export default function KlassenHub() {
       </div>
 
       <style jsx>{`
-        .klasse-tab {
+        :global(.klasse-tab) {
           display: inline-flex;
           align-items: center;
-          gap: 8px;
-          padding: 10px 16px;
-          font-size: 13.5px;
+          gap: 7px;
+          padding: 8px 12px;
+          font-size: 12.5px;
           font-weight: 500;
           color: rgba(26, 26, 46, 0.7);
           border: 1px solid rgba(26, 26, 46, 0.15);
@@ -130,24 +130,37 @@ export default function KlassenHub() {
           backdrop-filter: blur(8px);
           transition: all 250ms;
         }
-        .klasse-tab:hover {
+        @media (min-width: 480px) {
+          :global(.klasse-tab) {
+            gap: 8px;
+            padding: 10px 16px;
+            font-size: 13.5px;
+          }
+        }
+        :global(.klasse-tab):hover {
           color: var(--c-navy);
           border-color: rgba(26, 26, 46, 0.3);
           transform: translateY(-1px);
         }
-        .klasse-tab.is-active {
+        :global(.klasse-tab.is-active) {
           color: #F8F8FB;
           background: linear-gradient(135deg, #5B4FE9 0%, #7C3AED 100%);
           border-color: transparent;
           box-shadow: 0 6px 20px -6px rgba(124, 58, 237, 0.7);
         }
         :global(.klasse-tab-icon) {
-          width: 20px;
-          height: 20px;
+          width: 18px;
+          height: 18px;
           flex-shrink: 0;
           object-fit: contain;
         }
-        .klasse-tab.is-active :global(.klasse-tab-icon) {
+        @media (min-width: 480px) {
+          :global(.klasse-tab-icon) {
+            width: 20px;
+            height: 20px;
+          }
+        }
+        :global(.klasse-tab.is-active .klasse-tab-icon) {
           filter: brightness(0) invert(1);
         }
         .klasse-icon-wrap {
