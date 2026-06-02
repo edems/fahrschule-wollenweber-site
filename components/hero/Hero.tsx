@@ -112,7 +112,7 @@ export default function Hero() {
       </div>
 
       <motion.div
-        className="relative z-10 flex h-full items-end pt-32"
+        className="relative z-10 flex h-full items-end justify-center pt-32 sm:pt-32"
         style={reduce ? undefined : { y: textY, opacity: textOpacity }}
       >
         <HeroContent active={active} />
