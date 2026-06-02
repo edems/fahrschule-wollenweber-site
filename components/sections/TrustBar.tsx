@@ -94,17 +94,17 @@ export default function TrustBar() {
 
       <style jsx>{`
         :global(.trustbar) {
-          background: rgba(26, 26, 46, 0.4);
-          border-top: 1px solid rgba(124, 58, 237, 0.15);
-          border-bottom: 1px solid rgba(124, 58, 237, 0.15);
-          padding: 22px 0;
+          background: linear-gradient(180deg, #FAFAFD 0%, #F0EEFB 100%);
+          border-top: 1px solid rgba(124, 58, 237, 0.2);
+          border-bottom: 1px solid rgba(124, 58, 237, 0.2);
+          padding: 32px 0;
           position: relative;
         }
         :global(.trustbar)::before {
           content: '';
           position: absolute;
           inset: 0;
-          background: radial-gradient(ellipse at center, rgba(91, 79, 233, 0.06) 0%, transparent 70%);
+          background: radial-gradient(ellipse at center, rgba(91, 79, 233, 0.08) 0%, transparent 70%);
           pointer-events: none;
         }
         :global(.trustbar-grid) {
@@ -134,17 +134,19 @@ export default function TrustBar() {
           gap: 12px;
           padding: 14px 16px;
           border-radius: 14px;
-          background: rgba(255, 255, 255, 0.04);
-          border: 1px solid rgba(124, 58, 237, 0.18);
-          backdrop-filter: blur(6px);
+          background: #FFFFFF;
+          border: 1px solid rgba(26, 26, 46, 0.08);
+          box-shadow: 0 1px 3px rgba(26, 26, 46, 0.04);
           transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1),
                       background 250ms,
-                      border-color 250ms;
+                      border-color 250ms,
+                      box-shadow 250ms;
         }
         :global(.trustbar-card):hover {
           transform: translateY(-2px);
-          background: rgba(124, 58, 237, 0.08);
-          border-color: rgba(124, 58, 237, 0.35);
+          background: #FAF8FF;
+          border-color: rgba(124, 58, 237, 0.4);
+          box-shadow: 0 8px 20px -6px rgba(91, 79, 233, 0.18);
         }
         @media (min-width: 640px) {
           :global(.trustbar-card) { padding: 16px 18px; }
@@ -155,8 +157,8 @@ export default function TrustBar() {
           display: grid;
           place-items: center;
           border-radius: 10px;
-          background: linear-gradient(135deg, rgba(91, 79, 233, 0.15) 0%, rgba(124, 58, 237, 0.1) 100%);
-          color: #C4B5FD;
+          background: linear-gradient(135deg, rgba(91, 79, 233, 0.18) 0%, rgba(124, 58, 237, 0.12) 100%);
+          color: #6D28D9;
           flex-shrink: 0;
         }
         :global(.trustbar-text) {
@@ -168,7 +170,7 @@ export default function TrustBar() {
           font-size: 18px;
           font-weight: 800;
           letter-spacing: -0.02em;
-          color: #F8F8FB;
+          color: #1A1A2E;
           line-height: 1.1;
         }
         :global(.trustbar-label) {
@@ -176,7 +178,7 @@ export default function TrustBar() {
           font-weight: 500;
           letter-spacing: 0.1em;
           text-transform: uppercase;
-          color: rgba(248, 248, 251, 0.65);
+          color: rgba(26, 26, 46, 0.6);
           margin-top: 4px;
         }
         @media (min-width: 640px) {
