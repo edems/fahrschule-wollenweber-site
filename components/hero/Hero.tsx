@@ -76,7 +76,7 @@ export default function Hero() {
     <motion.section
       ref={sectionRef}
       id="top"
-      className="hero-section relative h-[100vh] min-h-[720px] w-full overflow-hidden"
+      className="hero-section relative h-auto min-h-[820px] w-full overflow-hidden lg:h-[100vh] lg:min-h-[860px]"
     >
       <ModeEffects active={active} />
       <VideoStage active={active} />
@@ -112,7 +112,7 @@ export default function Hero() {
       </div>
 
       <motion.div
-        className="relative z-10 flex h-full items-end justify-center pt-32 sm:pt-32"
+        className="relative z-10 flex h-full items-end justify-center pb-12 pt-32 sm:pb-16 sm:pt-32 lg:pb-20"
         style={reduce ? undefined : { y: textY, opacity: textOpacity }}
       >
         <HeroContent active={active} />
