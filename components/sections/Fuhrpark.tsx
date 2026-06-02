@@ -40,7 +40,7 @@ export default function Fuhrpark() {
                     loop
                     playsInline
                     autoPlay
-                    preload="metadata"
+                    preload="none"
                     className="fuhrpark-video-el"
                   />
                   <div className="fuhrpark-video-overlay" />
